@@ -1,0 +1,5 @@
+# Keep experimental CSV bytes stable for SHA-256 and exact replay comparisons.
+*.csv -text
+*.npz -text
+*.pdf -text
+*.png -text
