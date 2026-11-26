@@ -57,7 +57,8 @@ class Ledger:
     def apply(self, owner, operation, body):
         with self.connect() as db:
             db.execute("BEGIN IMMEDIATE")
-            if operation == "reserve":
+            admitted = False
+            if operation in ("reserve", "cancel"):
                 ident, size = body["id"], body["size"]
                 if (
                     not isinstance(ident, str)
@@ -66,10 +67,24 @@ class Ledger:
                     or not 0 <= size < 2**63
                 ):
                     raise ValueError("Invalid reservation")
-                old = db.execute("SELECT owner,size FROM frames WHERE id=?", (ident,)).fetchone()
+                old = db.execute(
+                    "SELECT owner,size,sent FROM frames WHERE id=?", (ident,)
+                ).fetchone()
                 if old:
-                    if old != (owner, size):
+                    if old[:2] != (owner, size):
                         raise ValueError("Conflicting reservation")
+                    if operation == "cancel":
+                        if old[2] not in (None, 0):
+                            raise ValueError("Cannot cancel a sent frame")
+                        db.execute("UPDATE frames SET sent=0 WHERE id=?", (ident,))
+                    else:
+                        admitted = old[2] is None
+                elif operation == "cancel":
+                    # Tombstone fences a delayed reserve that has not reached SQLite yet.
+                    db.execute(
+                        "INSERT INTO frames VALUES (?,?,?,?,?)",
+                        (ident, owner, size, 0, time.time()),
+                    )
                 else:
                     charged = db.execute(
                         "SELECT COALESCE(SUM(COALESCE(sent,size)),0) FROM frames"
@@ -78,6 +93,7 @@ class Ledger:
                         db.execute("INSERT INTO denials VALUES (?,?)", (owner, time.time()))
                         db.commit()
                         raise ByteBudgetExceeded("Application byte quota exhausted")
+                    admitted = True
                     db.execute(
                         "INSERT INTO frames VALUES (?,?,?,NULL,?)",
                         (ident, owner, size, time.time()),
@@ -98,6 +114,7 @@ class Ledger:
                 "SELECT COALESCE(SUM(sent),0), COALESCE(SUM(CASE WHEN sent IS NULL THEN size ELSE 0 END),0), COUNT(*) FROM frames"
             ).fetchone()
             return dict(
+                admitted=admitted,
                 limit=self.limit,
                 spent=spent,
                 reserved=reserved,
@@ -141,6 +158,7 @@ class RemoteBudget:
     def __init__(self, client):
         self.client = client
         self.local = threading.local()
+        self.settlement_grace_s = 2 * client.timeout + 1
 
     def reserve(self, size):
         ident = uuid.uuid4().hex
@@ -149,7 +167,17 @@ class RemoteBudget:
         remaining = deadline - time.time()
         if remaining <= 0:
             raise TimeoutError("Budget admission deadline expired")
-        self.client.call("reserve", dict(id=ident, size=size), timeout=remaining)
+        try:
+            reply = self.client.call("reserve", dict(id=ident, size=size), timeout=remaining)
+            if not reply["admitted"]:
+                raise ByteBudgetExceeded("Reservation already settled or canceled")
+        except (OSError, ValueError):
+            # No application byte has been sent. Fencing is safe in either request order.
+            try:
+                self.client.call("cancel", dict(id=ident, size=size))
+            except (OSError, ValueError):
+                pass  # Unknown reservations remain conservatively charged.
+            raise
         self.local.frame = [ident, size, 0]
 
     def sent(self, size):
@@ -159,11 +187,22 @@ class RemoteBudget:
         ident, size, sent = self.local.frame
         if sent + unsent != size:
             raise ValueError("Invalid local settlement")
-        self.client.call("settle", dict(id=ident, sent=sent))
+        for attempt in range(3):
+            try:
+                self.client.call("settle", dict(id=ident, sent=sent))
+                break
+            except OSError:
+                if attempt == 2:
+                    raise
         del self.local.frame
 
     def state(self):
         return self.client.call("state", {})
+
+
+class _ControlHTTPServer(ThreadingHTTPServer):
+    request_queue_size = 128
+    daemon_threads = True
 
 
 class ControlServer:
@@ -201,9 +240,12 @@ class ControlServer:
                 self.send_response(200)
                 self.send_header("Content-Length", str(len(payload)))
                 self.end_headers()
-                self.wfile.write(payload)
+                try:
+                    self.wfile.write(payload)
+                except OSError:
+                    pass  # The committed reservation survives a disconnected client.
 
-        self.http = ThreadingHTTPServer(address, Handler)
+        self.http = _ControlHTTPServer(address, Handler)
         self.http.daemon_threads = True
         if cert:
             context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)

@@ -56,6 +56,28 @@ class LedgerTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 ledger.apply("w0", "settle", dict(id="a", sent=0))
             self.assertEqual(ledger.apply("w0", "state", {})["spent"], 31)
+            # Cancellation can precede the delayed admission, without granting credit twice.
+            for ident in ("late", "early"):
+                if ident == "early":
+                    ledger.apply("w0", "reserve", dict(id=ident, size=10))
+                ledger.apply("w0", "cancel", dict(id=ident, size=10))
+                self.assertFalse(ledger.apply("w0", "reserve", dict(id=ident, size=10))["admitted"])
+            with self.assertRaises(ValueError):
+                ledger.apply("w0", "cancel", dict(id="a", size=80))
+            self.assertEqual(ledger.apply("w0", "state", {})["reserved"], 0)
+
+            class LostAckClient:
+                timeout = 0.1
+
+                def call(self, operation, body, timeout=None):
+                    reply = ledger.apply("w0", operation, body)
+                    if operation == "reserve":
+                        raise TimeoutError("Admission reply lost")
+                    return reply
+
+            with self.assertRaises(TimeoutError):
+                RemoteBudget(LostAckClient()).reserve(10)
+            self.assertEqual(ledger.apply("w0", "state", {})["reserved"], 0)
 
     def test_http_auth_and_partial_frame(self):
         with tempfile.TemporaryDirectory() as tmp:
