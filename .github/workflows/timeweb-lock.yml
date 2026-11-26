@@ -1,6 +1,9 @@
 name: Generate and verify Ubuntu x86_64 lock
 on:
   workflow_dispatch:
+  push:
+    branches: [timeweb-collector-v3]
+    paths: [requirements.txt, .github/workflows/timeweb-lock.yml]
 permissions:
   contents: read
 jobs:
