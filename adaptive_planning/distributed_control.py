@@ -416,7 +416,7 @@ class ControlClient:
                     **fields,
                     elapsed_s=time.perf_counter() - started,
                     error_type=type(exc).__name__,
-                        detail=str(exc)[:200],
+                    detail=str(exc)[:200],
                 )
             if connection:
                 connection.close()
@@ -545,8 +545,7 @@ class _ControlHTTPServer(ThreadingHTTPServer):
                 "worker_start_error",
                 peer=address[0],
                 error_type=type(exc).__name__,
-                        detail=str(exc)[:200],
-                detail=str(exc),
+                detail=str(exc)[:250],
             )
 
     def _serve_connection(self, request, address, accepted):
