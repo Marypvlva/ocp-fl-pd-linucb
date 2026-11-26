@@ -251,7 +251,7 @@ import json
 from distributed_live import plan,run
 root=Path.cwd();out=Path(__import__('sys').argv[1])/'run'
 p=out.parent/'placement.json';p.write_text(json.dumps({'workers':['local'],'edges':['local']*4}))
-plan(root,p,out,'pilot',rounds=2,seeds=[81101],modes=['joint'])
+plan(root,p,out,'pilot',rounds=2,seeds=[81101],modes=['joint'],windows=[1000,1500,2000])
 run(root,out,dict(url='loopback',bind='127.0.0.1',port=0,network_mode='natural'))
 rows=[json.loads(f.read_text()) for f in sorted((out/'81101_joint').glob('round-*.json'))]
 assert len(rows)==2
