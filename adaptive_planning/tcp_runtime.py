@@ -1111,7 +1111,11 @@ class Cluster:
                     snapshots[futures[future]] = future.result()
                 except (ValueError, OSError) as exc:
                     errors.append(str(exc))
+        client=getattr(self.application_budget,'client',None)
+        if client and hasattr(client,'telemetry'):
+            snapshots['coordinator']['control_client']=client.telemetry.snapshot()
         metrics = {
+            "control_clients": {name: values['control_client'] for name,values in snapshots.items() if 'control_client' in values},
             "app_tx_bytes": int(sum(s.get("tx_bytes", 0) for s in snapshots.values())),
             "app_rx_bytes": int(sum(s.get("rx_bytes", 0) for s in snapshots.values())),
             "telemetry_missing_nodes": len(errors),

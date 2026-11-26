@@ -9,7 +9,7 @@ def settled_metrics(cluster, round_id, before):
     differences = []
     while True:
         result = cluster.collect_metrics(round_id)
-        state = budget.state()
+        state = result["app_byte_budget"]
         expected = state["spent"] - before
         actual = result["app_tx_bytes"]
         if not state["reserved"] and not result["telemetry_missing_nodes"] and actual == expected:

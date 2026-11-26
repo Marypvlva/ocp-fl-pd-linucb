@@ -138,6 +138,7 @@ class DistributedShaper:
 
     def authorize(self, header):
         self.byte_budget.local.deadline = header["deadline_ns"] / 1e9
+        self.byte_budget.local.round_id = header["round"]
         if self.guard:
             self.guard.authorize(header)
 

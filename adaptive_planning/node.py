@@ -177,6 +177,8 @@ def serve(spec, out=sys.stdout, stdin=sys.stdin):
                 pool.submit(server.connection, sock, perf_counter())
     finally:
         gate.close()
+        client=getattr(getattr(server.shaper,'byte_budget',None),'client',None)
+        if client and hasattr(client,'close'):client.close()
 
 
 def main():

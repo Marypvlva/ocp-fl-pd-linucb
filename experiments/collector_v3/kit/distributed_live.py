@@ -242,13 +242,26 @@ def episode(root, output, config, seed, mode, runtime):
         lambda request: read_evidence(chain.w3, lease_pin, request),
         runtime.get("cert"),
         runtime.get("key"),
+        log_path=directory / "control-server.jsonl",
     ).start()
     url = runtime["url"]
     if url == "loopback":
         url = f"http://127.0.0.1:{service.http.server_port}"
     clients = {
         name: dict(
-            url=url, owner=name, key=credentials[name].hex(), ca=runtime.get("ca"), timeout=5
+            url=url,
+            owner=name,
+            key=credentials[name].hex(),
+            ca=runtime.get("ca"),
+            timeout=5,
+            log_path=str(directory / "control-client-coordinator.jsonl")
+            if name == "coordinator"
+            else str(
+                root
+                / "results/control"
+                / f"{directory.name}-{sha256(str(directory).encode()).hexdigest()[:12]}"
+                / f"{name}.jsonl"
+            ),
         )
         for name in names
     }
@@ -336,6 +349,9 @@ def episode(root, output, config, seed, mode, runtime):
                 if external:
                     wait_blocks(chain.w3, chain.model_blocks[rd], chain.finality)
                 after_commit = time.perf_counter()
+                service_status = dict(
+                    counters=service.telemetry.snapshot(), load=service.http.load()
+                )
                 drift = (time.time() - wall_started) - (after_commit - started)
                 if abs(drift) > 0.005:
                     raise ValueError("Coordinator wall clock stepped during round")
@@ -385,6 +401,7 @@ def episode(root, output, config, seed, mode, runtime):
                     window_ms=int(SLA[c]),
                     byte_ledger=state,
                     telemetry=met,
+                    control_service=service_status,
                     metrics=result.metrics,
                     started_at=wall_started,
                     total_round_s=after_commit - started,
@@ -397,6 +414,20 @@ def episode(root, output, config, seed, mode, runtime):
                 )
                 rows.append(row)
                 dump(directory / f"round-{rd:04}.json", row)
+                if rd % 10 == 0 or service_status["counters"]["counts"].get("response_lost", 0):
+                    print(
+                        json.dumps(
+                            dict(
+                                event="control_health",
+                                seed=seed,
+                                mode=mode,
+                                round=rd,
+                                counters=service_status["counters"]["counts"],
+                                load=service_status["load"],
+                            )
+                        ),
+                        flush=True,
+                    )
             dump(directory / "chain.json", chain.export())
             dump(
                 directory / "complete.json",
@@ -419,7 +450,15 @@ def episode(root, output, config, seed, mode, runtime):
         )
         raise
     finally:
+        coordinator_shaper.byte_budget.client.close()
         service.close()
+        if "cluster" in locals():
+            dump(
+                directory / "control-log-fetch.json",
+                dict(errors=cluster.fetch_control_logs(directory / "control-clients")),
+            )
+        dump(directory / "ledger-audit.json", ledger.audit())
+        ledger.close()
 
 
 def make_gradient(old, model, group):

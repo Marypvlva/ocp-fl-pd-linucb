@@ -9,7 +9,13 @@ import sys
 import tempfile
 import unittest
 
-from adaptive_planning.distributed_control import Ledger, ControlServer, ControlClient, RemoteBudget
+from adaptive_planning.distributed_control import (
+    Ledger,
+    ControlServer,
+    ControlClient,
+    RemoteBudget,
+    ControlServiceError,
+)
 from adaptive_planning.byte_budget import ByteBudgetExceeded, reserve_frame
 from adaptive_planning.lease_guard import LeaseGuard, read_evidence
 from adaptive_planning.ocp_chain import OcpChain
@@ -96,7 +102,7 @@ class LedgerTests(unittest.TestCase):
                         raise OSError("disconnect")
                 state = remote.state()
                 self.assertEqual((state["spent"], state["reserved"]), (23, 0))
-                with self.assertRaises(ByteBudgetExceeded):
+                with self.assertRaises(ControlServiceError):
                     ControlClient(client.url, "w0", bytes(32).hex()).call("state", {})
             finally:
                 service.close()

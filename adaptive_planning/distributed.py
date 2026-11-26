@@ -272,6 +272,30 @@ class RemoteCluster(Cluster):
         """Silence a role's relay (local rehearsal of a network partition)."""
         (self.proxies[name].silent.set if silent else self.proxies[name].silent.clear)()
 
+    def fetch_control_logs(self, destination):
+        """Copy role logs after processes stop, without copying their credentials."""
+        import shutil
+        from pathlib import Path
+        destination=Path(destination)
+        destination.mkdir(parents=True,exist_ok=True)
+        errors=[]
+        for name,options in (self.control or {}).items():
+            if name=='coordinator' or not options.get('log_path'):continue
+            target=destination/f'{name}.jsonl'
+            host=self.placement[name]
+            try:
+                if host=='local':
+                    shutil.copyfile(options['log_path'],target)
+                else:
+                    with target.open('wb') as stream:
+                        subprocess.run(['ssh',*self.ssh_options,
+                            f'{self.ssh_user}@{host}' if self.ssh_user else host,
+                            'cat -- '+shlex.quote(options['log_path'])],stdout=stream,stderr=subprocess.PIPE,
+                            check=True,timeout=self.control_timeout)
+            except (OSError,subprocess.SubprocessError) as exc:
+                errors.append(dict(role=name,error_type=type(exc).__name__))
+        return errors
+
     def close(self):
         for name in list(self.remote):
             try:

@@ -23,7 +23,7 @@
 cd /opt/research/ocp-fl-pd-linucb
 git status --short
 git fetch origin --tags
-git switch --detach v0.6.0
+git switch --detach v0.6.1
 bash deploy/timeweb/bootstrap.sh
 .venv/bin/python --version
 ```

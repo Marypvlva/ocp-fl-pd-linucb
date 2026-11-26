@@ -1,7 +1,7 @@
 name: Timeweb Ubuntu 24.04 distributed mechanisms
 on:
   push:
-    branches: [main, timeweb-collector-v3]
+    branches: [main, timeweb-collector-v3, fix/control-service-061]
   pull_request:
   workflow_dispatch:
 permissions:
@@ -24,6 +24,8 @@ jobs:
         run: bash deploy/timeweb/bootstrap.sh --no-system
       - name: Run full regressions including local multi-process distributed rehearsal
         run: .venv/bin/python project.py test > timeweb-tests.txt 2>&1
+      - name: Sustained HTTPS service load on one CPU with 2 GiB address-space limit
+        run: .venv/bin/python deploy/timeweb/stress_control.py --out results/control-load --frames 60480 --owners 9 --concurrency 18 --one-cpu --memory-mb 2048 > control-load.txt 2>&1
       - name: Reproduce archived scientific results
         run: |
           .venv/bin/python experiments/collector_v3/kit/analyze_v3.py experiments/collector_v3/data reproduced.json
@@ -35,3 +37,5 @@ jobs:
           path: |
             timeweb-tests.txt
             results/bootstrap/
+            control-load.txt
+            results/control-load/result.json

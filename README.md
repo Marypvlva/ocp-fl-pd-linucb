@@ -4,7 +4,7 @@ Resource-constrained scheduling of verifiable federated-learning rounds on edge 
 
 OCP-FL fixes a publicly verifiable random client roster. The collector experiment then selects one or two gateways for that roster, charges every attempted route, and learns from individually verified replies under delayed feedback and per-gateway quotas. A model update is applied after every selected client's reply passes the existing signature and projection checks.
 
-The current software release is **v0.6.0**, dated 26 November 2026. It adds distributed Collector v3 execution for Timeweb Cloud. The archived collector study remains version v3. Its code, frozen plans, archived measurements, per-draw outcomes and TCP/EVM logs are in [`experiments/collector_v3`](experiments/collector_v3). The [Russian report](reports/collector-v3-report-ru.pdf) describes the results and implementation work required for a multi-host confirmatory study.
+The current software release is **v0.6.1**, dated 26 November 2026. It includes the distributed Collector v3 execution for Timeweb Cloud and a control-service reliability fix. Existing stands should follow the [v0.6.1 update instructions](deploy/timeweb/UPDATE_061_RU.md). The archived collector study remains version v3. Its code, frozen plans, archived measurements, per-draw outcomes and TCP/EVM logs are in [`experiments/collector_v3`](experiments/collector_v3). The [Russian report](reports/collector-v3-report-ru.pdf) describes the results and implementation work required for a multi-host confirmatory study.
 
 ## Install
 
