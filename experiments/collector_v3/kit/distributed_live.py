@@ -276,6 +276,8 @@ def episode(root, output, config, seed, mode, runtime):
     classes = np.resize(np.arange(3), h)
     np.random.default_rng(seed + 200).shuffle(classes)
     rows = []
+    progress = {}
+    result = None
     try:
         with RemoteCluster(
             groups,
@@ -299,11 +301,14 @@ def episode(root, output, config, seed, mode, runtime):
                 rd = t + 1
                 started = time.perf_counter()
                 wall_started = time.time()
+                result = None
+                progress = dict(round=rd, started_at=wall_started, stage="roster")
                 ticket = ceremony(chain, rd, seed, n, bool(external))
                 after_final = time.perf_counter()
                 members = list(chain.authorize(ticket, rd, n))
                 arm = int(policy.decide(c, np.array([members]))[0])
                 gateways = ARMS[arm]
+                progress["stage"] = "booking"
                 lease = reserve(chain, book, cfg, ticket, gateways, int(SLA[c]))
                 if external:
                     wait_blocks(chain.w3, lease["block"], chain.finality)
@@ -332,6 +337,7 @@ def episode(root, output, config, seed, mode, runtime):
                     if runtime["network_mode"] == "controlled" and rd % 5 == 0
                     else None
                 )
+                progress["stage"] = "protocol"
                 result = cluster.run_round(
                     model,
                     "F+P",
@@ -344,7 +350,9 @@ def episode(root, output, config, seed, mode, runtime):
                 )
                 after_data = time.perf_counter()
                 # Verification against the exact gradient is outside the measured round.
+                progress["stage"] = "accounting"
                 met, state = settled_metrics(cluster, rd, before)
+                progress["stage"] = "model_record"
                 digest = chain.record_model(rd, flatten_model(model))
                 if external:
                     wait_blocks(chain.w3, chain.model_blocks[rd], chain.finality)
@@ -442,6 +450,12 @@ def episode(root, output, config, seed, mode, runtime):
         dump(
             directory / "failure.json",
             dict(
+                progress=progress,
+                partial_result=dict(
+                    accepted=result.accepted, errors=result.errors, metrics=result.metrics
+                )
+                if result is not None
+                else None,
                 type=type(exc).__name__,
                 message=str(exc)[:500],
                 ledger=ledger.apply("coordinator", "state", {}),

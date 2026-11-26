@@ -25,12 +25,17 @@ def audit(output):
     source_rosters = {}
     initial = None
     missing = []
+    diagnostic_errors = []
     for seed in plan["seeds"]:
         for mode in plan["order"][str(seed)]:
             path = output / f"{seed}_{mode}"
             if not (path / "complete.json").exists():
                 missing.append(path.name)
                 continue
+            if (path / "control-log-fetch.json").exists():
+                fetched = json.loads((path / "control-log-fetch.json").read_text())
+                if fetched["errors"]:
+                    diagnostic_errors.append(dict(episode=path.name, errors=fetched["errors"]))
             keys = json.loads((path / "worker-keys.json").read_text())
             rows = [json.loads(p.read_text()) for p in sorted(path.glob("round-*.json"))]
             if len(rows) != plan["horizon"]:
@@ -90,7 +95,7 @@ def audit(output):
             totals[mode].append(sum(r["accepted"] for r in rows))
             walls[mode].extend(r["total_round_s"] for r in rows)
     if missing:
-        return dict(complete=False, missing=missing)
+        return dict(complete=False, missing=missing, control_log_fetch_errors=diagnostic_errors)
     rng = np.random.default_rng(734128)
     n = len(plan["seeds"])
     indices = rng.integers(n, size=(10000, n))
@@ -106,6 +111,7 @@ def audit(output):
         )
     return dict(
         complete=True,
+        control_log_fetch_errors=diagnostic_errors,
         blocks=n,
         results=effects,
         scope=plan["paired_scope"],
