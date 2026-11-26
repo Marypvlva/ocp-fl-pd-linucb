@@ -1,0 +1,36 @@
+{
+  "workers": [
+    4,
+    8,
+    12
+  ],
+  "sample_size": 2,
+  "hidden": 8,
+  "rounds": 4,
+  "model_seeds": [
+    16
+  ],
+  "learning_rate": 0.5,
+  "target_loss": 0.22,
+  "budget_credits": 12,
+  "action_costs": {
+    "F+B": 2,
+    "F+P": 1,
+    "R+B": 3,
+    "R+P": 2
+  },
+  "pd_alpha": 1.0,
+  "pd_ridge": 1.0,
+  "pd_eta": 0.05,
+  "pd_feedback_delay": 2,
+  "pd_reward": "throughput",
+  "pd_reward_reference_seconds": 0.1,
+  "conditions": [
+    "healthy"
+  ],
+  "deadline": 1.5,
+  "rpc_timeout": 1.2,
+  "network_profile": "unlimited",
+  "stage": "smoke",
+  "stop_at_target": false
+}

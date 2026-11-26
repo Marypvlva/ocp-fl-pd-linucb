@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "Please cite the tagged software version and exact commit used in your experiments."
+type: software
+title: "OCP-FL + PD-LinUCB: Resource-Constrained Verifiable Edge Scheduling"
+authors:
+  - family-names: Pavlova
+    given-names: Mariia
+version: 0.5.0
+date-released: 2026-11-26
+repository-code: "https://github.com/Marypvlva/ocp-fl-pd-linucb"
+url: "https://github.com/Marypvlva/ocp-fl-pd-linucb"
+keywords:
+  - federated learning
+  - verifiable scheduling
+  - contextual bandits
+  - edge computing

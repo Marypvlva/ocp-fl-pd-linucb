@@ -1,0 +1,18 @@
+{
+  "workers": [4, 8, 12],
+  "policies": ["network_aligned", "network_online", "network_prior"],
+  "rounds": 4,
+  "repeats": 1,
+  "model_seeds": [16],
+  "hidden": 16,
+  "learning_rate": 0.5,
+  "target_loss": 0.22,
+  "phase_min": 1,
+  "phase_max": 1,
+  "scenario": "clean",
+  "deadline": 1.5,
+  "rpc_timeout": 1.2,
+  "switch_seconds": 0.025,
+  "seed": 72026,
+  "stage": "smoke"
+}

@@ -1,0 +1,1454 @@
+{
+  "binary": {
+    "chosen": {
+      "mean": 61.333333333333336,
+      "settings": {
+        "mode": "joint",
+        "alpha": 0.035,
+        "eta": 0.04,
+        "initial_price": 0.25,
+        "ridge": 0.4,
+        "delay": 2,
+        "epsilon": 0.05,
+        "use_current_roster": true,
+        "price_rule": "local"
+      }
+    },
+    "grid": [
+      {
+        "mean": 60.833333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.0,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 60.75,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.0,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 60.833333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.0,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 60.583333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.0,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 61.333333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.035,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 60.375,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.035,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 60.583333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.035,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 60.416666666666664,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.035,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 60.25,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 61.166666666666664,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 60.833333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 60.458333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 52.75,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 52.625,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 52.625,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 52.333333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      }
+    ]
+  },
+  "aggregate": {
+    "chosen": {
+      "mean": 53.458333333333336,
+      "settings": {
+        "mode": "joint",
+        "alpha": 0.035,
+        "eta": 0.04,
+        "initial_price": 0.25,
+        "ridge": 0.4,
+        "delay": 2,
+        "epsilon": 0.05,
+        "use_current_roster": true,
+        "price_rule": "local"
+      }
+    },
+    "grid": [
+      {
+        "mean": 53.041666666666664,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.0,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 52.833333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.0,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 52.541666666666664,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.0,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 53.083333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.0,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 53.458333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.035,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 53.291666666666664,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.035,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 53.291666666666664,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.035,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 52.583333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.035,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 51.791666666666664,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 52.791666666666664,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 53.0,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 53.083333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 46.5,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 45.875,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 45.208333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 44.541666666666664,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      }
+    ]
+  },
+  "aggregate_ordered": {
+    "chosen": {
+      "mean": 55.625,
+      "settings": {
+        "mode": "joint",
+        "alpha": 0.0,
+        "eta": 0.04,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05,
+        "use_current_roster": true,
+        "price_rule": "local"
+      }
+    },
+    "grid": [
+      {
+        "mean": 55.458333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.0,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 55.625,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.0,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 54.625,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.0,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 55.291666666666664,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.0,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 54.5,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.035,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 54.958333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.035,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 54.625,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.035,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 54.958333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.035,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 54.0,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 53.875,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 54.541666666666664,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 54.625,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 48.833333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 49.541666666666664,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 48.833333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 48.541666666666664,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      }
+    ]
+  },
+  "round": {
+    "chosen": {
+      "mean": 55.291666666666664,
+      "settings": {
+        "mode": "round_lin",
+        "alpha": 0.15,
+        "eta": 0.2,
+        "initial_price": 0.25,
+        "ridge": 0.4,
+        "delay": 2,
+        "epsilon": 0.05,
+        "use_current_roster": true,
+        "price_rule": "local"
+      }
+    },
+    "grid": [
+      {
+        "mean": 54.0,
+        "settings": {
+          "mode": "round_lin",
+          "alpha": 0.0,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 54.0,
+        "settings": {
+          "mode": "round_lin",
+          "alpha": 0.0,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 55.083333333333336,
+        "settings": {
+          "mode": "round_lin",
+          "alpha": 0.0,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 55.083333333333336,
+        "settings": {
+          "mode": "round_lin",
+          "alpha": 0.0,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 53.666666666666664,
+        "settings": {
+          "mode": "round_lin",
+          "alpha": 0.035,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 53.666666666666664,
+        "settings": {
+          "mode": "round_lin",
+          "alpha": 0.035,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 55.0,
+        "settings": {
+          "mode": "round_lin",
+          "alpha": 0.035,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 55.0,
+        "settings": {
+          "mode": "round_lin",
+          "alpha": 0.035,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 54.208333333333336,
+        "settings": {
+          "mode": "round_lin",
+          "alpha": 0.15,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 54.208333333333336,
+        "settings": {
+          "mode": "round_lin",
+          "alpha": 0.15,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 55.291666666666664,
+        "settings": {
+          "mode": "round_lin",
+          "alpha": 0.15,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 55.291666666666664,
+        "settings": {
+          "mode": "round_lin",
+          "alpha": 0.15,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 52.958333333333336,
+        "settings": {
+          "mode": "round_lin",
+          "alpha": 0.55,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 52.958333333333336,
+        "settings": {
+          "mode": "round_lin",
+          "alpha": 0.55,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 53.291666666666664,
+        "settings": {
+          "mode": "round_lin",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 53.291666666666664,
+        "settings": {
+          "mode": "round_lin",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      }
+    ]
+  },
+  "rtt": {
+    "chosen": {
+      "mean": 64.0,
+      "settings": {
+        "mode": "joint",
+        "alpha": 0.035,
+        "eta": 0.2,
+        "initial_price": 0.25,
+        "ridge": 0.4,
+        "delay": 2,
+        "epsilon": 0.05,
+        "use_current_roster": true,
+        "price_rule": "local"
+      }
+    },
+    "grid": [
+      {
+        "mean": 63.0,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.0,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 62.958333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.0,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 63.291666666666664,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.0,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 62.916666666666664,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.0,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 63.166666666666664,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.035,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 63.166666666666664,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.035,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 64.0,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.035,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 63.208333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.035,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 62.5,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 63.083333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 63.375,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 63.583333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 55.0,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 55.291666666666664,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 56.0,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 55.833333333333336,
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      }
+    ]
+  },
+  "recent": {
+    "chosen": {
+      "mean": 63.333333333333336,
+      "settings": {
+        "mode": "recent",
+        "alpha": 0.0,
+        "eta": 0.2,
+        "initial_price": 0.25,
+        "ridge": 0.4,
+        "delay": 2,
+        "epsilon": 0.05,
+        "use_current_roster": true,
+        "price_rule": "local"
+      }
+    },
+    "grid": [
+      {
+        "mean": 62.833333333333336,
+        "settings": {
+          "mode": "recent",
+          "alpha": 0.0,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 62.833333333333336,
+        "settings": {
+          "mode": "recent",
+          "alpha": 0.0,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 63.333333333333336,
+        "settings": {
+          "mode": "recent",
+          "alpha": 0.0,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 63.333333333333336,
+        "settings": {
+          "mode": "recent",
+          "alpha": 0.0,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 62.833333333333336,
+        "settings": {
+          "mode": "recent",
+          "alpha": 0.035,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 62.833333333333336,
+        "settings": {
+          "mode": "recent",
+          "alpha": 0.035,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 63.333333333333336,
+        "settings": {
+          "mode": "recent",
+          "alpha": 0.035,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 63.333333333333336,
+        "settings": {
+          "mode": "recent",
+          "alpha": 0.035,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 62.833333333333336,
+        "settings": {
+          "mode": "recent",
+          "alpha": 0.15,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 62.833333333333336,
+        "settings": {
+          "mode": "recent",
+          "alpha": 0.15,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 63.333333333333336,
+        "settings": {
+          "mode": "recent",
+          "alpha": 0.15,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 63.333333333333336,
+        "settings": {
+          "mode": "recent",
+          "alpha": 0.15,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 62.833333333333336,
+        "settings": {
+          "mode": "recent",
+          "alpha": 0.55,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 62.833333333333336,
+        "settings": {
+          "mode": "recent",
+          "alpha": 0.55,
+          "eta": 0.04,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 63.333333333333336,
+        "settings": {
+          "mode": "recent",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 0.4,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      },
+      {
+        "mean": 63.333333333333336,
+        "settings": {
+          "mode": "recent",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05,
+          "use_current_roster": true,
+          "price_rule": "local"
+        }
+      }
+    ]
+  }
+}

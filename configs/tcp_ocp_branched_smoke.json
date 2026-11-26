@@ -1,0 +1,78 @@
+{
+  "workers": [
+    4
+  ],
+  "sample_size": 2,
+  "hidden": 8,
+  "rounds": 12,
+  "model_seeds": [
+    192999
+  ],
+  "learning_rate": 0.5,
+  "target_loss": 0.22,
+  "budget_credits": 18,
+  "action_costs": {
+    "F+P": 1,
+    "F+B": 2,
+    "R+P": 2,
+    "R+B": 3
+  },
+  "pd_alpha": 0.1,
+  "pd_ridge": 1.0,
+  "pd_eta": 0.05,
+  "pd_feedback_delay": 2,
+  "pd_reward": "success",
+  "pd_reward_reference_seconds": 0.1,
+  "conditions": [
+    "mixed_availability"
+  ],
+  "deadline": 1.5,
+  "rpc_timeout": 1.2,
+  "network_profile": "unlimited",
+  "stage": "af_protocol_smoke_branched",
+  "stop_at_target": false,
+  "available_actions": [
+    "F+P",
+    "F+B",
+    "R+P",
+    "R+B"
+  ],
+  "af_planner": {
+    "kind": "pd",
+    "reward_model": "branched",
+    "base_context": false,
+    "dual": "resolve"
+  },
+  "fault_traces": {
+    "192999": [
+      "healthy",
+      "participant",
+      "edge",
+      "shared_edge",
+      "healthy",
+      "participant",
+      "edge",
+      "shared_edge",
+      "healthy",
+      "participant",
+      "edge",
+      "shared_edge"
+    ]
+  },
+  "affected_clients": {
+    "192999": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "shared_affected_clients": {
+    "192999": [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+name: Project checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    env:
+      OPENBLAS_NUM_THREADS: "1"
+      OMP_NUM_THREADS: "1"
+      VECLIB_MAXIMUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          cache: pip
+      - name: Install dependencies
+        run: python -m pip install -e '.[dev]'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Rebuild and verify contract artifact
+        run: |
+          npm ci --prefix contracts --ignore-scripts --no-audit --no-fund
+          npm run build --prefix contracts
+          git diff --exit-code -- contracts/artifacts/OcpfScheduler.json
+      - name: Check environment
+        run: python project.py doctor
+      - name: Check imports and static errors
+        run: |
+          python -m ruff check adaptive_planning tests project.py
+      - name: Run tests
+        run: python project.py test
+      - name: Verify collector results and protocol boundaries
+        run: |
+          python experiments/collector_v3/kit/analyze_v3.py experiments/collector_v3/data reproduced.json
+          cmp experiments/collector_v3/data/summary.json reproduced.json
+          python experiments/collector_v3/kit/check_bounds.py
+          python experiments/collector_v3/kit/check_feedback.py
+          python experiments/collector_v3/kit/check_collector.py .
+          python experiments/collector_v3/kit/check_leases.py .
+      - name: Short TCP integration check
+        run: python project.py smoke --workers 4

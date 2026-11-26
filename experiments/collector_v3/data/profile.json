@@ -1,0 +1,44 @@
+{
+  "platform": "macOS-15.6.1-arm64-arm-64bit-Mach-O",
+  "machine": "arm64",
+  "python": "3.13.7",
+  "numpy": "2.5.4",
+  "methods": {
+    "joint": {
+      "wall_ms_med_p95": [
+        0.205166,
+        0.21775415
+      ],
+      "cpu_ms_med_p95": [
+        0.204,
+        0.216
+      ],
+      "resident_numpy_logical_bytes": 10226,
+      "samples": 1440
+    },
+    "low_alpha": {
+      "wall_ms_med_p95": [
+        0.207417,
+        0.21775
+      ],
+      "cpu_ms_med_p95": [
+        0.206,
+        0.216
+      ],
+      "resident_numpy_logical_bytes": 10226,
+      "samples": 1440
+    },
+    "forecast": {
+      "wall_ms_med_p95": [
+        0.2104165,
+        0.6619893
+      ],
+      "cpu_ms_med_p95": [
+        0.209,
+        0.66
+      ],
+      "resident_numpy_logical_bytes": 21746,
+      "samples": 1440
+    }
+  }
+}

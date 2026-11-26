@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Test double for ssh: drops options and the target, runs the remote command locally.
+args=("$@"); i=0
+while [[ $i -lt ${#args[@]} ]]; do
+  a=${args[$i]}
+  if [[ $a == -o || $a == -i || $a == -p || $a == -J ]]; then i=$((i+2)); continue; fi
+  if [[ $a == -* ]]; then i=$((i+1)); continue; fi
+  break
+done
+echo "$(date +%s) ${args[$i]}" >> "${FAKE_SSH_LOG:-/dev/null}"
+eval "${args[@]:$((i+1))}"

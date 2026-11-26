@@ -1,0 +1,978 @@
+{
+  "prices": {
+    "0": [
+      0.13928571428571446,
+      0.0,
+      0.0,
+      0.13928571428571446,
+      0.0
+    ],
+    "1": [
+      -0.0,
+      0.39107142857142857,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "2": [
+      -0.0,
+      0.39107142857142857,
+      -0.0,
+      0.0,
+      0.0
+    ],
+    "3": [
+      0.13928571428571435,
+      0.0,
+      0.0,
+      0.13928571428571435,
+      0.0
+    ]
+  },
+  "records": {
+    "joint": {
+      "chosen": {
+        "settings": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 63.583333333333336
+      },
+      "grid": [
+        {
+          "settings": {
+            "mode": "joint",
+            "alpha": 0.15,
+            "eta": 0.025,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 62.625
+        },
+        {
+          "settings": {
+            "mode": "joint",
+            "alpha": 0.55,
+            "eta": 0.025,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 54.791666666666664
+        },
+        {
+          "settings": {
+            "mode": "joint",
+            "alpha": 1.0,
+            "eta": 0.025,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 54.291666666666664
+        },
+        {
+          "settings": {
+            "mode": "joint",
+            "alpha": 0.15,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 63.416666666666664
+        },
+        {
+          "settings": {
+            "mode": "joint",
+            "alpha": 0.55,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 56.25
+        },
+        {
+          "settings": {
+            "mode": "joint",
+            "alpha": 1.0,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 54.458333333333336
+        },
+        {
+          "settings": {
+            "mode": "joint",
+            "alpha": 0.15,
+            "eta": 0.2,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 63.583333333333336
+        },
+        {
+          "settings": {
+            "mode": "joint",
+            "alpha": 0.55,
+            "eta": 0.2,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 55.833333333333336
+        },
+        {
+          "settings": {
+            "mode": "joint",
+            "alpha": 1.0,
+            "eta": 0.2,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 54.416666666666664
+        }
+      ]
+    },
+    "round_lin": {
+      "chosen": {
+        "settings": {
+          "mode": "round_lin",
+          "alpha": 0.15,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 55.291666666666664
+      },
+      "grid": [
+        {
+          "settings": {
+            "mode": "round_lin",
+            "alpha": 0.15,
+            "eta": 0.025,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 53.958333333333336
+        },
+        {
+          "settings": {
+            "mode": "round_lin",
+            "alpha": 0.55,
+            "eta": 0.025,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 52.708333333333336
+        },
+        {
+          "settings": {
+            "mode": "round_lin",
+            "alpha": 1.0,
+            "eta": 0.025,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 50.416666666666664
+        },
+        {
+          "settings": {
+            "mode": "round_lin",
+            "alpha": 0.15,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 54.875
+        },
+        {
+          "settings": {
+            "mode": "round_lin",
+            "alpha": 0.55,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 53.125
+        },
+        {
+          "settings": {
+            "mode": "round_lin",
+            "alpha": 1.0,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 50.583333333333336
+        },
+        {
+          "settings": {
+            "mode": "round_lin",
+            "alpha": 0.15,
+            "eta": 0.2,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 55.291666666666664
+        },
+        {
+          "settings": {
+            "mode": "round_lin",
+            "alpha": 0.55,
+            "eta": 0.2,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 53.291666666666664
+        },
+        {
+          "settings": {
+            "mode": "round_lin",
+            "alpha": 1.0,
+            "eta": 0.2,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 50.833333333333336
+        }
+      ]
+    },
+    "recent": {
+      "chosen": {
+        "settings": {
+          "mode": "recent",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 63.416666666666664
+      },
+      "grid": [
+        {
+          "settings": {
+            "mode": "recent",
+            "alpha": 0.55,
+            "eta": 0.025,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 62.083333333333336
+        },
+        {
+          "settings": {
+            "mode": "recent",
+            "alpha": 0.55,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 63.416666666666664
+        },
+        {
+          "settings": {
+            "mode": "recent",
+            "alpha": 0.55,
+            "eta": 0.2,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 63.333333333333336
+        }
+      ]
+    },
+    "greedy": {
+      "chosen": {
+        "settings": {
+          "mode": "greedy",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 63.416666666666664
+      },
+      "grid": [
+        {
+          "settings": {
+            "mode": "greedy",
+            "alpha": 0.55,
+            "eta": 0.025,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 62.375
+        },
+        {
+          "settings": {
+            "mode": "greedy",
+            "alpha": 0.55,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 63.416666666666664
+        },
+        {
+          "settings": {
+            "mode": "greedy",
+            "alpha": 0.55,
+            "eta": 0.2,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 62.916666666666664
+        }
+      ]
+    },
+    "eps": {
+      "chosen": {
+        "settings": {
+          "mode": "eps",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 61.25
+      },
+      "grid": [
+        {
+          "settings": {
+            "mode": "eps",
+            "alpha": 0.55,
+            "eta": 0.025,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 60.75
+        },
+        {
+          "settings": {
+            "mode": "eps",
+            "alpha": 0.55,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 61.25
+        },
+        {
+          "settings": {
+            "mode": "eps",
+            "alpha": 0.55,
+            "eta": 0.2,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 60.916666666666664
+        }
+      ]
+    },
+    "thompson": {
+      "chosen": {
+        "settings": {
+          "mode": "thompson",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 58.916666666666664
+      },
+      "grid": [
+        {
+          "settings": {
+            "mode": "thompson",
+            "alpha": 0.55,
+            "eta": 0.025,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 57.083333333333336
+        },
+        {
+          "settings": {
+            "mode": "thompson",
+            "alpha": 0.55,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 58.916666666666664
+        },
+        {
+          "settings": {
+            "mode": "thompson",
+            "alpha": 0.55,
+            "eta": 0.2,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 57.458333333333336
+        }
+      ]
+    },
+    "filter": {
+      "chosen": {
+        "settings": {
+          "mode": "filter",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 63.208333333333336
+      },
+      "grid": [
+        {
+          "settings": {
+            "mode": "filter",
+            "alpha": 0.55,
+            "eta": 0.025,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 61.875
+        },
+        {
+          "settings": {
+            "mode": "filter",
+            "alpha": 0.55,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 63.208333333333336
+        },
+        {
+          "settings": {
+            "mode": "filter",
+            "alpha": 0.55,
+            "eta": 0.2,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 62.708333333333336
+        }
+      ]
+    },
+    "scalar": {
+      "chosen": {
+        "settings": {
+          "mode": "scalar",
+          "alpha": 0.15,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 57.5
+      },
+      "grid": [
+        {
+          "settings": {
+            "mode": "scalar",
+            "alpha": 0.15,
+            "eta": 0.025,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 57.5
+        },
+        {
+          "settings": {
+            "mode": "scalar",
+            "alpha": 0.55,
+            "eta": 0.025,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 49.541666666666664
+        },
+        {
+          "settings": {
+            "mode": "scalar",
+            "alpha": 1.0,
+            "eta": 0.025,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 49.75
+        },
+        {
+          "settings": {
+            "mode": "scalar",
+            "alpha": 0.15,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 57.458333333333336
+        },
+        {
+          "settings": {
+            "mode": "scalar",
+            "alpha": 0.55,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 50.375
+        },
+        {
+          "settings": {
+            "mode": "scalar",
+            "alpha": 1.0,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 50.416666666666664
+        },
+        {
+          "settings": {
+            "mode": "scalar",
+            "alpha": 0.15,
+            "eta": 0.2,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 57.083333333333336
+        },
+        {
+          "settings": {
+            "mode": "scalar",
+            "alpha": 0.55,
+            "eta": 0.2,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 50.583333333333336
+        },
+        {
+          "settings": {
+            "mode": "scalar",
+            "alpha": 1.0,
+            "eta": 0.2,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 50.291666666666664
+        }
+      ]
+    },
+    "fixed": {
+      "chosen": {
+        "settings": {
+          "mode": "fixed",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 55.208333333333336
+      },
+      "grid": [
+        {
+          "settings": {
+            "mode": "fixed",
+            "alpha": 0.15,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 54.75
+        },
+        {
+          "settings": {
+            "mode": "fixed",
+            "alpha": 0.55,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 55.208333333333336
+        },
+        {
+          "settings": {
+            "mode": "fixed",
+            "alpha": 1.0,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 53.416666666666664
+        }
+      ]
+    },
+    "no_ids": {
+      "chosen": {
+        "settings": {
+          "mode": "no_ids",
+          "alpha": 0.15,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 58.041666666666664
+      },
+      "grid": [
+        {
+          "settings": {
+            "mode": "no_ids",
+            "alpha": 0.15,
+            "eta": 0.025,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 58.0
+        },
+        {
+          "settings": {
+            "mode": "no_ids",
+            "alpha": 0.55,
+            "eta": 0.025,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 51.791666666666664
+        },
+        {
+          "settings": {
+            "mode": "no_ids",
+            "alpha": 1.0,
+            "eta": 0.025,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 45.875
+        },
+        {
+          "settings": {
+            "mode": "no_ids",
+            "alpha": 0.15,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 58.041666666666664
+        },
+        {
+          "settings": {
+            "mode": "no_ids",
+            "alpha": 0.55,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 52.625
+        },
+        {
+          "settings": {
+            "mode": "no_ids",
+            "alpha": 1.0,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 45.708333333333336
+        },
+        {
+          "settings": {
+            "mode": "no_ids",
+            "alpha": 0.15,
+            "eta": 0.2,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 57.916666666666664
+        },
+        {
+          "settings": {
+            "mode": "no_ids",
+            "alpha": 0.55,
+            "eta": 0.2,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 52.541666666666664
+        },
+        {
+          "settings": {
+            "mode": "no_ids",
+            "alpha": 1.0,
+            "eta": 0.2,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 47.208333333333336
+        }
+      ]
+    },
+    "no_price": {
+      "chosen": {
+        "settings": {
+          "mode": "no_price",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 54.0
+      },
+      "grid": [
+        {
+          "settings": {
+            "mode": "no_price",
+            "alpha": 0.55,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 54.0
+        }
+      ]
+    },
+    "lp": {
+      "chosen": {
+        "settings": {
+          "mode": "lp",
+          "alpha": 0.15,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 62.25
+      },
+      "grid": [
+        {
+          "settings": {
+            "mode": "lp",
+            "alpha": 0.15,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 62.25
+        },
+        {
+          "settings": {
+            "mode": "lp",
+            "alpha": 0.55,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 54.791666666666664
+        },
+        {
+          "settings": {
+            "mode": "lp",
+            "alpha": 1.0,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 53.75
+        }
+      ]
+    },
+    "lp_mean": {
+      "chosen": {
+        "settings": {
+          "mode": "lp_mean",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 62.625
+      },
+      "grid": [
+        {
+          "settings": {
+            "mode": "lp_mean",
+            "alpha": 0.55,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 62.625
+        }
+      ]
+    },
+    "periodic": {
+      "chosen": {
+        "settings": {
+          "mode": "periodic",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 56.708333333333336
+      },
+      "grid": [
+        {
+          "settings": {
+            "mode": "periodic",
+            "alpha": 0.55,
+            "eta": 0.08,
+            "initial_price": 0.25,
+            "ridge": 1.0,
+            "delay": 2,
+            "epsilon": 0.05
+          },
+          "mean": 56.708333333333336
+        }
+      ]
+    }
+  }
+}

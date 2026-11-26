@@ -1,0 +1,12 @@
+{
+  "workers": [4],
+  "policies": ["F+B", "F+P", "R+B", "R+P", "rule", "online", "network_rule", "network_online"],
+  "rounds": 4,
+  "repeats": 1,
+  "phase_min": 1,
+  "phase_max": 1,
+  "scenario": "clean",
+  "seed": 33026,
+  "model_seed": 2026,
+  "stage": "smoke"
+}

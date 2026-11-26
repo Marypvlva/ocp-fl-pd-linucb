@@ -1,0 +1,6 @@
+{
+  "name": "adaptive-planning-ocp-contracts",
+  "private": true,
+  "scripts": {"build": "node compile.mjs"},
+  "devDependencies": {"solc": "0.8.30"}
+}

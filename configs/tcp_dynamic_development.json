@@ -1,0 +1,16 @@
+{
+  "workers": [12],
+  "policies": ["F+B", "F+P", "R+B", "R+P", "rule", "online", "network_rule", "network_online"],
+  "rounds": 80,
+  "repeats": 2,
+  "phase_min": 4,
+  "phase_max": 8,
+  "scenario": "faults",
+  "deadline": 1.5,
+  "rpc_timeout": 1.2,
+  "switch_seconds": 0.025,
+  "target_loss": 0.22,
+  "seed": 33026,
+  "model_seed": 2026,
+  "stage": "development"
+}

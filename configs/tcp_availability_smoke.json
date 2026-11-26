@@ -1,0 +1,18 @@
+{
+  "workers": [4, 8, 12],
+  "policies": ["F+B", "F+P", "R+B", "R+P", "network_rule", "network_freshness", "availability"],
+  "rounds": 8,
+  "repeats": 1,
+  "model_seeds": [16],
+  "hidden": 16,
+  "learning_rate": 0.5,
+  "target_loss": 0.22,
+  "phase_min": 2,
+  "phase_max": 2,
+  "scenario": "faults",
+  "deadline": 1.5,
+  "rpc_timeout": 1.2,
+  "switch_seconds": 0.025,
+  "seed": 93026,
+  "stage": "smoke"
+}

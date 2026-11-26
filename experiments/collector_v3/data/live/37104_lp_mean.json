@@ -1,0 +1,2083 @@
+[
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 1,
+  "members": [
+   1,
+   2
+  ],
+  "act": [
+   1,
+   3
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   0,
+   1,
+   0,
+   1
+  ],
+  "mirror": 1,
+  "slack": 200,
+  "errors": [
+   "e3/w2: TimeoutError",
+   "e1/w1: TimeoutError"
+  ],
+  "observed": {
+   "1": {
+    "2": 41.85412498190999
+   },
+   "3": {
+    "1": 133.77862493507564
+   }
+  },
+  "tx": 203378,
+  "ledger": 203378,
+  "hash": "dbd9e547a05c63d06b547d69e17013768e9edbe2bb7255a00019804d17f213f2",
+  "block": "cef98e52baba9fc4520ce68ed3702ecbd83c1cf4c479a3f0da0cbea346aec945",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.21136012498755008
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 2,
+  "members": [
+   3,
+   2
+  ],
+  "act": [
+   0,
+   3
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   1,
+   1,
+   0,
+   2
+  ],
+  "mirror": 2,
+  "slack": 130,
+  "errors": [
+   "e0/w3: TimeoutError",
+   "e3/w2: TimeoutError",
+   "e0/w2: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "0": {},
+   "3": {
+    "3": 127.5282088899985
+   }
+  },
+  "tx": 201887,
+  "ledger": 405265,
+  "hash": "dbd9e547a05c63d06b547d69e17013768e9edbe2bb7255a00019804d17f213f2",
+  "block": "c9e52f7e3c809e0136f2fd2c6ad713d9d90ed37f5a0cd63cac5a6bcd755f7da4",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.13696879195049405
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 3,
+  "members": [
+   3,
+   2
+  ],
+  "act": [
+   1
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   1,
+   2,
+   0,
+   2
+  ],
+  "mirror": 2,
+  "slack": 130,
+  "errors": [],
+  "observed": {
+   "1": {
+    "2": 33.72099995613098,
+    "3": 33.80745800677687
+   }
+  },
+  "tx": 202116,
+  "ledger": 607381,
+  "hash": "25b8f4f4ec0996839086374c95bbba4aff88153566cb43c5e392ccd927ba5f31",
+  "block": "3ecdcf7b526adf4cb423fecd7775fec54bed54ab0cdd407fde1ccc127a8ff5e9",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.0384104159893468
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 4,
+  "members": [
+   3,
+   1
+  ],
+  "act": [
+   2
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   1,
+   2,
+   1,
+   2
+  ],
+  "mirror": 2,
+  "slack": 80,
+  "errors": [
+   "e2/w1: TimeoutError",
+   "e2/w3: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "2": {}
+  },
+  "tx": 199138,
+  "ledger": 806519,
+  "hash": "25b8f4f4ec0996839086374c95bbba4aff88153566cb43c5e392ccd927ba5f31",
+  "block": "a2336edd328511787014f85d9abacb9820ae5fe0ffabeaebbf50891c6a360843",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.08672491705510765
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 5,
+  "members": [
+   1,
+   2
+  ],
+  "act": [
+   2
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   1,
+   2,
+   2,
+   2
+  ],
+  "mirror": 2,
+  "slack": 80,
+  "errors": [
+   "e2/w1: TimeoutError",
+   "e2/w2: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "2": {}
+  },
+  "tx": 199131,
+  "ledger": 1005650,
+  "hash": "25b8f4f4ec0996839086374c95bbba4aff88153566cb43c5e392ccd927ba5f31",
+  "block": "f7b98dff3c4a1a39e58df7a9632f3710a743a8b9089f4241392f925b53fdad84",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.0880595410708338
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 6,
+  "members": [
+   1,
+   3
+  ],
+  "act": [
+   0,
+   3
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   2,
+   2,
+   2,
+   3
+  ],
+  "mirror": 3,
+  "slack": 130,
+  "errors": [
+   "e0/w3: TimeoutError"
+  ],
+  "observed": {
+   "0": {
+    "1": 38.344208034686744
+   },
+   "3": {
+    "3": 126.05208298191428,
+    "1": 126.60829199012369
+   }
+  },
+  "tx": 204871,
+  "ledger": 1210521,
+  "hash": "1437548aa20bc5b106a39ab5ccedfd1f2ca089de1315418b4682ec259bd62a26",
+  "block": "22852318f27d37573642e1a7f3fec872cb7f4ac8e97142fb1ccf33854fbece56",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.13720995793119073
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 7,
+  "members": [
+   0,
+   2
+  ],
+  "act": [
+   1
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   2,
+   3,
+   2,
+   3
+  ],
+  "mirror": 3,
+  "slack": 200,
+  "errors": [
+   "e1/w0: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "1": {
+    "2": 42.29966702405363
+   }
+  },
+  "tx": 200636,
+  "ledger": 1411157,
+  "hash": "1437548aa20bc5b106a39ab5ccedfd1f2ca089de1315418b4682ec259bd62a26",
+  "block": "cd59fd2766d92f631f33e0cc48fd953578abe93ac394e014fbce2528bce015d8",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.2074849579948932
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 8,
+  "members": [
+   0,
+   1
+  ],
+  "act": [
+   0
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   3,
+   3,
+   2,
+   3
+  ],
+  "mirror": 3,
+  "slack": 130,
+  "errors": [],
+  "observed": {
+   "0": {
+    "0": 31.76533302757889,
+    "1": 33.918790984898806
+   }
+  },
+  "tx": 202109,
+  "ledger": 1613266,
+  "hash": "b5ed326949fdb791550e238ea60a40e1abd5de0aaa1d179d2fa2d45a53265590",
+  "block": "c4d47496b9d44cc8bd67604e40d78f824793fe975a160aa0d07a3207ee252034",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.03842779202386737
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 9,
+  "members": [
+   3,
+   0
+  ],
+  "act": [
+   3
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   3,
+   3,
+   2,
+   4
+  ],
+  "mirror": 3,
+  "slack": 200,
+  "errors": [
+   "e3/w0: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "3": {
+    "3": 121.01400003302842
+   }
+  },
+  "tx": 200638,
+  "ledger": 1813904,
+  "hash": "b5ed326949fdb791550e238ea60a40e1abd5de0aaa1d179d2fa2d45a53265590",
+  "block": "0e7aa39d93299a1c9bd0a4e3571d7d37fa887d7ddef49416fd1f30183fd9c266",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.20598191593308002
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 10,
+  "members": [
+   3,
+   0
+  ],
+  "act": [
+   0,
+   3
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   4,
+   3,
+   2,
+   5
+  ],
+  "mirror": 4,
+  "slack": 200,
+  "errors": [
+   "e0/w3: TimeoutError",
+   "e3/w0: TimeoutError"
+  ],
+  "observed": {
+   "0": {
+    "0": 23.80354201886803
+   },
+   "3": {
+    "3": 117.14270804077387
+   }
+  },
+  "tx": 203437,
+  "ledger": 2017341,
+  "hash": "2c0af8469dbd8c889436d99b5096eaf76cf4d79df48beae945f69199ab8b032f",
+  "block": "d0ff356c719da9079c51d5d986102880e78889682672281135e7a7fe701d4ff2",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.20749291696120054
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 11,
+  "members": [
+   2,
+   0
+  ],
+  "act": [
+   0
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   5,
+   3,
+   2,
+   5
+  ],
+  "mirror": 4,
+  "slack": 200,
+  "errors": [
+   "e0/w2: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "0": {
+    "0": 119.45524998009205
+   }
+  },
+  "tx": 200652,
+  "ledger": 2217993,
+  "hash": "2c0af8469dbd8c889436d99b5096eaf76cf4d79df48beae945f69199ab8b032f",
+  "block": "c8f809e0aec6af49ffafd58e2ad6148730e15c7dacd20a0aba027f274bbfe086",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.2065531249390915
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 12,
+  "members": [
+   1,
+   2
+  ],
+  "act": [
+   0,
+   1
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   6,
+   4,
+   2,
+   5
+  ],
+  "mirror": 5,
+  "slack": 130,
+  "errors": [
+   "e1/w1: TimeoutError",
+   "e0/w2: TimeoutError"
+  ],
+  "observed": {
+   "0": {
+    "1": 127.22675001714379
+   },
+   "1": {
+    "2": 32.64954104088247
+   }
+  },
+  "tx": 203443,
+  "ledger": 2421436,
+  "hash": "8396b0468f1788bc6029bc818e268549ccb8db4efac840bf9433b490b4d8b7dd",
+  "block": "4c44565f3957d78369dd2060c9c9cf968c529e29c0389ebee6378860126d2bdc",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.13717179198283702
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 13,
+  "members": [
+   3,
+   0
+  ],
+  "act": [
+   2
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   6,
+   4,
+   3,
+   5
+  ],
+  "mirror": 5,
+  "slack": 80,
+  "errors": [
+   "e2/w3: TimeoutError",
+   "e2/w0: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "2": {}
+  },
+  "tx": 199162,
+  "ledger": 2620598,
+  "hash": "8396b0468f1788bc6029bc818e268549ccb8db4efac840bf9433b490b4d8b7dd",
+  "block": "fb6dd5ab943df4c5f3029a3bb904c41099456dc8612cc92f22a6b21d521bccb1",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.08745691692456603
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 14,
+  "members": [
+   0,
+   2
+  ],
+  "act": [
+   0,
+   1
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   7,
+   5,
+   3,
+   5
+  ],
+  "mirror": 6,
+  "slack": 200,
+  "errors": [
+   "e1/w0: TimeoutError",
+   "e0/w2: TimeoutError"
+  ],
+  "observed": {
+   "0": {
+    "0": 35.39729106705636
+   },
+   "1": {
+    "2": 33.27629098203033
+   }
+  },
+  "tx": 203454,
+  "ledger": 2824052,
+  "hash": "3205cbd89475149dfc236b9a62b16984d968875e404bb19df6ab4c08c1a5e647",
+  "block": "d6aec290ce4b1dab998ba8a5ccc298ade199bbb6cebeee17f1b498df4b1fb028",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.20725729200057685
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 15,
+  "members": [
+   0,
+   3
+  ],
+  "act": [
+   0,
+   3
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   8,
+   5,
+   3,
+   6
+  ],
+  "mirror": 7,
+  "slack": 200,
+  "errors": [
+   "e0/w3: TimeoutError",
+   "e3/w0: TimeoutError"
+  ],
+  "observed": {
+   "0": {
+    "0": 31.346583040431142
+   },
+   "3": {
+    "3": 116.88554205466062
+   }
+  },
+  "tx": 203444,
+  "ledger": 3027496,
+  "hash": "02411fdc43a025b2c888a6a6b3ab50aa4ae926cc854d3ff7c6cc408cb6a7a565",
+  "block": "c0575a27aa9878b692cddc8775f24c54831c7bba9b14ca657056eef40bb5301a",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.20662941702175885
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 16,
+  "members": [
+   2,
+   0
+  ],
+  "act": [
+   0
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   9,
+   5,
+   3,
+   6
+  ],
+  "mirror": 7,
+  "slack": 80,
+  "errors": [
+   "e0/w2: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "0": {
+    "0": 22.629208979196846
+   }
+  },
+  "tx": 200657,
+  "ledger": 3228153,
+  "hash": "02411fdc43a025b2c888a6a6b3ab50aa4ae926cc854d3ff7c6cc408cb6a7a565",
+  "block": "10a3a2286b43adcb81b0295c0d5ff58a7247ed8634b2362f2ae60df05d83c22f",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.08638070803135633
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 17,
+  "members": [
+   2,
+   0
+  ],
+  "act": [
+   2
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   9,
+   5,
+   4,
+   6
+  ],
+  "mirror": 7,
+  "slack": 130,
+  "errors": [],
+  "observed": {
+   "2": {
+    "0": 105.04708404187113,
+    "2": 105.20866699516773
+   }
+  },
+  "tx": 202146,
+  "ledger": 3430299,
+  "hash": "65d10be5b1262f3ca52f7bb18f1f2f20680a8ee39eddc1e1a33ae45edfd7d5bc",
+  "block": "da26d3a6ba61f792e3da69de9007f8b25f4d9d7c8f39b0218668e5d92aa7cd4e",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.11006400000769645
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 18,
+  "members": [
+   3,
+   0
+  ],
+  "act": [
+   0
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   10,
+   5,
+   4,
+   6
+  ],
+  "mirror": 7,
+  "slack": 80,
+  "errors": [
+   "e0/w3: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "0": {
+    "0": 23.073458927683532
+   }
+  },
+  "tx": 200643,
+  "ledger": 3630942,
+  "hash": "65d10be5b1262f3ca52f7bb18f1f2f20680a8ee39eddc1e1a33ae45edfd7d5bc",
+  "block": "3e670e9f502b3ed9ebfb4c202e2f183fd73513f929cbd7ffd5e7c3ec4b1e0b1a",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.08637316699605435
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 19,
+  "members": [
+   3,
+   2
+  ],
+  "act": [
+   1
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   10,
+   6,
+   4,
+   6
+  ],
+  "mirror": 7,
+  "slack": 80,
+  "errors": [],
+  "observed": {
+   "1": {
+    "2": 32.21899992786348,
+    "3": 32.39833295810968
+   }
+  },
+  "tx": 202147,
+  "ledger": 3833089,
+  "hash": "5e4b598a989f27ff7eb4703a58a0155d036246b772a179fdd58aa4318fb53885",
+  "block": "2d5fa31eebbea2e0ed41cb61531b6f81f7cafd9574a4a9a6fd776e3b43ab7904",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.03787708398886025
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 20,
+  "members": [
+   0,
+   1
+  ],
+  "act": [
+   0
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   11,
+   6,
+   4,
+   6
+  ],
+  "mirror": 7,
+  "slack": 200,
+  "errors": [],
+  "observed": {
+   "0": {
+    "0": 31.123166903853416,
+    "1": 38.5143329622224
+   }
+  },
+  "tx": 202147,
+  "ledger": 4035236,
+  "hash": "1df3be12597ba95a390d0908d461038b3f1e3c8bacee02201ef21e49d9acebb4",
+  "block": "bdfecda09576b7756b83f165dffa1aa0bd2b44fb8f29b0c484e7f200c3665d2f",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.04303995904047042
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 21,
+  "members": [
+   3,
+   2
+  ],
+  "act": [
+   1
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   11,
+   7,
+   4,
+   6
+  ],
+  "mirror": 7,
+  "slack": 80,
+  "errors": [],
+  "observed": {
+   "1": {
+    "3": 26.27866598777473,
+    "2": 36.66791599243879
+   }
+  },
+  "tx": 202136,
+  "ledger": 4237372,
+  "hash": "004514a5d25c3549fcf2988868cbc9b0c5da3711289453972fe048949a0f1357",
+  "block": "fea7ec53f3d63b91b7daf11e514931ee7be5a24185e0fc05765ad65a6995e74c",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.04113062494434416
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 22,
+  "members": [
+   1,
+   2
+  ],
+  "act": [
+   2
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   11,
+   7,
+   5,
+   6
+  ],
+  "mirror": 7,
+  "slack": 130,
+  "errors": [
+   "e2/w1: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "2": {
+    "2": 117.95666697435081
+   }
+  },
+  "tx": 200657,
+  "ledger": 4438029,
+  "hash": "004514a5d25c3549fcf2988868cbc9b0c5da3711289453972fe048949a0f1357",
+  "block": "9a66bf15cd92ad01465e7eb91312f9737859f9c9fe65791b4572a252c30db627",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.13588279206305742
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 23,
+  "members": [
+   3,
+   0
+  ],
+  "act": [
+   0,
+   3
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   12,
+   7,
+   5,
+   7
+  ],
+  "mirror": 8,
+  "slack": 200,
+  "errors": [
+   "e3/w0: TimeoutError",
+   "e0/w3: TimeoutError"
+  ],
+  "observed": {
+   "0": {
+    "0": 24.03083408717066
+   },
+   "3": {
+    "3": 122.48466699384153
+   }
+  },
+  "tx": 203443,
+  "ledger": 4641472,
+  "hash": "cd693e7285b5ea0fc2b5d046e1450358f0549715f73928a043b112ab2b8af0b3",
+  "block": "d6ea61cb75feacd3358257a127e866f18d716b16971d6408a72a7fc534349f80",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.20670908398460597
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 24,
+  "members": [
+   2,
+   3
+  ],
+  "act": [
+   1
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   12,
+   8,
+   5,
+   7
+  ],
+  "mirror": 8,
+  "slack": 130,
+  "errors": [],
+  "observed": {
+   "1": {
+    "2": 33.98449998348951,
+    "3": 34.174749976955354
+   }
+  },
+  "tx": 202145,
+  "ledger": 4843617,
+  "hash": "b1c4e8de005af80eb355500ad4b1d73f89bd2df594643ee354fb805416d37a22",
+  "block": "5843e29003b97ff82e1a95a3b20a9dd36e29a575520b1f35be53093a61aa3835",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.03846724994946271
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 25,
+  "members": [
+   1,
+   2
+  ],
+  "act": [
+   0,
+   2
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   13,
+   8,
+   6,
+   7
+  ],
+  "mirror": 9,
+  "slack": 200,
+  "errors": [
+   "e2/w1: TimeoutError",
+   "e0/w2: TimeoutError"
+  ],
+  "observed": {
+   "0": {
+    "1": 39.76304200477898
+   },
+   "2": {
+    "2": 115.38874998223037
+   }
+  },
+  "tx": 203440,
+  "ledger": 5047057,
+  "hash": "915a6096222fd0fb5fb59abc005b994bd06d4b9b414370f50f406884890427e9",
+  "block": "3a269d2ca81664e853757b8b26483cac787edbe8251fca1569d7a4fdfde32bd3",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.20730262505821884
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 26,
+  "members": [
+   1,
+   0
+  ],
+  "act": [
+   0
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   14,
+   8,
+   6,
+   7
+  ],
+  "mirror": 9,
+  "slack": 130,
+  "errors": [],
+  "observed": {
+   "0": {
+    "0": 29.408875037916005,
+    "1": 40.07391701452434
+   }
+  },
+  "tx": 202145,
+  "ledger": 5249202,
+  "hash": "edff94f7ee76eb3df15f5a51807f9d78071cddc0372424c4862d6ec2737f84cf",
+  "block": "58db40d9d113941c4d56beb08e9fc8a309e025372f7de82889885b2f5745c090",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.044437000062316656
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 27,
+  "members": [
+   3,
+   2
+  ],
+  "act": [
+   2,
+   3
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   14,
+   8,
+   7,
+   8
+  ],
+  "mirror": 10,
+  "slack": 130,
+  "errors": [
+   "e2/w3: TimeoutError",
+   "e3/w2: TimeoutError"
+  ],
+  "observed": {
+   "2": {
+    "2": 103.6805409239605
+   },
+   "3": {
+    "3": 118.00775001756847
+   }
+  },
+  "tx": 203454,
+  "ledger": 5452656,
+  "hash": "673435ec572bf0acd405577d1912b9829bc405866953512c38e3f6af697a5973",
+  "block": "63366f31947c690334001a262c99e395a35e1ed898013289a994f71780d0e0d6",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.1370669170282781
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 28,
+  "members": [
+   0,
+   3
+  ],
+  "act": [
+   0,
+   3
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   15,
+   8,
+   7,
+   9
+  ],
+  "mirror": 11,
+  "slack": 200,
+  "errors": [
+   "e0/w3: TimeoutError",
+   "e3/w0: TimeoutError"
+  ],
+  "observed": {
+   "0": {
+    "0": 24.533707997761667
+   },
+   "3": {
+    "3": 127.5247079320252
+   }
+  },
+  "tx": 203445,
+  "ledger": 5656101,
+  "hash": "cee315787a915fa9cb54e4c567ed203eee545d4a547f59294ed12fb506d2aad9",
+  "block": "20cb5bfc2cdfa0ceba004a846bce5abd02206d1cfb1a66c2e0f1b9679100be53",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.206574417068623
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 29,
+  "members": [
+   3,
+   1
+  ],
+  "act": [
+   3
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   15,
+   8,
+   7,
+   10
+  ],
+  "mirror": 11,
+  "slack": 200,
+  "errors": [],
+  "observed": {
+   "3": {
+    "1": 122.69845802802593,
+    "3": 122.80200002714992
+   }
+  },
+  "tx": 202145,
+  "ledger": 5858246,
+  "hash": "f080004eac4996c8f186e42b9942d3d2fcfa658f8240396d5e288bd59ef06e3e",
+  "block": "a2a2a8042acd56e7289e71bcdfdcc86934eab25bf90eac9e6974c147f929c1ee",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.12747495796065778
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 30,
+  "members": [
+   0,
+   1
+  ],
+  "act": [
+   0
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   16,
+   8,
+   7,
+   10
+  ],
+  "mirror": 11,
+  "slack": 80,
+  "errors": [],
+  "observed": {
+   "0": {
+    "1": 34.406666993163526,
+    "0": 34.50808394700289
+   }
+  },
+  "tx": 202145,
+  "ledger": 6060391,
+  "hash": "f946039825a7545a8c9b0a33413c4d90420fcc07009b401a97650415bccbac42",
+  "block": "253d437d7f6f630aadd5e6386ecf145dcf5a389af2ca02b1205660e057eb06c0",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.03894324996508658
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 31,
+  "members": [
+   1,
+   3
+  ],
+  "act": [
+   3
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   16,
+   8,
+   7,
+   11
+  ],
+  "mirror": 11,
+  "slack": 130,
+  "errors": [],
+  "observed": {
+   "3": {
+    "3": 116.23854096978903,
+    "1": 127.74387502577156
+   }
+  },
+  "tx": 202150,
+  "ledger": 6262541,
+  "hash": "3e392162e099f83bc7125417df7e50b259bda4fa91df55be7fbae8142aba424d",
+  "block": "9fb2f9b0b8152b72eedf5315055487a4eae05b883656cc81646e1746ef4ffe7a",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.13363437494263053
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 32,
+  "members": [
+   1,
+   2
+  ],
+  "act": [
+   0
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   17,
+   8,
+   7,
+   11
+  ],
+  "mirror": 11,
+  "slack": 80,
+  "errors": [
+   "e0/w2: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "0": {
+    "1": 33.03462499752641
+   }
+  },
+  "tx": 200658,
+  "ledger": 6463199,
+  "hash": "3e392162e099f83bc7125417df7e50b259bda4fa91df55be7fbae8142aba424d",
+  "block": "fa623add37f5ca8897baaf45bb2fe178b4249d05623f0d8b8ea1d04803d193c9",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.08881970797665417
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 33,
+  "members": [
+   0,
+   3
+  ],
+  "act": [
+   0,
+   3
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   18,
+   8,
+   7,
+   12
+  ],
+  "mirror": 12,
+  "slack": 200,
+  "errors": [
+   "e3/w0: TimeoutError",
+   "e0/w3: ConnectionError"
+  ],
+  "observed": {
+   "0": {
+    "0": 26.600500103086233
+   },
+   "3": {
+    "3": 126.3825410278514
+   }
+  },
+  "tx": 203442,
+  "ledger": 6666641,
+  "hash": "6b9fadf5d7dc3567e7bbc70949c064379379563570f605eec46ffc8ea723df5e",
+  "block": "3956771188442f463d1c1a94e07282c17be3c630d17a6081b79833395a6a504f",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.20675404206849635
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 34,
+  "members": [
+   1,
+   2
+  ],
+  "act": [
+   3
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   18,
+   8,
+   7,
+   13
+  ],
+  "mirror": 12,
+  "slack": 130,
+  "errors": [
+   "e3/w2: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "3": {
+    "1": 123.16850002389401
+   }
+  },
+  "tx": 200655,
+  "ledger": 6867296,
+  "hash": "6b9fadf5d7dc3567e7bbc70949c064379379563570f605eec46ffc8ea723df5e",
+  "block": "31db31c8d6d17f8e323e915d3f2a597f1fd74ca99b01474d2c261f52b0f78575",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.1365063750417903
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 35,
+  "members": [
+   0,
+   3
+  ],
+  "act": [
+   0
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   19,
+   8,
+   7,
+   13
+  ],
+  "mirror": 12,
+  "slack": 80,
+  "errors": [
+   "e0/w3: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "0": {
+    "0": 34.4030000269413
+   }
+  },
+  "tx": 200652,
+  "ledger": 7067948,
+  "hash": "6b9fadf5d7dc3567e7bbc70949c064379379563570f605eec46ffc8ea723df5e",
+  "block": "404c5968f83db944850ddacc840fd1a0c9b4cb73f6bc6745fea2f82e5d314875",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.08791775000281632
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 36,
+  "members": [
+   2,
+   0
+  ],
+  "act": [
+   2
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   19,
+   8,
+   8,
+   13
+  ],
+  "mirror": 12,
+  "slack": 200,
+  "errors": [],
+  "observed": {
+   "2": {
+    "0": 103.8084999890998,
+    "2": 103.83083298802376
+   }
+  },
+  "tx": 202149,
+  "ledger": 7270097,
+  "hash": "31c6dce92ee2653ea59d2410ff28d836817ac65d6948d7604f8d20689083f947",
+  "block": "33ac10952868483401464317d7feffa298b78c4db4f2e384737ce455b3e2557b",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.10839412489440292
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 37,
+  "members": [
+   1,
+   2
+  ],
+  "act": [
+   0
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   20,
+   8,
+   8,
+   13
+  ],
+  "mirror": 12,
+  "slack": 80,
+  "errors": [
+   "e0/w2: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "0": {
+    "1": 38.48204098176211
+   }
+  },
+  "tx": 200654,
+  "ledger": 7470751,
+  "hash": "31c6dce92ee2653ea59d2410ff28d836817ac65d6948d7604f8d20689083f947",
+  "block": "c8e261584605544812199285d36d7f9763e278304a0dfebb50babde584dd7808",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.0855225829873234
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 38,
+  "members": [
+   3,
+   1
+  ],
+  "act": [
+   0
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   21,
+   8,
+   8,
+   13
+  ],
+  "mirror": 12,
+  "slack": 80,
+  "errors": [
+   "e0/w3: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "0": {
+    "1": 35.247917054221034
+   }
+  },
+  "tx": 200656,
+  "ledger": 7671407,
+  "hash": "31c6dce92ee2653ea59d2410ff28d836817ac65d6948d7604f8d20689083f947",
+  "block": "e5f07d07528d669952f78aaddf53e1f572ff0d49aaf8fa553d6dc98e56e1479b",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.08666904107667506
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 39,
+  "members": [
+   2,
+   0
+  ],
+  "act": [
+   0
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   22,
+   8,
+   8,
+   13
+  ],
+  "mirror": 12,
+  "slack": 80,
+  "errors": [
+   "e0/w2: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "0": {
+    "0": 22.873125039041042
+   }
+  },
+  "tx": 200651,
+  "ledger": 7872058,
+  "hash": "31c6dce92ee2653ea59d2410ff28d836817ac65d6948d7604f8d20689083f947",
+  "block": "bcf00a3043599cd0a874eb60fb4bf0afa7eea3df07b1da802cad1f8ffb7c1f0a",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.0865202919812873
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 40,
+  "members": [
+   2,
+   0
+  ],
+  "act": [
+   2
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   22,
+   8,
+   9,
+   13
+  ],
+  "mirror": 12,
+  "slack": 130,
+  "errors": [
+   "e2/w2: TimeoutError",
+   "e2/w0: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "2": {}
+  },
+  "tx": 199164,
+  "ledger": 8071222,
+  "hash": "31c6dce92ee2653ea59d2410ff28d836817ac65d6948d7604f8d20689083f947",
+  "block": "6d3d3d20c5d3515c062e05a4d54b95e951f23b3adc208d471d3148d62794f835",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.13739933399483562
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 41,
+  "members": [
+   1,
+   2
+  ],
+  "act": [
+   0
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   23,
+   8,
+   9,
+   13
+  ],
+  "mirror": 12,
+  "slack": 130,
+  "errors": [
+   "e0/w2: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "0": {
+    "1": 36.60570899955928
+   }
+  },
+  "tx": 200654,
+  "ledger": 8271876,
+  "hash": "31c6dce92ee2653ea59d2410ff28d836817ac65d6948d7604f8d20689083f947",
+  "block": "6e8070b9b921fdde9d8c17f99dcefa155f4e4aa32a049f5d25fc9bfdee21e8c3",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.13635704095941037
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 42,
+  "members": [
+   2,
+   1
+  ],
+  "act": [
+   0
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   24,
+   8,
+   9,
+   13
+  ],
+  "mirror": 12,
+  "slack": 130,
+  "errors": [
+   "e0/w2: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "0": {
+    "1": 32.68641699105501
+   }
+  },
+  "tx": 200649,
+  "ledger": 8472525,
+  "hash": "31c6dce92ee2653ea59d2410ff28d836817ac65d6948d7604f8d20689083f947",
+  "block": "53d712ff15b6c1b514d81121dd9b4e675b12cb21a3e9489473d908019161925f",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.13671037496533245
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 43,
+  "members": [
+   0,
+   2
+  ],
+  "act": [
+   0
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   25,
+   8,
+   9,
+   13
+  ],
+  "mirror": 12,
+  "slack": 80,
+  "errors": [
+   "e0/w2: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "0": {
+    "0": 33.13008404802531
+   }
+  },
+  "tx": 200659,
+  "ledger": 8673184,
+  "hash": "31c6dce92ee2653ea59d2410ff28d836817ac65d6948d7604f8d20689083f947",
+  "block": "e68fdf96f5670217786b6ce811b4b04284f33b65bb8d859eae50de4e304f2ef5",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.08635900006629527
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 44,
+  "members": [
+   1,
+   0
+  ],
+  "act": [
+   0
+  ],
+  "accepted": true,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   26,
+   8,
+   9,
+   13
+  ],
+  "mirror": 12,
+  "slack": 80,
+  "errors": [],
+  "observed": {
+   "0": {
+    "0": 19.928541965782642,
+    "1": 33.08795893099159
+   }
+  },
+  "tx": 202146,
+  "ledger": 8875330,
+  "hash": "3b21ad8f44bf6a09d6e988b5f9eae511bddec44427a8be894160383b4b1c9800",
+  "block": "bda43c29d4f92066b8bd954cc4f55a89a5b9dedcc4b96a3ba61df6b77069d2da",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.03737066709436476
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 45,
+  "members": [
+   2,
+   1
+  ],
+  "act": [
+   3
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   26,
+   8,
+   9,
+   14
+  ],
+  "mirror": 12,
+  "slack": 130,
+  "errors": [
+   "e3/w1: ConnectionError",
+   "e3/w2: ConnectionError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "3": {}
+  },
+  "tx": 199166,
+  "ledger": 9074496,
+  "hash": "3b21ad8f44bf6a09d6e988b5f9eae511bddec44427a8be894160383b4b1c9800",
+  "block": "715db55ecf7d1e74dd6c1c6284c446e1964a434af70ae316051be9bd2f0de749",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.13583150005433708
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 46,
+  "members": [
+   2,
+   3
+  ],
+  "act": [
+   3
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   26,
+   8,
+   9,
+   15
+  ],
+  "mirror": 12,
+  "slack": 200,
+  "errors": [
+   "e3/w2: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "3": {
+    "3": 126.59808399621397
+   }
+  },
+  "tx": 200654,
+  "ledger": 9275150,
+  "hash": "3b21ad8f44bf6a09d6e988b5f9eae511bddec44427a8be894160383b4b1c9800",
+  "block": "e5edc114ac5f3bb1dd17fd25070211b7221550395ea27b04d7878a8b5d7be3e2",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.20593308401294053
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 47,
+  "members": [
+   0,
+   2
+  ],
+  "act": [
+   0
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   27,
+   8,
+   9,
+   15
+  ],
+  "mirror": 12,
+  "slack": 200,
+  "errors": [
+   "e0/w2: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "0": {
+    "0": 34.281291998922825
+   }
+  },
+  "tx": 200646,
+  "ledger": 9475796,
+  "hash": "3b21ad8f44bf6a09d6e988b5f9eae511bddec44427a8be894160383b4b1c9800",
+  "block": "16a19e73198382571fc00b12e6f148337ccdfb89daa24c7fd8f5852879fd8695",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.2059876659186557
+ },
+ {
+  "seed": 37104,
+  "mode": "lp_mean",
+  "t": 48,
+  "members": [
+   3,
+   0
+  ],
+  "act": [
+   0
+  ],
+  "accepted": false,
+  "cap": [
+   48,
+   9,
+   9,
+   48
+  ],
+  "count": [
+   28,
+   8,
+   9,
+   15
+  ],
+  "mirror": 12,
+  "slack": 80,
+  "errors": [
+   "e0/w3: TimeoutError",
+   "verification: ProtocolError: Missing projection participant"
+  ],
+  "observed": {
+   "0": {
+    "0": 22.810874972492456
+   }
+  },
+  "tx": 200657,
+  "ledger": 9676453,
+  "hash": "3b21ad8f44bf6a09d6e988b5f9eae511bddec44427a8be894160383b4b1c9800",
+  "block": "fe718a379aec1037edf063804e9cbbf5c691a74afa126e6c31e37ea71371d65a",
+  "reservation": null,
+  "certificate_lookup": "finalized_cache",
+  "round_s": 0.0863830829039216
+ }
+]

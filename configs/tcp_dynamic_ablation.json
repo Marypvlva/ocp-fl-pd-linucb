@@ -1,0 +1,17 @@
+{
+  "workers": [12],
+  "policies": ["network_online", "network_prior", "network_rule"],
+  "rounds": 80,
+  "repeats": 8,
+  "phase_min": 4,
+  "phase_max": 8,
+  "scenario": "faults",
+  "deadline": 1.5,
+  "rpc_timeout": 1.2,
+  "switch_seconds": 0.025,
+  "target_loss": 0.22,
+  "seed": 53026,
+  "model_seed": 2026,
+  "stage": "ablation",
+  "primary_contrast": "network_online - network_prior"
+}

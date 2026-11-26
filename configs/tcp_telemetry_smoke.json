@@ -1,0 +1,13 @@
+{
+  "workers": [4],
+  "policies": ["network_online", "network_prior"],
+  "rounds": 4,
+  "repeats": 1,
+  "model_seeds": [16],
+  "learning_rate": 0.5,
+  "phase_min": 1,
+  "phase_max": 1,
+  "scenario": "clean",
+  "seed": 63026,
+  "stage": "smoke"
+}

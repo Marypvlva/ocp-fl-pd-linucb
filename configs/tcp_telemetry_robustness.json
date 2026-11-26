@@ -1,0 +1,17 @@
+{
+  "workers": [12],
+  "policies": ["network_online", "network_prior"],
+  "rounds": 160,
+  "repeats": 8,
+  "model_seeds": [16, 17, 18, 19, 20, 21, 22, 23],
+  "learning_rate": 0.5,
+  "target_loss": 0.22,
+  "phase_min": 4,
+  "phase_max": 8,
+  "scenario": "faults",
+  "deadline": 1.5,
+  "rpc_timeout": 1.2,
+  "switch_seconds": 0.025,
+  "seed": 63026,
+  "stage": "robustness"
+}

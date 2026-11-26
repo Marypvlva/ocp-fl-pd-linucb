@@ -1,0 +1,2489 @@
+{
+  "scores": {
+    "0.1": [
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 63.416666666666664,
+        "spent": 11.833333333333334
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 64.5,
+        "spent": 11.875
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 64.29166666666667,
+        "spent": 11.875
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 54.333333333333336,
+        "spent": 11.958333333333334
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 55.125,
+        "spent": 12.0
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 56.333333333333336,
+        "spent": 11.958333333333334
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 1.0,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 53.791666666666664,
+        "spent": 12.0
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 1.0,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 54.041666666666664,
+        "spent": 12.0
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 1.0,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 54.958333333333336,
+        "spent": 11.958333333333334
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 0.15,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 55.5,
+        "spent": 11.625
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 0.15,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 54.833333333333336,
+        "spent": 11.833333333333334
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 0.15,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 55.0,
+        "spent": 11.875
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 0.55,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 53.916666666666664,
+        "spent": 11.958333333333334
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 54.041666666666664,
+        "spent": 11.916666666666666
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 53.791666666666664,
+        "spent": 12.0
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 1.0,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 52.375,
+        "spent": 12.0
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 1.0,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 51.666666666666664,
+        "spent": 12.0
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 1.0,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 52.041666666666664,
+        "spent": 12.0
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.15,
+          "eta": 0.08,
+          "initial_price": 0.08,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 62.5,
+        "spent": 12.0
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.15,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 62.5,
+        "spent": 12.0
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.15,
+          "eta": 0.08,
+          "initial_price": 0.5,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 64.41666666666667,
+        "spent": 5.958333333333333
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.15,
+          "eta": 0.08,
+          "initial_price": 0.8,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 61.166666666666664,
+        "spent": 1.0416666666666667
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.08,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 53.541666666666664,
+        "spent": 12.0
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 54.0,
+        "spent": 12.0
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.5,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 56.125,
+        "spent": 5.375
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.8,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 52.583333333333336,
+        "spent": 0.0
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 1.0,
+          "eta": 0.08,
+          "initial_price": 0.08,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 53.583333333333336,
+        "spent": 12.0
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 1.0,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 54.041666666666664,
+        "spent": 12.0
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 1.0,
+          "eta": 0.08,
+          "initial_price": 0.5,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 52.75,
+        "spent": 0.875
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 1.0,
+          "eta": 0.08,
+          "initial_price": 0.8,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 52.083333333333336,
+        "spent": 0.0
+      },
+      {
+        "setting": {
+          "mode": "greedy",
+          "alpha": 0.55,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 63.625,
+        "spent": 11.583333333333334
+      },
+      {
+        "setting": {
+          "mode": "greedy",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 64.20833333333333,
+        "spent": 11.875
+      },
+      {
+        "setting": {
+          "mode": "greedy",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 64.20833333333333,
+        "spent": 11.875
+      },
+      {
+        "setting": {
+          "mode": "eps",
+          "alpha": 0.55,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 62.041666666666664,
+        "spent": 11.875
+      },
+      {
+        "setting": {
+          "mode": "eps",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 62.291666666666664,
+        "spent": 11.875
+      },
+      {
+        "setting": {
+          "mode": "eps",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 62.5,
+        "spent": 12.0
+      },
+      {
+        "setting": {
+          "mode": "thompson",
+          "alpha": 0.55,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 58.125,
+        "spent": 12.0
+      },
+      {
+        "setting": {
+          "mode": "thompson",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 59.625,
+        "spent": 11.75
+      },
+      {
+        "setting": {
+          "mode": "thompson",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 59.541666666666664,
+        "spent": 11.916666666666666
+      },
+      {
+        "setting": {
+          "mode": "recent",
+          "alpha": 0.55,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 63.333333333333336,
+        "spent": 11.583333333333334
+      },
+      {
+        "setting": {
+          "mode": "recent",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 64.375,
+        "spent": 11.833333333333334
+      },
+      {
+        "setting": {
+          "mode": "recent",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 64.66666666666667,
+        "spent": 11.958333333333334
+      },
+      {
+        "setting": {
+          "mode": "filter",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 64.25,
+        "spent": 12.0
+      },
+      {
+        "setting": {
+          "mode": "periodic",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 54.416666666666664,
+        "spent": 12.0
+      },
+      {
+        "setting": {
+          "mode": "always_single",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 52.583333333333336,
+        "spent": 0.0
+      },
+      {
+        "setting": {
+          "mode": "no_price",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 56.916666666666664,
+        "spent": 12.0
+      },
+      {
+        "setting": {
+          "mode": "no_ids",
+          "alpha": 0.55,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 52.416666666666664,
+        "spent": 11.916666666666666
+      },
+      {
+        "setting": {
+          "mode": "no_ids",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 52.458333333333336,
+        "spent": 12.0
+      },
+      {
+        "setting": {
+          "mode": "no_ids",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 52.666666666666664,
+        "spent": 12.0
+      }
+    ],
+    "0.25": [
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 68.04166666666667,
+        "spent": 28.541666666666668
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 67.79166666666667,
+        "spent": 29.416666666666668
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 67.41666666666667,
+        "spent": 29.833333333333332
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 57.5,
+        "spent": 29.791666666666668
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 58.875,
+        "spent": 29.583333333333332
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 58.5,
+        "spent": 29.791666666666668
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 1.0,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 56.458333333333336,
+        "spent": 29.833333333333332
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 1.0,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 57.708333333333336,
+        "spent": 29.708333333333332
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 1.0,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 57.041666666666664,
+        "spent": 29.833333333333332
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 0.15,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 56.541666666666664,
+        "spent": 27.791666666666668
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 0.15,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 56.25,
+        "spent": 29.291666666666668
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 0.15,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 55.208333333333336,
+        "spent": 28.75
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 0.55,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 54.708333333333336,
+        "spent": 29.166666666666668
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 55.0,
+        "spent": 29.75
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 54.5,
+        "spent": 29.916666666666668
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 1.0,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 52.416666666666664,
+        "spent": 29.583333333333332
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 1.0,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 52.333333333333336,
+        "spent": 29.916666666666668
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 1.0,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 53.541666666666664,
+        "spent": 29.875
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.15,
+          "eta": 0.08,
+          "initial_price": 0.08,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 63.916666666666664,
+        "spent": 30.0
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.15,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 65.29166666666667,
+        "spent": 29.666666666666668
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.15,
+          "eta": 0.08,
+          "initial_price": 0.5,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 65.0,
+        "spent": 6.833333333333333
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.15,
+          "eta": 0.08,
+          "initial_price": 0.8,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 61.166666666666664,
+        "spent": 1.0416666666666667
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.08,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 56.416666666666664,
+        "spent": 29.875
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 57.458333333333336,
+        "spent": 28.25
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.5,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 56.125,
+        "spent": 5.375
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.8,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 52.583333333333336,
+        "spent": 0.0
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 1.0,
+          "eta": 0.08,
+          "initial_price": 0.08,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 56.041666666666664,
+        "spent": 27.625
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 1.0,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 55.458333333333336,
+        "spent": 19.208333333333332
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 1.0,
+          "eta": 0.08,
+          "initial_price": 0.5,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 52.75,
+        "spent": 0.875
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 1.0,
+          "eta": 0.08,
+          "initial_price": 0.8,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 52.083333333333336,
+        "spent": 0.0
+      },
+      {
+        "setting": {
+          "mode": "greedy",
+          "alpha": 0.55,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 67.75,
+        "spent": 29.5
+      },
+      {
+        "setting": {
+          "mode": "greedy",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 67.08333333333333,
+        "spent": 29.708333333333332
+      },
+      {
+        "setting": {
+          "mode": "greedy",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 67.08333333333333,
+        "spent": 30.0
+      },
+      {
+        "setting": {
+          "mode": "eps",
+          "alpha": 0.55,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 66.41666666666667,
+        "spent": 29.666666666666668
+      },
+      {
+        "setting": {
+          "mode": "eps",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 66.04166666666667,
+        "spent": 29.791666666666668
+      },
+      {
+        "setting": {
+          "mode": "eps",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 65.5,
+        "spent": 29.875
+      },
+      {
+        "setting": {
+          "mode": "thompson",
+          "alpha": 0.55,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 63.5,
+        "spent": 28.958333333333332
+      },
+      {
+        "setting": {
+          "mode": "thompson",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 63.375,
+        "spent": 29.416666666666668
+      },
+      {
+        "setting": {
+          "mode": "thompson",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 62.041666666666664,
+        "spent": 29.833333333333332
+      },
+      {
+        "setting": {
+          "mode": "recent",
+          "alpha": 0.55,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 68.16666666666667,
+        "spent": 29.708333333333332
+      },
+      {
+        "setting": {
+          "mode": "recent",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 67.70833333333333,
+        "spent": 29.708333333333332
+      },
+      {
+        "setting": {
+          "mode": "recent",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 67.45833333333333,
+        "spent": 29.791666666666668
+      },
+      {
+        "setting": {
+          "mode": "filter",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 67.83333333333333,
+        "spent": 30.0
+      },
+      {
+        "setting": {
+          "mode": "periodic",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 56.666666666666664,
+        "spent": 30.0
+      },
+      {
+        "setting": {
+          "mode": "always_single",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 52.583333333333336,
+        "spent": 0.0
+      },
+      {
+        "setting": {
+          "mode": "no_price",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 58.791666666666664,
+        "spent": 30.0
+      },
+      {
+        "setting": {
+          "mode": "no_ids",
+          "alpha": 0.55,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 54.166666666666664,
+        "spent": 30.0
+      },
+      {
+        "setting": {
+          "mode": "no_ids",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 54.791666666666664,
+        "spent": 30.0
+      },
+      {
+        "setting": {
+          "mode": "no_ids",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 55.5,
+        "spent": 30.0
+      }
+    ],
+    "0.5": [
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 69.08333333333333,
+        "spent": 59.291666666666664
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 68.875,
+        "spent": 59.625
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 0.15,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 68.20833333333333,
+        "spent": 59.75
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 59.166666666666664,
+        "spent": 59.0
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 60.333333333333336,
+        "spent": 59.416666666666664
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 62.0,
+        "spent": 59.625
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 1.0,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 59.083333333333336,
+        "spent": 58.791666666666664
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 1.0,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 60.083333333333336,
+        "spent": 59.25
+      },
+      {
+        "setting": {
+          "mode": "joint",
+          "alpha": 1.0,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 60.875,
+        "spent": 59.25
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 0.15,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 57.5,
+        "spent": 51.166666666666664
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 0.15,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 57.833333333333336,
+        "spent": 53.666666666666664
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 0.15,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 56.875,
+        "spent": 52.166666666666664
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 0.55,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 54.625,
+        "spent": 53.833333333333336
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 57.041666666666664,
+        "spent": 57.875
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 57.208333333333336,
+        "spent": 58.708333333333336
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 1.0,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 53.458333333333336,
+        "spent": 59.291666666666664
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 1.0,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 53.5,
+        "spent": 59.666666666666664
+      },
+      {
+        "setting": {
+          "mode": "round_lin",
+          "alpha": 1.0,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 54.291666666666664,
+        "spent": 59.75
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.15,
+          "eta": 0.08,
+          "initial_price": 0.08,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 67.25,
+        "spent": 60.0
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.15,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 69.25,
+        "spent": 38.75
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.15,
+          "eta": 0.08,
+          "initial_price": 0.5,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 65.0,
+        "spent": 6.833333333333333
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.15,
+          "eta": 0.08,
+          "initial_price": 0.8,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 61.166666666666664,
+        "spent": 1.0416666666666667
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.08,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 57.666666666666664,
+        "spent": 43.541666666666664
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 57.666666666666664,
+        "spent": 29.916666666666668
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.5,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 56.125,
+        "spent": 5.375
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.8,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 52.583333333333336,
+        "spent": 0.0
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 1.0,
+          "eta": 0.08,
+          "initial_price": 0.08,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 56.125,
+        "spent": 29.75
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 1.0,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 55.458333333333336,
+        "spent": 19.208333333333332
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 1.0,
+          "eta": 0.08,
+          "initial_price": 0.5,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 52.75,
+        "spent": 0.875
+      },
+      {
+        "setting": {
+          "mode": "fixed",
+          "alpha": 1.0,
+          "eta": 0.08,
+          "initial_price": 0.8,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 52.083333333333336,
+        "spent": 0.0
+      },
+      {
+        "setting": {
+          "mode": "greedy",
+          "alpha": 0.55,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 69.0,
+        "spent": 59.583333333333336
+      },
+      {
+        "setting": {
+          "mode": "greedy",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 68.5,
+        "spent": 60.0
+      },
+      {
+        "setting": {
+          "mode": "greedy",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 68.29166666666667,
+        "spent": 60.0
+      },
+      {
+        "setting": {
+          "mode": "eps",
+          "alpha": 0.55,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 67.91666666666667,
+        "spent": 59.541666666666664
+      },
+      {
+        "setting": {
+          "mode": "eps",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 67.625,
+        "spent": 60.0
+      },
+      {
+        "setting": {
+          "mode": "eps",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 67.0,
+        "spent": 60.0
+      },
+      {
+        "setting": {
+          "mode": "thompson",
+          "alpha": 0.55,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 66.41666666666667,
+        "spent": 59.625
+      },
+      {
+        "setting": {
+          "mode": "thompson",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 65.58333333333333,
+        "spent": 59.75
+      },
+      {
+        "setting": {
+          "mode": "thompson",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 65.625,
+        "spent": 59.833333333333336
+      },
+      {
+        "setting": {
+          "mode": "recent",
+          "alpha": 0.55,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 69.16666666666667,
+        "spent": 60.0
+      },
+      {
+        "setting": {
+          "mode": "recent",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 68.70833333333333,
+        "spent": 60.0
+      },
+      {
+        "setting": {
+          "mode": "recent",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 68.75,
+        "spent": 59.916666666666664
+      },
+      {
+        "setting": {
+          "mode": "filter",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 68.91666666666667,
+        "spent": 59.666666666666664
+      },
+      {
+        "setting": {
+          "mode": "periodic",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 60.166666666666664,
+        "spent": 60.0
+      },
+      {
+        "setting": {
+          "mode": "always_single",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 52.583333333333336,
+        "spent": 0.0
+      },
+      {
+        "setting": {
+          "mode": "no_price",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 61.083333333333336,
+        "spent": 60.0
+      },
+      {
+        "setting": {
+          "mode": "no_ids",
+          "alpha": 0.55,
+          "eta": 0.025,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 59.0,
+        "spent": 60.0
+      },
+      {
+        "setting": {
+          "mode": "no_ids",
+          "alpha": 0.55,
+          "eta": 0.08,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 58.791666666666664,
+        "spent": 60.0
+      },
+      {
+        "setting": {
+          "mode": "no_ids",
+          "alpha": 0.55,
+          "eta": 0.2,
+          "initial_price": 0.25,
+          "ridge": 1.0,
+          "delay": 2,
+          "epsilon": 0.05
+        },
+        "mean": 60.625,
+        "spent": 60.0
+      }
+    ]
+  },
+  "chosen": {
+    "0.1": {
+      "joint": {
+        "mode": "joint",
+        "alpha": 0.15,
+        "eta": 0.08,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "round_lin": {
+        "mode": "round_lin",
+        "alpha": 0.15,
+        "eta": 0.025,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "fixed": {
+        "mode": "fixed",
+        "alpha": 0.15,
+        "eta": 0.08,
+        "initial_price": 0.5,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "greedy": {
+        "mode": "greedy",
+        "alpha": 0.55,
+        "eta": 0.08,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "eps": {
+        "mode": "eps",
+        "alpha": 0.55,
+        "eta": 0.2,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "thompson": {
+        "mode": "thompson",
+        "alpha": 0.55,
+        "eta": 0.08,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "recent": {
+        "mode": "recent",
+        "alpha": 0.55,
+        "eta": 0.2,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "filter": {
+        "mode": "filter",
+        "alpha": 0.55,
+        "eta": 0.08,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "periodic": {
+        "mode": "periodic",
+        "alpha": 0.55,
+        "eta": 0.08,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "always_single": {
+        "mode": "always_single",
+        "alpha": 0.55,
+        "eta": 0.08,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "no_price": {
+        "mode": "no_price",
+        "alpha": 0.55,
+        "eta": 0.08,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "no_ids": {
+        "mode": "no_ids",
+        "alpha": 0.55,
+        "eta": 0.2,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      }
+    },
+    "0.25": {
+      "joint": {
+        "mode": "joint",
+        "alpha": 0.15,
+        "eta": 0.025,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "round_lin": {
+        "mode": "round_lin",
+        "alpha": 0.15,
+        "eta": 0.025,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "fixed": {
+        "mode": "fixed",
+        "alpha": 0.15,
+        "eta": 0.08,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "greedy": {
+        "mode": "greedy",
+        "alpha": 0.55,
+        "eta": 0.025,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "eps": {
+        "mode": "eps",
+        "alpha": 0.55,
+        "eta": 0.025,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "thompson": {
+        "mode": "thompson",
+        "alpha": 0.55,
+        "eta": 0.025,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "recent": {
+        "mode": "recent",
+        "alpha": 0.55,
+        "eta": 0.025,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "filter": {
+        "mode": "filter",
+        "alpha": 0.55,
+        "eta": 0.08,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "periodic": {
+        "mode": "periodic",
+        "alpha": 0.55,
+        "eta": 0.08,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "always_single": {
+        "mode": "always_single",
+        "alpha": 0.55,
+        "eta": 0.08,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "no_price": {
+        "mode": "no_price",
+        "alpha": 0.55,
+        "eta": 0.08,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "no_ids": {
+        "mode": "no_ids",
+        "alpha": 0.55,
+        "eta": 0.2,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      }
+    },
+    "0.5": {
+      "joint": {
+        "mode": "joint",
+        "alpha": 0.15,
+        "eta": 0.025,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "round_lin": {
+        "mode": "round_lin",
+        "alpha": 0.15,
+        "eta": 0.08,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "fixed": {
+        "mode": "fixed",
+        "alpha": 0.15,
+        "eta": 0.08,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "greedy": {
+        "mode": "greedy",
+        "alpha": 0.55,
+        "eta": 0.025,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "eps": {
+        "mode": "eps",
+        "alpha": 0.55,
+        "eta": 0.025,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "thompson": {
+        "mode": "thompson",
+        "alpha": 0.55,
+        "eta": 0.025,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "recent": {
+        "mode": "recent",
+        "alpha": 0.55,
+        "eta": 0.025,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "filter": {
+        "mode": "filter",
+        "alpha": 0.55,
+        "eta": 0.08,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "periodic": {
+        "mode": "periodic",
+        "alpha": 0.55,
+        "eta": 0.08,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "always_single": {
+        "mode": "always_single",
+        "alpha": 0.55,
+        "eta": 0.08,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "no_price": {
+        "mode": "no_price",
+        "alpha": 0.55,
+        "eta": 0.08,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      },
+      "no_ids": {
+        "mode": "no_ids",
+        "alpha": 0.55,
+        "eta": 0.2,
+        "initial_price": 0.25,
+        "ridge": 1.0,
+        "delay": 2,
+        "epsilon": 0.05
+      }
+    }
+  },
+  "bounds": {
+    "0.1": {
+      "blind": [
+        58.214285714285715,
+        64.95892857142857
+      ],
+      "separated": [
+        58.214285714285715,
+        72.12142857142858
+      ],
+      "singles": [
+        58.214285714285715,
+        68.99285714285715
+      ],
+      "full": [
+        58.214285714285715,
+        80.99285714285715
+      ],
+      "base_realized": [
+        [
+          61,
+          60,
+          62,
+          54,
+          64,
+          54,
+          58,
+          59,
+          55,
+          46,
+          59,
+          59
+        ],
+        [
+          75,
+          76,
+          61,
+          61,
+          72,
+          67,
+          68,
+          72,
+          74,
+          69,
+          75,
+          69
+        ]
+      ],
+      "full_realized": [
+        [
+          61,
+          60,
+          62,
+          54,
+          64,
+          54,
+          58,
+          59,
+          55,
+          46,
+          59,
+          59
+        ],
+        [
+          87,
+          88,
+          73,
+          73,
+          84,
+          78,
+          80,
+          84,
+          86,
+          81,
+          87,
+          81
+        ]
+      ]
+    },
+    "0.25": {
+      "blind": [
+        58.214285714285715,
+        70.39107142857144
+      ],
+      "separated": [
+        58.214285714285715,
+        76.81428571428572
+      ],
+      "singles": [
+        58.214285714285715,
+        68.99285714285715
+      ],
+      "full": [
+        58.214285714285715,
+        82.85892857142858
+      ],
+      "base_realized": [
+        [
+          61,
+          60,
+          62,
+          54,
+          64,
+          54,
+          58,
+          59,
+          55,
+          46,
+          59,
+          59
+        ],
+        [
+          75,
+          76,
+          61,
+          61,
+          72,
+          67,
+          68,
+          72,
+          74,
+          69,
+          75,
+          69
+        ]
+      ],
+      "full_realized": [
+        [
+          61,
+          60,
+          62,
+          54,
+          64,
+          54,
+          58,
+          59,
+          55,
+          46,
+          59,
+          59
+        ],
+        [
+          88,
+          90,
+          74,
+          79,
+          86,
+          78,
+          86,
+          84,
+          89,
+          87,
+          88,
+          86
+        ]
+      ]
+    },
+    "0.5": {
+      "blind": [
+        58.214285714285715,
+        75.99464285714286
+      ],
+      "separated": [
+        58.214285714285715,
+        81.35357142857143
+      ],
+      "singles": [
+        58.214285714285715,
+        68.99285714285715
+      ],
+      "full": [
+        58.214285714285715,
+        82.85892857142858
+      ],
+      "base_realized": [
+        [
+          61,
+          60,
+          62,
+          54,
+          64,
+          54,
+          58,
+          59,
+          55,
+          46,
+          59,
+          59
+        ],
+        [
+          75,
+          76,
+          61,
+          61,
+          72,
+          67,
+          68,
+          72,
+          74,
+          69,
+          75,
+          69
+        ]
+      ],
+      "full_realized": [
+        [
+          61,
+          60,
+          62,
+          54,
+          64,
+          54,
+          58,
+          59,
+          55,
+          46,
+          59,
+          59
+        ],
+        [
+          88,
+          90,
+          74,
+          79,
+          86,
+          78,
+          86,
+          84,
+          89,
+          87,
+          88,
+          86
+        ]
+      ]
+    }
+  }
+}

@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import solc from 'solc';
+const source=fs.readFileSync(new URL('OcpfScheduler.sol',import.meta.url),'utf8');
+const settings={optimizer:{enabled:true,runs:200},viaIR:true,evmVersion:'paris',outputSelection:{'*':{'*':['abi','evm.bytecode.object','evm.deployedBytecode.object']}}};
+const output=JSON.parse(solc.compile(JSON.stringify({language:'Solidity',sources:{'OcpfScheduler.sol':{content:source}},settings})));
+for(const e of output.errors??[])if(e.severity==='error')throw Error(e.formattedMessage);
+const artifact={compiler:solc.version(),source_sha256:crypto.createHash('sha256').update(source).digest('hex'),settings,...output.contracts['OcpfScheduler.sol'].OcpfScheduler};
+fs.mkdirSync(new URL('artifacts',import.meta.url),{recursive:true});
+fs.writeFileSync(new URL('artifacts/OcpfScheduler.json',import.meta.url),JSON.stringify(artifact,null,2)+'\n');
+console.log('Compiled',artifact.compiler);

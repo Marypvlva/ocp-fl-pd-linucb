@@ -1,0 +1,702 @@
+--- a/adaptive_planning/crypto_baseline.py
++++ b/adaptive_planning/crypto_baseline.py
+@@ -52,22 +52,17 @@
+ def message(packet):
+     """Сообщение, защищённое подписью."""
+ 
+-    validate_context(packet.session_id, packet.epoch, packet.round_id)
+-    if any(
+-        type(x) is not int or not 0 <= x < 2**32 for x in (packet.worker_id, packet.vector_size)
+-    ):
+-        raise ValueError("Неверный участник или размер")
+-    header = struct.pack(
+-        ">16sIIII",
+-        packet.session_id,
+-        packet.epoch,
+-        packet.round_id,
+-        packet.worker_id,
+-        packet.vector_size,
+-    )
+-
+-    digest = hashlib.sha256(packet.payload).digest()
+-
++    return digest_message(packet.worker_id, packet.session_id, packet.epoch, packet.round_id,
++                          packet.vector_size, hashlib.sha256(packet.payload).digest())
++
++
++def digest_message(worker_id, session, epoch, round_id, dimension, digest):
++    validate_context(session, epoch, round_id)
++    if any(type(v) is not int or not 0 <= v < 2**32 for v in (worker_id, dimension)):
++        raise ValueError("Invalid worker or dimension")
++    if not isinstance(digest, bytes) or len(digest) != 32:
++        raise ValueError("Expected a SHA-256 digest")
++    header = struct.pack(">16sIIII", session, epoch, round_id, worker_id, dimension)
+     return DOMAIN + header + digest
+ 
+ 
+--- a/adaptive_planning/randomized_check.py
++++ b/adaptive_planning/randomized_check.py
+@@ -5,7 +5,7 @@
+ import struct
+ 
+ import numpy as np
+-from .crypto_baseline import integer_vector, validate_context
++from .crypto_baseline import digest_message, integer_vector, validate_context
+ 
+ from cryptography.exceptions import InvalidSignature
+ from cryptography.hazmat.primitives.asymmetric.ed25519 import (
+@@ -255,8 +255,13 @@
+         round_id,
+         *,
+         max_abs_update=None,
++        commitments=None,
+     ):
+ 
++        self.receipts = dict(commitments or {})
++        if commitments is not None and set(self.receipts) != set(public_keys):
++            raise ValueError("Incomplete commitment roster")
++        self.pinned = {}
+         self.public_keys = public_keys
+         self.session = session
+         self.epoch = epoch
+@@ -288,6 +293,13 @@
+         self.candidate.flags.writeable = False
+ 
+         dimension = len(self.candidate)
++        for worker_id, (digest, signature) in self.receipts.items():
++            msg = digest_message(worker_id, self.session, self.epoch, self.round_id, dimension, digest)
++            try:
++                self.public_keys[worker_id].verify(signature, msg)
++            except InvalidSignature as exc:
++                raise ValueError("Invalid commitment for this candidate context") from exc
++            self.pinned[worker_id] = digest
+ 
+         bound = len(self.public_keys) * self.max_abs_update
+ 
+@@ -307,7 +319,7 @@
+ 
+         return self.challenge
+ 
+-    def finish(self, replies):
++    def finish(self, replies, *, openings=None):
+ 
+         if self.consumed:
+             raise ValueError("Повторное использование проверки")
+@@ -318,7 +330,8 @@
+         if challenge is None or self.candidate is None:
+             raise ValueError("Сумма ещё не зафиксирована")
+ 
+-        if len(replies) != len(self.public_keys):
++        openings = {} if openings is None else openings
++        if len(replies) + len(openings) != len(self.public_keys):
+             raise ValueError("Ответили не все участники")
+ 
+         totals = np.zeros(
+@@ -327,6 +340,18 @@
+         )
+ 
+         seen = set()
++        # Only the coordinator supplies openings. Digests must be authenticated
++        # by the worker and pinned BEFORE begin() chooses the challenge.
++        for worker_id, raw in openings.items():
++            if worker_id not in self.public_keys or len(raw) != 8 * challenge.dimension:
++                raise ValueError("Invalid opening identity or length")
++            if self.pinned.get(worker_id) != sha256(raw).digest():
++                raise ValueError("The opening differs from the committed update")
++            vector = integer_vector(np.frombuffer(raw, dtype="<i8"), self.max_abs_update)
++            for j, seed in enumerate(challenge.seeds):
++                weights = random_weights(seed, challenge.dimension)
++                totals[j] = (totals[j] + dot_mod(vector, weights)) % P
++            seen.add(worker_id)
+ 
+         for reply in replies:
+             worker_id = reply.worker_id
+--- a/adaptive_planning/tcp_network.py
++++ b/adaptive_planning/tcp_network.py
+@@ -164,7 +164,7 @@
+             return "model"
+         if header["response"] and header["kind"] == "fragment":
+             return "edge"
+-        if header["response"] and header["kind"] in ("compute", "aggregate", "projection"):
++        if header["response"] and header["kind"] in ("compute", "aggregate", "projection", "signed_recovery", "open_committed"):
+             return "verifier"
+         return None
+ 
+--- a/adaptive_planning/tcp_runtime.py
++++ b/adaptive_planning/tcp_runtime.py
+@@ -31,6 +31,7 @@
+ 
+ from . import crypto_baseline as baseline
+ from . import randomized_check as projection
++from . import collector_routes
+ from .tcp_network import NetworkShaper, PROFILES
+ from .tcp_transport import (
+     Meter,
+@@ -114,6 +115,8 @@
+     missing_compute: tuple = ()
+     edge_delay_s: tuple = (0.0, 0.0, 0.0, 0.0)
+     missing_full_update: tuple = ()
++    # Test harness controls endpoint admission responses independently of eventual data service.
++    unavailable_at_probe: tuple | None = None
+ 
+ 
+ @dataclass
+@@ -148,6 +151,12 @@
+                 fields.add("selected_examples")
+             if "projection_failure_delay_s" in body:
+                 fields.add("projection_failure_delay_s")
++            for flag in ("cross_spares", "commit_updates", "late_map"):
++                if flag in body:
++                    require(type(body[flag]) is bool, "Invalid round option")
++                    fields.add(flag)
++            if "allow_signed_recovery" in body:
++                fields.add("allow_signed_recovery")
+             if "missing_full_update" in body:
+                 fields.add("missing_full_update")
+             exact_fields(body, fields)
+@@ -169,7 +178,14 @@
+                 require(round_id > self.round_id, "Repeated or stale compute")
+                 self.round_id = round_id
+                 self.challenges.clear()
++                self.relay_reply = None
+                 self.missing_projection = body["missing_projection"]
++                self.allow_signed_recovery = body.get("allow_signed_recovery") is True
++                self.cross_spares = body.get("cross_spares", False)
++                self.late_map = body.get("late_map", False)
++                self.map_granted = not self.late_map
++                self.commit_updates = body.get("commit_updates", False)
++                self.missing_full_update = body.get("missing_full_update", False)
+                 self.projection_failure_delay_s = delay
+                 load_model(self.model, payload)
+                 self.ready = False
+@@ -203,6 +219,12 @@
+                         round_id,
+                     )
+                     data = packet.payload + packet.signature
++                elif self.commit_updates:
++                    raw = self.worker.update.astype("<i8", copy=False).tobytes()
++                    digest = baseline.hashlib.sha256(raw).digest()
++                    message = baseline.digest_message(self.worker_id, bytes.fromhex(server.session),
++                                                      1, self.round_id, update.size, digest)
++                    data = digest + self.worker.private_key.sign(message)
+                 else:
+                     data = b""
+                 return dict(
+@@ -218,14 +240,52 @@
+                 round_id == self.round_id and getattr(self, "ready", False),
+                 "No update for this round",
+             )
++            if kind == "grant_spares":
++                require(header["sender"] == "coordinator" and self.late_map,
++                        "The coordinator must authorize a late placement")
++                exact_fields(body, {"cross"})
++                require(type(body["cross"]) is bool, "Invalid spare map")
++                require(not self.map_granted or self.cross_spares == body["cross"],
++                        "A conflicting spare map was already granted")
++                self.cross_spares = body["cross"]
++                self.map_granted = True
++                return {}, b""
++            if kind == "open_committed":
++                exact_fields(body, set())
++                require(header["sender"] == "coordinator" and self.allow_signed_recovery and
++                        self.commit_updates, "Opening not authorized for this round")
++                require(not self.missing_full_update, "Signed update unavailable")
++                return {}, self.worker.update.astype("<i8", copy=False).tobytes()
++            if kind == "signed_recovery":
++                exact_fields(body, set())
++                require(header["sender"] == "coordinator" and self.allow_signed_recovery,
++                        "This round does not authorize signed full recovery")
++                require(not self.missing_full_update, "Signed update unavailable")
++                packet = baseline.make_packet(self.worker.private_key, self.worker_id,
++                                              self.worker.update, bytes.fromhex(server.session),
++                                              1, self.round_id)
++                return {}, packet.payload + packet.signature
+             if kind == "fragment":
+                 exact_fields(body, {"lane"})
+                 lane = integer(body["lane"], 0, 1)
+-                require(header["sender"] in (f"e{lane}", f"e{lane + 2}"), "Wrong edge lane")
++                spare = 2 + (1 - lane if self.cross_spares else lane)
++                require(header["sender"] == f"e{lane}" or
++                        (self.map_granted and header["sender"] == f"e{spare}"), "Wrong edge lane")
+                 indices = lane_indices(self.model.nparam, lane)
+                 return {"size": len(indices)}, self.worker.update[indices].astype("<i8").tobytes()
+-            if kind == "projection":
+-                require(header["sender"] == "coordinator", "Challenge requires coordinator")
++            if kind in ("projection","relayed_projection"):
++                relay = kind=="relayed_projection"
++                if relay:
++                    exact_fields(body, {"command","token"})
++                    sender=header["sender"]
++                    require(sender in ("e0","e1","e2","e3"), "Unregistered proof collector")
++                    expected=collector_routes.token(server.keys["coordinator"],server.session,round_id,
++                                                    self.worker_id,int(sender[1:]),body["command"])
++                    require(type(body["token"]) is str and secrets.compare_digest(body["token"],expected),
++                            "Invalid collector grant")
++                    body=body["command"]
++                else:
++                    require(header["sender"] == "coordinator", "Challenge requires coordinator")
+                 exact_fields(body, {"hash", "seeds", "dimension"})
+                 dimension = integer(body["dimension"], self.model.nparam, self.model.nparam)
+                 require(
+@@ -241,6 +301,9 @@
+                     tuple(hex_bytes(s, 32) for s in body["seeds"]),
+                 )
+                 identity = (challenge.candidate_hash, challenge.seeds)
++                if relay and self.relay_reply is not None:
++                    require(self.relay_reply[0]==identity,"Conflicting relayed challenge")
++                    return self.relay_reply[1]
+                 require(identity not in self.challenges, "Repeated projection challenge")
+                 self.challenges.add(identity)
+                 if self.missing_projection:
+@@ -250,11 +313,14 @@
+                     raise ProtocolError("Injected unavailable worker during projection")
+                 start, cpu = perf_counter(), thread_time()
+                 reply = self.worker.reply(challenge)
+-                return dict(
++                response = dict(
+                     tags=list(reply.tags),
+                     prepare_s=perf_counter() - start,
+                     prepare_cpu_s=thread_time() - cpu,
+                 ), reply.signature
++                if relay:
++                    self.relay_reply=(identity,response)
++                return response
+         raise ProtocolError("Unknown worker command")
+ 
+ 
+@@ -266,6 +332,14 @@
+         self.round_id = 0
+ 
+     def handle(self, header, payload, server):
++        if header["kind"]=="relay_projection":
++            return collector_routes.forward(self,header,payload,server)
++        if header["kind"] == "ready_spare":
++            require(header["sender"] == "coordinator" and self.node in (2,3) and not payload,
++                    "A readiness request requires an authorized spare")
++            exact_fields(header["body"], {"unavailable"})
++            require(header["body"]["unavailable"] is False, "Spare refused the readiness request")
++            return {"ready": True}, b""
+         require(
+             header["sender"] == "coordinator" and header["kind"] == "aggregate",
+             "Invalid edge command",
+@@ -273,6 +347,10 @@
+         require(not payload, "Unexpected edge payload")
+         body = header["body"]
+         fields = {"fail", "corrupt", "stall", "delay_s", "budget_s"}
++        lane = self.node % 2
++        if "assigned_lane" in body:
++            fields.add("assigned_lane")
++            lane = integer(body["assigned_lane"], 0, 1)
+         if "worker_ids" in body:
+             fields.add("worker_ids")
+         exact_fields(body, fields)
+@@ -308,7 +386,7 @@
+         deadline = min(
+             header["deadline_ns"] / 1e9, monotonic() + min(body["budget_s"], self.rpc_timeout)
+         )
+-        indices = lane_indices(self.dimension, self.node % 2)
++        indices = lane_indices(self.dimension, lane)
+         fetch_start = perf_counter()
+ 
+         def fetch(peer):
+@@ -319,7 +397,7 @@
+                 server.session,
+                 round_id,
+                 "fragment",
+-                {"lane": self.node % 2},
++                {"lane": lane},
+                 b"",
+                 deadline,
+                 server.meter,
+@@ -602,8 +680,26 @@
+         switch_s=0.0,
+         network_profile=None,
+         selection=None,
++        recovery_gate=None,
++        cross_spares=False,
++        commit_updates=False,
++        probe_spares=False,
++        proof_collectors=None,
++        proof_budget_ms=None,
++        emulated_link_ms=None,
+     ):
+         require(action in ACTIONS, "Unknown action")
++        if proof_collectors is not None:
++            require(action.endswith("+P") and self.selection_authority is not None,"Collector needs certified P")
++            require(isinstance(proof_collectors,(list,tuple)) and 1<=len(proof_collectors)<=2 and
++                    all(type(g) is int and 0<=g<4 for g in proof_collectors) and
++                    len(set(proof_collectors))==len(proof_collectors),"Invalid collector grant")
++            require(type(proof_budget_ms) in (float,int) and 0<proof_budget_ms<=60000,"Invalid proof window")
++        require(type(cross_spares) is bool and type(commit_updates) is bool, "Invalid round mode")
++        require(not commit_updates or recovery_gate is not None, "Selective repair requires a gate")
++        require(type(probe_spares) is bool and (not probe_spares or recovery_gate is not None),
++                "Late placement requires an enabled gate")
++        require(recovery_gate is None or action == "F+P", "Deferred recovery starts at F+P")
+         require(0 < deadline_s <= 60 and 0 <= switch_s <= 5, "Invalid deadline/switch cost")
+         profile = network_profile or self.network
+         require(
+@@ -634,6 +730,12 @@
+             action=action,
+             switched=int(switched),
+             feedback_schema=3,
++            recovery_attempts=[],
++            opened_workers=[],
++            spare_assignments=[],
++            ready_spares=None,
++            grant_complete=None,
++            accepted_check=None,
+             compute_started=False,
+             compute_completed=False,
+             aggregate_started=False,
+@@ -677,6 +779,10 @@
+                     "compute",
+                     {
+                         "method": action[-1],
++                        **({"cross_spares": True} if cross_spares else {}),
++                        **({"late_map": True} if probe_spares else {}),
++                        **({"commit_updates": True} if commit_updates else {}),
++                        **({"allow_signed_recovery": True} if recovery_gate is not None else {}),
+                         **(
+                             {"selected_examples": selected_examples}
+                             if self.selection_authority is not None
+@@ -699,6 +805,7 @@
+             metrics["worker_rpc_wall_s"] = perf_counter() - t
+             result.errors.extend(errors)
+             packets = []
++            commitments = {}
+             for name, ((body, data), _) in responses.items():
+                 exact_fields(body, {"gradient_s", "gradient_cpu_s", "prepare_s", "prepare_cpu_s"})
+                 timing_fields(body, body)
+@@ -721,60 +828,107 @@
+                             data[-64:],
+                         )
+                     )
++                elif commit_updates:
++                    require(len(data) == 96, "Wrong signed commitment length")
++                    worker_id = int(name[1:])
++                    digest, signature = data[:32], data[32:]
++                    msg = baseline.digest_message(worker_id, bytes.fromhex(self.session), 1,
++                                                  self.round_id, self.dimension, digest)
++                    try:
++                        selected_keys[worker_id].verify(signature, msg)
++                    except baseline.InvalidSignature as exc:
++                        raise ValueError("Invalid update commitment signature") from exc
++                    commitments[worker_id] = (digest, signature)
+                 else:
+                     require(not data, "Projection mode must not return raw updates")
+             require(len(responses) == len(selected), "Not all workers computed updates")
+             metrics["compute_completed"] = True
+             metrics["aggregate_started"] = True
+-            nodes = range(4 if action[0] == "R" else 2)
++            lanes = {0: [], 1: []}
++            def assigned_lane(node):
++                return (1-node%2) if cross_spares and node >= 2 else node%2
++
++            def fetch_lanes(nodes):
++                responses, errors = self.parallel(
++                    [
++                        (
++                            f"e{i}",
++                            "aggregate",
++                            {
++                                "fail": i in fault.failed_edges,
++                                **({"assigned_lane": assigned_lane(i)} if cross_spares and i >= 2 else {}),
++                                "corrupt": i in fault.corrupt_edges,
++                                "stall": i in fault.stalled_edges,
++                                "delay_s": fault.edge_delay_s[i],
++                                "budget_s": remaining(deadline),
++                                **(
++                                    {"worker_ids": list(selected)}
++                                    if self.selection_authority is not None
++                                    else {}
++                                ),
++                            },
++                            b"",
++                        )
++                        for i in nodes
++                    ],
++                    deadline,
++                )
++                result.errors.extend(errors)
++                for name, ((body, data), elapsed) in responses.items():
++                    try:
++                        exact_fields(body, {"size", "fetch_s", "aggregate_s", "aggregate_cpu_s"})
++                        timing_fields(body, ("fetch_s", "aggregate_s", "aggregate_cpu_s"))
++                        node = int(name[1:])
++                        indices = lane_indices(self.dimension, assigned_lane(node))
++                        integer(body["size"], len(indices), len(indices))
++                        require(len(data) == len(indices) * 8, "Wrong aggregate fragment length")
++                        candidate = baseline.integer_vector(
++                            np.frombuffer(data, dtype="<i8"), len(selected) * MAX_UPDATE
++                        )
++                        lanes[assigned_lane(node)].append((elapsed, node, candidate))
++                        metrics["edge_compute_max_s"] = max(
++                            metrics["edge_compute_max_s"], body["aggregate_s"]
++                        )
++                        metrics["update_fetch_max_s"] = max(
++                            metrics["update_fetch_max_s"], body["fetch_s"]
++                        )
++                        metrics["edge_cpu_sum_s"] += body["aggregate_cpu_s"]
++                    except ValueError as exc:
++                        result.errors.append(f"{name}: malformed replica: {exc}")
+             t = perf_counter()
+-            responses, errors = self.parallel(
+-                [
+-                    (
+-                        f"e{i}",
+-                        "aggregate",
+-                        {
+-                            "fail": i in fault.failed_edges,
+-                            "corrupt": i in fault.corrupt_edges,
+-                            "stall": i in fault.stalled_edges,
+-                            "delay_s": fault.edge_delay_s[i],
+-                            "budget_s": remaining(deadline),
+-                            **(
+-                                {"worker_ids": list(selected)}
+-                                if self.selection_authority is not None
+-                                else {}
+-                            ),
+-                        },
+-                        b"",
+-                    )
+-                    for i in nodes
+-                ],
+-                deadline,
+-            )
++            fetch_lanes(range(4 if action[0] == "R" else 2))
++            missing = [i for i in (0, 1) if not lanes[i]]
++            if missing and recovery_gate is not None and remaining(deadline) > 0:
++                if recovery_gate("edge", tuple(missing), remaining(deadline)):
++                    metrics["recovery_attempts"].append("edge")
++                    if probe_spares:
++                        unavailable = (fault.failed_edges if fault.unavailable_at_probe is None
++                                       else fault.unavailable_at_probe)
++                        # Fault flags go only to the isolated service. The scheduling decision
++                        # below consumes the actual authenticated replies, never those flags.
++                        offers, offer_errors = self.parallel(
++                            [(f"e{j}", "ready_spare", {"unavailable": j in unavailable}, b"")
++                             for j in (2, 3)], min(deadline, monotonic() + .06))
++                        result.errors.extend(offer_errors)
++                        ready = {int(name[1:]) for name, ((body, data), _) in offers.items()
++                                 if body == {"ready": True} and not data}
++                        metrics["ready_spares"] = sorted(ready)
++                        eligible = [m for m in (cross_spares, not cross_spares)
++                                    if all(2+(1-i if m else i) in ready for i in missing)]
++                        require(bool(eligible), "No responding spare for this fragment set")
++                        cross_spares = eligible[0]
++                        grants, grant_errors = self.parallel(
++                            [(f"w{i}", "grant_spares", {"cross": cross_spares}, b"")
++                             for i in selected], deadline)
++                        result.errors.extend(grant_errors)
++                        metrics["grant_complete"] = (
++                            set(grants) == {f"w{i}" for i in selected}
++                            and all(body == {} and not data for (body, data), _ in grants.values()))
++                        require(metrics["grant_complete"], "Incomplete spare authorization")
++                    nodes = [2 + (1 - i if cross_spares else i) for i in missing]
++                    metrics["spare_assignments"] = list(zip(nodes, missing))
++                    fetch_lanes(nodes)
+             metrics["edge_rpc_wall_s"] = perf_counter() - t
+-            result.errors.extend(errors)
+-            lanes = {0: [], 1: []}
+-            for name, ((body, data), elapsed) in responses.items():
+-                try:
+-                    exact_fields(body, {"size", "fetch_s", "aggregate_s", "aggregate_cpu_s"})
+-                    timing_fields(body, ("fetch_s", "aggregate_s", "aggregate_cpu_s"))
+-                    node = int(name[1:])
+-                    indices = lane_indices(self.dimension, node % 2)
+-                    integer(body["size"], len(indices), len(indices))
+-                    require(len(data) == len(indices) * 8, "Wrong aggregate fragment length")
+-                    candidate = baseline.integer_vector(
+-                        np.frombuffer(data, dtype="<i8"), len(selected) * MAX_UPDATE
+-                    )
+-                    lanes[node % 2].append((elapsed, node, candidate))
+-                    metrics["edge_compute_max_s"] = max(
+-                        metrics["edge_compute_max_s"], body["aggregate_s"]
+-                    )
+-                    metrics["update_fetch_max_s"] = max(
+-                        metrics["update_fetch_max_s"], body["fetch_s"]
+-                    )
+-                    metrics["edge_cpu_sum_s"] += body["aggregate_cpu_s"]
+-                except ValueError as exc:
+-                    result.errors.append(f"{name}: malformed replica: {exc}")
+             require(all(lanes.values()), "Missing aggregate lane")
+             metrics["aggregate_completed"] = True
+             # All copies have arrived or timed out. Ordering uses only observed response time.
+@@ -816,6 +970,7 @@
+                             1,
+                             self.round_id,
+                             max_abs_update=MAX_UPDATE,
++                            commitments=commitments if commit_updates else None,
+                         )
+                         challenge = verifier.begin(candidate)
+                         metrics["verification_wall_s"] += perf_counter() - t
+@@ -827,10 +982,13 @@
+                         }
+                         t = perf_counter()
+                         metrics["projection_started"] = True
+-                        replies, errors = self.parallel(
+-                            [(f"w{i}", "projection", command, b"") for i in selected],
+-                            deadline,
+-                        )
++                        if proof_collectors is None:
++                            replies, errors = self.parallel(
++                                [(f"w{i}", "projection", command, b"") for i in selected], deadline)
++                        else:
++                            phase_end=min(deadline,monotonic()+proof_budget_ms/1000)
++                            replies,errors=collector_routes.collect(self,selected,proof_collectors,command,
++                                challenge,phase_end,emulated_link_ms,metrics)
+                         metrics["projection_rpc_wall_s"] += perf_counter() - t
+                         result.errors.extend(errors)
+                         signed = []
+@@ -848,14 +1006,57 @@
+                             signed.append(
+                                 projection.Reply(int(name[1:]), tuple(body["tags"]), data)
+                             )
+-                        # Missing workers cannot be repaired by choosing another edge candidate.
+-                        require(len(signed) == len(selected), "Missing projection participant")
+-                        t, cpu = perf_counter(), thread_time()
+-                        try:
+-                            verified = verifier.finish(signed)
+-                        finally:
+-                            metrics["verification_wall_s"] += perf_counter() - t
+-                            metrics["verification_cpu_s"] += thread_time() - cpu
++                        missing = sorted(set(selected_keys) - {r.worker_id for r in signed})
++                        if missing and recovery_gate is not None and remaining(deadline) > 0:
++                            if recovery_gate("proof", tuple(missing), remaining(deadline)):
++                                metrics["recovery_attempts"].append("proof")
++                                recover_ids = missing if commit_updates else selected
++                                rpc_name = "open_committed" if commit_updates else "signed_recovery"
++                                full, errors = self.parallel(
++                                    [(f"w{i}", rpc_name, {}, b"") for i in recover_ids], deadline)
++                                metrics["opened_workers"] = sorted(int(n[1:]) for n in full)
++                                result.errors.extend(errors)
++                                packets = []
++                                openings = {}
++                                for name, ((body, data), _) in full.items():
++                                    exact_fields(body, set())
++                                    if commit_updates:
++                                        worker_id = int(name[1:])
++                                        require(worker_id in missing, "Unexpected opening")
++                                        openings[worker_id] = data
++                                        continue
++                                    require(len(data) == self.dimension * 8 + 64,
++                                            "Wrong signed recovery length")
++                                    packets.append(baseline.SignedUpdate(
++                                        int(name[1:]), bytes.fromhex(self.session), 1, self.round_id,
++                                        self.dimension, data[:-64], data[-64:]))
++                                t, cpu = perf_counter(), thread_time()
++                                try:
++                                    if commit_updates:
++                                        require(set(openings) == set(missing), "Incomplete opening set")
++                                        verified = verifier.finish(signed, openings=openings)
++                                        metrics["accepted_check"] = "mixed_projection"
++                                    else:
++                                        verified = baseline.verify_and_reconstruct(
++                                            packets, selected_keys, bytes.fromhex(self.session), 1,
++                                            self.round_id, np.array_split(candidate, min(BLOCKS, self.dimension)),
++                                            vector_size=self.dimension, blocks=min(BLOCKS, self.dimension),
++                                            max_abs_update=MAX_UPDATE)
++                                        metrics["accepted_check"] = "exact_full"
++                                finally:
++                                    metrics["verification_wall_s"] += perf_counter() - t
++                                    metrics["verification_cpu_s"] += thread_time() - cpu
++                            else:
++                                require(False, "Missing projection participant")
++                        else:
++                            require(len(signed) == len(selected), "Missing projection participant")
++                            t, cpu = perf_counter(), thread_time()
++                            try:
++                                verified = verifier.finish(signed)
++                                metrics["accepted_check"] = "projection"
++                            finally:
++                                metrics["verification_wall_s"] += perf_counter() - t
++                                metrics["verification_cpu_s"] += thread_time() - cpu
+                 except ValueError as exc:
+                     metrics["candidate_rejections"] += 1
+                     result.errors.append(f"verification: {type(exc).__name__}: {exc}")
+--- a/adaptive_planning/tcp_transport.py
++++ b/adaptive_planning/tcp_transport.py
+@@ -131,6 +131,8 @@
+         ("fragment", True): "update_transfer",
+         ("aggregate", True): "aggregate_transfer",
+         ("projection", True): "proof_transfer",
++        ("signed_recovery", True): "signed_recovery_transfer",
++        ("open_committed", True): "signed_recovery_transfer",
+     }.get((header["kind"], header["response"]), "control")
+     budget = getattr(shaper, "byte_budget", None) if header["round"] else None
+     with reserve_frame(budget, len(data)) as record_sent:
+--- /dev/null
++++ b/adaptive_planning/collector_routes.py
+@@ -0,0 +1,72 @@
++"""Deliver one coordinator-issued challenge through one or two authorized collectors."""
++from concurrent.futures import ThreadPoolExecutor, as_completed
++from hashlib import sha256
++import hmac
++import json
++import math
++from time import sleep
++
++from cryptography.exceptions import InvalidSignature
++from .clock import now
++from . import randomized_check as proof
++from .tcp_transport import exact_fields, integer, remaining, require, rpc
++
++
++def token(key, session, round_id, worker, gateway, command):
++    body = json.dumps([session,round_id,worker,gateway,command],sort_keys=True,separators=(',',':')).encode()
++    return hmac.new(key,b'OCP/proof-relay/1\x00'+body,sha256).hexdigest()
++
++
++def forward(edge, header, payload, server):
++    body=header['body']
++    require(header['sender']=='coordinator' and not payload,'Relay needs coordinator authorization')
++    exact_fields(body,{'worker','command','token','emulated_ms'})
++    i=integer(body['worker'],0,len(edge.workers)-1)
++    delay=body['emulated_ms']
++    require(type(delay) in (int,float) and math.isfinite(delay) and -2<=delay<=60000,'Invalid link delay')
++    deadline=header['deadline_ns']/1e9
++    if delay<0:
++        sleep(remaining(deadline))
++        raise TimeoutError('No measured response')
++    if delay:
++        sleep(min(remaining(deadline),delay/1000))
++    remaining(deadline)
++    return rpc(edge.workers[i],server.identity,server.keys,server.session,header['round'],
++               'relayed_projection',{'command':body['command'],'token':body['token']},
++               b'',deadline,server.meter,shaper=server.shaper)
++
++
++def collect(cluster, roster, gateways, command, challenge, phase_end, emulated_ms, metrics):
++    calls=[(g,i) for g in gateways for i in roster]
++    started=now()
++    def one(g,i):
++        auth=token(cluster.keys['coordinator'][f'w{i}'],cluster.session,cluster.round_id,i,g,command)
++        msg={'worker':i,'command':command,'token':auth,
++             'emulated_ms':0. if emulated_ms is None else min(60000.,float(emulated_ms[i,g]))}
++        reply=cluster.call(f'e{g}',cluster.round_id,'relay_projection',msg,deadline=phase_end)
++        return reply,now()
++    replies={}
++    errors=[]
++    timing={str(g):{} for g in gateways}
++    with ThreadPoolExecutor(max_workers=len(calls)) as pool:
++        futures={pool.submit(one,g,i):(g,i) for g,i in calls}
++        for future in as_completed(futures):
++            g,i=futures[future]
++            try:
++                (body,raw),arrived=future.result()
++                require(arrived<=phase_end,'Reply after proof cut-off')
++                exact_fields(body,{'tags','prepare_s','prepare_cpu_s'})
++                encoded=proof.encoded_message(challenge,i,body['tags'])
++                cluster.public_keys[i].verify(raw,encoded)
++            except (OSError,ValueError,InvalidSignature) as e:
++                errors.append(f'e{g}/w{i}: {type(e).__name__}')
++                continue
++            elapsed=arrived-started
++            name=f'w{i}'
++            if name in replies:
++                old,_=replies[name]
++                require(old[1]==raw and old[0]['tags']==body['tags'],'Conflicting signed response')
++            replies[name]=((body,raw),elapsed)
++            timing[str(g)][str(i)]=1000*elapsed
++    metrics['collector_ms']=timing
++    return replies,errors

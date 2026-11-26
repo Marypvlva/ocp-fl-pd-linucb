@@ -1,0 +1,11 @@
+{
+  "workers": [4],
+  "policies": ["F+B", "F+P", "R+B", "R+P", "rule", "online"],
+  "rounds": 5,
+  "repeats": 1,
+  "target_loss": 0.22,
+  "scenario": "clean",
+  "deadline": 5.0,
+  "rpc_timeout": 2.0,
+  "model_seed": 2026
+}
