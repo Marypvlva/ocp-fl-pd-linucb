@@ -12,6 +12,7 @@ from urllib.parse import urlsplit
 from concurrent.futures import ThreadPoolExecutor
 import json
 import sqlite3
+import socket
 import ssl
 import threading
 import time
@@ -475,6 +476,7 @@ class _ControlHTTPServer(ThreadingHTTPServer):
             self.peak = max(self.peak, self.active)
         try:
             request.settimeout(5)
+            request.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
             if self.tls_context:
                 request = self.tls_context.wrap_socket(request, server_side=True)
             self.telemetry.event(
