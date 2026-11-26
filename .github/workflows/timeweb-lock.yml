@@ -1,0 +1,30 @@
+name: Generate and verify Ubuntu x86_64 lock
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  lock:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.7'
+      - run: |
+          python -m pip install uv==0.9.11
+          uv pip compile requirements.txt --python-version 3.13 --generate-hashes -o requirements-linux-x86_64.lock
+          uv venv --python 3.13.7 .venv-linux
+          uv pip sync --python .venv-linux/bin/python --require-hashes requirements-linux-x86_64.lock
+          uv pip install --python .venv-linux/bin/python --no-deps -e .
+          uv pip check --python .venv-linux/bin/python
+          .venv-linux/bin/python -c 'import platform, numpy, scipy, web3, eth_tester; print(platform.platform(), platform.python_version())' > linux-lock-verification.txt
+          sha256sum requirements-linux-x86_64.lock >> linux-lock-verification.txt
+          uv --version >> linux-lock-verification.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux-lock
+          path: |
+            requirements-linux-x86_64.lock
+            linux-lock-verification.txt
