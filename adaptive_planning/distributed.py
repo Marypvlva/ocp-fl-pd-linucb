@@ -14,8 +14,8 @@ left silent), so timeouts, deadline misses and retries happen in the real
 socket stack. On cloud VMs the network is real; the same proxy can still be
 used to add WAN-like latency between zones.
 
-Hard byte budgets (app_byte_budget) rely on a shared-memory ledger and are not
-available across hosts; bytes are measured per role and collected per round.
+Legacy app_byte_budget uses shared memory. Collector experiments supply an
+authenticated durable control service and a RemoteBudget at every sender.
 """
 
 import json
@@ -123,7 +123,7 @@ class RemoteCluster(Cluster):
     def __init__(self, groups, *, placement, ssh_user=None, ssh_options=(),
                  remote_dir="~/adaptive_planning", remote_python=".venv/bin/python",
                  bind_host="0.0.0.0", proxies=None, physical_faults=True,
-                 edge_outage="refuse", control_timeout=10.0, **kwargs):
+                 edge_outage="refuse", control_timeout=10.0, control=None, lease_pin=None, chain_rpc=None, **kwargs):
         require(clock.MODE == "wall", "Distributed runs require ADAPTIVE_CLOCK=wall")
         require(kwargs.get("app_byte_budget") is None, "Hard byte budgets need one host")
         require(kwargs.get("network") in (None, PROFILES["unlimited"]),
@@ -143,6 +143,7 @@ class RemoteCluster(Cluster):
         self.proxies, self.remote, self.replies = {}, {}, {}
         self.sequence = 0
         self.gate_log = []
+        self.control, self.lease_pin, self.chain_rpc = control, lease_pin, chain_rpc
 
     def _command(self, host):
         if host == "local":
@@ -158,7 +159,10 @@ class RemoteCluster(Cluster):
         spec = dict(identity=name, session=self.session, rpc_timeout=self.rpc_timeout,
                     keys={peer: key.hex() for peer, key in self.keys[name].items()},
                     bind_host="127.0.0.1" if host == "local" else self.bind_host,
-                    advertise_host="127.0.0.1" if host == "local" else host)
+                    advertise_host="127.0.0.1" if host == "local" else host,
+                    port=23000+(int(name[1:]) if name.startswith("w") else 16+int(name[1:])) if self.control else 0)
+        if self.control:
+            spec.update(control=dict(self.control[name]), lease_pin=self.lease_pin, chain_rpc=self.chain_rpc)
         if name.startswith("w"):
             (X, y), total, hidden = args
             spec.update(role="worker", worker=dict(X=X.tolist(), y=[int(v) for v in y],
@@ -208,6 +212,24 @@ class RemoteCluster(Cluster):
                 self.public_keys[int(name[1:])] = Ed25519PublicKey.from_public_bytes(
                     bytes.fromhex(info["key"]))
 
+    def install_grant(self, request):
+        """Require independent contract validation from every role before traffic."""
+        pending = {}
+        for name, process in self.remote.items():
+            self.sequence += 1
+            pending[name] = self.sequence
+            process.stdin.write(json.dumps(dict(grant=request, seq=self.sequence)) + "\n")
+            process.stdin.flush()
+        answers = {}
+        deadline = time.monotonic() + self.control_timeout
+        for name, seq in pending.items():
+            ack = self.replies[name].get(timeout=max(.01, deadline-time.monotonic()))
+            require(ack is not None and ack.get('seq') == seq and 'error' not in ack,
+                    f'Grant validation failed at {name}: {ack}')
+            require(ack['grant']['digest'] == request['digest'], 'Grant acknowledgement mismatch')
+            answers[name] = ack['grant']
+        return answers
+
     def gates(self, modes):
         """Switch real availability of roles and wait for every acknowledgement."""
         sent = {}
@@ -251,7 +273,7 @@ class RemoteCluster(Cluster):
         for name in list(self.remote):
             try:
                 self.call(name, 0, "stop", {}, deadline=clock.now() + 1.0)
-            except (ValueError, OSError):
+            except (ValueError, OSError, KeyError):
                 pass
         for process in self.remote.values():
             try:

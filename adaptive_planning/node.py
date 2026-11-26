@@ -14,7 +14,7 @@ import os
 import socket
 import sys
 import threading
-from time import sleep
+from time import sleep, perf_counter
 
 import numpy as np
 
@@ -37,7 +37,20 @@ def build(spec):
         key = None
     else:
         raise ValueError("Unknown role")
-    server = Server(identity, spec["session"], keys, service, max(2.0, rpc_timeout + 0.5), None)
+    shaper = None
+    if 'control' in spec:
+        from .distributed_control import ControlClient, RemoteBudget
+        from .lease_guard import LeaseGuard, DistributedShaper, read_evidence
+        client = ControlClient(**spec['control'])
+        pin = spec['lease_pin']
+        if spec.get('chain_rpc'):
+            from web3 import Web3
+            w3 = Web3(Web3.HTTPProvider(spec['chain_rpc'], request_kwargs={'timeout': 5}))
+            reader = lambda request: read_evidence(w3, pin, request)
+        else:
+            reader = lambda request: client.call('evidence', request)
+        shaper = DistributedShaper(RemoteBudget(client), LeaseGuard(identity, pin, reader))
+    server = Server(identity, spec["session"], keys, service, max(2.0, rpc_timeout + 0.5), shaper)
     return server, key
 
 
@@ -119,8 +132,15 @@ def serve(spec, out=sys.stdout, stdin=sys.stdin):
         try:
             for line in stdin:
                 command = json.loads(line)
-                gate.set(command["gate"])
-                emit(dict(gate=gate.mode, seq=command.get("seq")))
+                if 'grant' in command:
+                    try:
+                        ack = server.shaper.guard.install(command['grant'])
+                        emit(dict(seq=command['seq'], grant=ack))
+                    except Exception as exc:
+                        emit(dict(seq=command['seq'], error=repr(exc)))
+                else:
+                    gate.set(command["gate"])
+                    emit(dict(gate=gate.mode, seq=command.get("seq")))
         except (ValueError, KeyError, OSError) as exc:
             emit(dict(error=repr(exc)))
         finally:
@@ -134,7 +154,7 @@ def serve(spec, out=sys.stdout, stdin=sys.stdin):
                 if sock is None:
                     continue
                 sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
-                pool.submit(server.connection, sock)
+                pool.submit(server.connection, sock, perf_counter())
     finally:
         gate.close()
 

@@ -28,3 +28,7 @@ deploy/yandex/tf_output.json
 deploy/yandex/clock_check.txt
 study_*/
 reproduced.json
+.bootstrap/
+.venv-linux/
+deploy/timeweb/state/
+*.results.zip

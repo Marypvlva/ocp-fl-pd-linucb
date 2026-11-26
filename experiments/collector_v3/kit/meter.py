@@ -8,7 +8,7 @@ def settled_metrics(cluster, round_id, before):
         if delay:
             sleep(delay)
         result=cluster.collect_metrics(round_id)
-        state=cluster.shaper.byte_budget.state()
+        state=cluster.application_budget.state()
         expected=state['spent']-before
         actual=result['app_tx_bytes']
         if not state['reserved'] and not result['telemetry_missing_nodes'] and actual==expected:

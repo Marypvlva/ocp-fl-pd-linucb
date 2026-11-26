@@ -46,6 +46,7 @@ def collect(cluster, roster, gateways, command, challenge, phase_end, emulated_m
         reply=cluster.call(f'e{g}',cluster.round_id,'relay_projection',msg,deadline=phase_end)
         return reply,now()
     replies={}
+    receipts=[]
     errors=[]
     timing={str(g):{} for g in gateways}
     with ThreadPoolExecutor(max_workers=len(calls)) as pool:
@@ -62,6 +63,10 @@ def collect(cluster, roster, gateways, command, challenge, phase_end, emulated_m
                 errors.append(f'e{g}/w{i}: {type(e).__name__}')
                 continue
             elapsed=arrived-started
+            receipts.append(dict(worker=i,gateway=g,tags=body['tags'],signature=raw.hex(),
+                session=challenge.session.hex(),epoch=challenge.epoch,round=challenge.round_id,
+                candidate_hash=challenge.candidate_hash.hex(),seeds=[s.hex() for s in challenge.seeds],
+                dimension=challenge.dimension,arrived_at=arrived,elapsed_ms=1000*elapsed))
             name=f'w{i}'
             if name in replies:
                 old,_=replies[name]
@@ -69,4 +74,5 @@ def collect(cluster, roster, gateways, command, challenge, phase_end, emulated_m
             replies[name]=((body,raw),elapsed)
             timing[str(g)][str(i)]=1000*elapsed
     metrics['collector_ms']=timing
+    metrics['collector_receipts']=receipts
     return replies,errors

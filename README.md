@@ -4,7 +4,7 @@ Resource-constrained scheduling of verifiable federated-learning rounds on edge 
 
 OCP-FL fixes a publicly verifiable random client roster. The collector experiment then selects one or two gateways for that roster, charges every attempted route, and learns from individually verified replies under delayed feedback and per-gateway quotas. A model update is applied after every selected client's reply passes the existing signature and projection checks.
 
-The current research snapshot is **collector v3**, dated 26 November 2026. Its code, frozen plans, archived measurements, per-draw outcomes and TCP/EVM logs are in [`experiments/collector_v3`](experiments/collector_v3). The [Russian report](reports/collector-v3-report-ru.pdf) describes the results and implementation work required for a multi-host confirmatory study.
+The current software release is **v0.6.0**, dated 26 November 2026. It adds distributed Collector v3 execution for Timeweb Cloud. The archived collector study remains version v3. Its code, frozen plans, archived measurements, per-draw outcomes and TCP/EVM logs are in [`experiments/collector_v3`](experiments/collector_v3). The [Russian report](reports/collector-v3-report-ru.pdf) describes the results and implementation work required for a multi-host confirmatory study.
 
 ## Install
 
@@ -43,13 +43,17 @@ The output directory must be new. This uses the stored measurements and needs no
 
 ## Run experiments in the cloud
 
-See [the cloud instructions](docs/CLOUD_COLLECTOR_V3.md) for a Linux VM run and the existing multi-host deployment entry points. The repository includes the original TCP runtime and its distributed launcher, Yandex Cloud infrastructure templates, and the current collector experiment. Use a fresh output directory for each independent study and record `git rev-parse HEAD` with its configuration.
+Start with the detailed [Timeweb runbook in Russian](deploy/timeweb/RUNBOOK_RU.md). It covers Ubuntu 24.04 x86_64 bootstrap, a verified Linux hash lock, coordinator-side SSH deployment, clock and peer diagnostics, frozen plans, natural latency runs and HTTPS result export.
+
+The distributed entry point is `experiments/collector_v3/kit/live.py --plan ...`. It uses `RemoteCluster`, a durable atomic application-byte admission service and node-side CollectorLeases verification.
+
+See also [the previous cloud instructions](docs/CLOUD_COLLECTOR_V3.md) for a Linux VM run and the existing multi-host deployment entry points. The repository includes the original TCP runtime and its distributed launcher, Yandex Cloud infrastructure templates, and the current collector experiment. Use a fresh output directory for each independent study and record `git rev-parse HEAD` with its configuration.
 
 ## What the current results establish
 
 Three disjoint probe panels with separate dates were evaluated using archived network measurements. The original joint collector policy exceeded an optimistic pre-roster reservation bound by 32.02, 36.16 and 27.16 accepted rounds per 480, when the bound allows discarding reserved resources after reveal. A matched factorial study found a positive interaction between roster information and per-resource prices. In a third held-out series, paid individual binary receipts yielded 216.03 acceptances versus 176.22 for the best tested aggregate-only method selected separately per panel.
 
-These results depend on the workload, resource regime and measurement replay described in the report. Individually informed greedy and recency controls remain strong. The UCB bonus alone has no established substantial advantage in these series. Local EVM and TCP runs validate protocol execution. End-to-end finality latency, distributed spending enforcement and real collector queues require cloud measurement. In the replay, an exclusive extra 5 ms for late booking preserves the chosen practical-effect threshold in all three series. At larger delays the evidence weakens.
+These results depend on the workload, resource regime and measurement replay described in the report. Individually informed greedy and recency controls remain strong. The UCB bonus alone has no established substantial advantage in these series. Local EVM and TCP runs validate protocol execution. Distributed spending admission and queue telemetry are implemented. Real interhost performance, end-to-end external consensus finality and hardware sizing require measurement on the operator-provided cloud VMs. In the replay, an exclusive extra 5 ms for late booking preserves the chosen practical-effect threshold in all three series. At larger delays the evidence weakens.
 
 ## Project layout
 
@@ -68,4 +72,4 @@ The [previous project guide](docs/README_PREVIOUS_RU.md) documents the older CLI
 
 ## Reuse in a paper
 
-Use a tagged version together with its exact commit SHA, frozen plan, configuration, seeds and raw output files. [`CITATION.cff`](CITATION.cff) provides software citation metadata. Report new cloud outcomes with their own hardware, clock synchronization, network placement, complete latency and spending measurements. The supplied report is a research handoff and records remaining implementation requirements.
+Use a tagged version together with its exact commit SHA, frozen plan, configuration, seeds and raw output files. [`CITATION.cff`](CITATION.cff) provides software citation metadata. Report new cloud outcomes with their own hardware, clock synchronization, network placement, complete latency and spending measurements. The supplied report records the original research handoff. The [Timeweb implementation report](deploy/timeweb/IMPLEMENTATION_REPORT_RU.md) describes subsequent changes, checks and remaining empirical limits.

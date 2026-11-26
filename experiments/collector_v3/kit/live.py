@@ -138,4 +138,10 @@ def main():
     a=p.parse_args()
     for s in a.seeds: run(a.root,a.data,s,a.rounds,a.modes,a.atlas,a.cached_finality)
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    if '--plan' in sys.argv:
+        sys.path.insert(0,str(Path(__file__).resolve().parents[3]))
+        from distributed_live import main as distributed_main
+        distributed_main(Path(__file__).resolve().parents[3])
+    else:
+        main()

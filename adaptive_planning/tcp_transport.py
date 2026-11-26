@@ -120,6 +120,8 @@ def encode(header, payload, key):
 
 
 def send_message(sock, header, payload, key, deadline, meter, shaper=None):
+    if shaper and hasattr(shaper, "authorize"):
+        shaper.authorize(header)
     started = perf_counter()
     data = encode(header, payload, key)
     meter.add(header["round"], serialization_s=perf_counter() - started)

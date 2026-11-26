@@ -436,7 +436,8 @@ class Server:
         self.seen = set()
         self.lock = threading.Lock()
 
-    def connection(self, sock):
+    def connection(self, sock, queued_at=None):
+        queue_s = max(0.,perf_counter()-queued_at) if queued_at is not None else 0.
         header = None
         with sock:
             deadline = monotonic() + self.timeout
@@ -444,6 +445,7 @@ class Server:
                 header, payload = receive_message(
                     sock, self.keys, self.identity, self.session, deadline, self.meter
                 )
+                self.meter.add(header["round"], server_queue_wait_s=queue_s)
                 deadline = min(deadline, header["deadline_ns"] / 1e9)
                 require(not header["response"], "Request expected")
                 nonce = (header["sender"], header["nonce"])
@@ -469,6 +471,8 @@ class Server:
                         )
                 else:
                     require(header["round"] > 0, "Round must be positive")
+                    if self.shaper and hasattr(self.shaper, "authorize"):
+                        self.shaper.authorize(header)
                     info, data = self.service.handle(header, payload, self)
             except (ValueError, OSError, TypeError, KeyError, OverflowError) as exc:
                 self.meter.add(header["round"] if header else 0, protocol_errors=1)
@@ -516,7 +520,7 @@ def serve_process(identity, session, keys, role_args, ready_pipe, rpc_timeout, s
                 except socket.timeout:
                     continue
                 sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
-                pool.submit(server.connection, sock)
+                pool.submit(server.connection, sock, perf_counter())
     except Exception as exc:
         try:
             ready_pipe.send({"error": repr(exc)})
@@ -1088,6 +1092,10 @@ class Cluster:
         )
         return result
 
+    @property
+    def application_budget(self):
+        return self.shaper.byte_budget if self.shaper is not None else None
+
     def collect_metrics(self, round_id):
         """Telemetry is outside the round but inside end-to-end T_epsilon."""
         snapshots = {"coordinator": self.meter.snapshot(round_id)}
@@ -1114,6 +1122,7 @@ class Cluster:
             "socket_receive_wall_sum_s": sum(
                 s.get("socket_receive_s", 0) for s in snapshots.values()
             ),
+            "server_queue_wait_sum_s": sum(s.get("server_queue_wait_s",0) for s in snapshots.values()),
             "server_protocol_errors": sum(s.get("protocol_errors", 0) for s in snapshots.values()),
         }
         metrics["child_peak_rss_sum_bytes"] = sum(

@@ -1,0 +1,37 @@
+name: Timeweb Ubuntu 24.04 distributed mechanisms
+on:
+  push:
+    branches: [main, timeweb-collector-v3]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ubuntu:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13.7'
+      - name: Run the deployment bootstrap against the Linux hash lock
+        run: bash deploy/timeweb/bootstrap.sh --no-system
+      - name: Run full regressions including local multi-process distributed rehearsal
+        run: .venv/bin/python project.py test > timeweb-tests.txt 2>&1
+      - name: Reproduce archived scientific results
+        run: |
+          .venv/bin/python experiments/collector_v3/kit/analyze_v3.py experiments/collector_v3/data reproduced.json
+          cmp reproduced.json experiments/collector_v3/data/summary.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: timeweb-linux-validation
+          path: |
+            timeweb-tests.txt
+            results/bootstrap/
