@@ -78,6 +78,7 @@ set -o pipefail
   2>&1 | tee results/collector-061-repeat/console.log
 .venv/bin/python deploy/timeweb/summarize.py results/collector-061-repeat
 .venv/bin/python deploy/timeweb/audit_budget.py results/collector-061-repeat
+.venv/bin/python deploy/timeweb/control_report.py results/collector-061-repeat
 ```
 
 Ctrl+B, затем D — отсоединиться от tmux. `tmux attach -t collector-061` — вернуться. Приложение публикует control_health, а подробные события сохраняются в файлах
@@ -99,8 +100,9 @@ HTTPS-выгрузка результатов выполняется по [HTTPS
 На свободном координаторе, вне сбора научных результатов, можно выполнить
 
 ```bash
-.venv/bin/python deploy/timeweb/stress_control.py --out results/service-load-061 \
-  --frames 60480 --owners 9 --concurrency 18 --one-cpu --memory-mb 2048
+systemd-run --scope -p MemoryMax=2G -p CPUQuota=100% \
+  "$PWD/.venv/bin/python" "$PWD/deploy/timeweb/stress_control.py" \
+  --out results/service-load-061 --frames 60480 --owners 9 --concurrency 18 --one-cpu
 ```
 
 Это нагрузка на реальные локальные HTTPS-запросы и учёт тестовых кредитов. Она не запускает обучение и не имитирует межхостовую сеть. Не выполняйте её одновременно с основной серией. Результаты нагрузки и полные события записываются в отдельный каталог. Она помогает проверить устойчивость службы на одном CPU, но не доказывает отсутствие сетевых проблем на реальных ВМ.

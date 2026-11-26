@@ -138,6 +138,19 @@ class ServiceRegressionTests(unittest.TestCase):
             finally:
                 slow.close()
 
+    def test_thread_creation_failure_releases_capacity_and_recovers(self):
+        with service_fixture(max_workers=2) as (server, client, ledger, _):
+            with patch.object(
+                threading.Thread, "start", side_effect=RuntimeError("can't start new thread")
+            ):
+                with self.assertRaises(OSError):
+                    client.call("state", {})
+            self.assertEqual(server.http.load()["active_connections"], 0)
+            self.assertEqual(server.http.load()["queued_connections"], 0)
+            self.assertGreater(server.telemetry.snapshot()["counts"]["worker_start_error"], 0)
+            self.assertEqual(client.call("state", {})["spent"], 0)
+            self.assertEqual(ledger.audit()["reserved"], 0)
+
     def test_total_deadline_is_not_multiplied_by_retries(self):
         def delayed(_):
             time.sleep(0.15)

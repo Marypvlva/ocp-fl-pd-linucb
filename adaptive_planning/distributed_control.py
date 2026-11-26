@@ -9,7 +9,6 @@ import hmac
 import http.client
 import queue
 from urllib.parse import urlsplit
-from concurrent.futures import ThreadPoolExecutor
 from collections import deque
 import json
 import sqlite3
@@ -486,10 +485,8 @@ class _ControlHTTPServer(ThreadingHTTPServer):
 
     def __init__(self, address, handler, telemetry, context=None, max_workers=64):
         self.telemetry, self.tls_context = telemetry, context
-        self.workers = ThreadPoolExecutor(
-            max_workers=max_workers, thread_name_prefix="control-http"
-        )
-        self.slots = threading.BoundedSemaphore(max_workers * 2)
+        self.worker_threads = set()
+        self.slots = threading.BoundedSemaphore(max_workers)
         self.load_lock = threading.Lock()
         self.queued, self.active, self.peak = 0, 0, 0
         super().__init__(address, handler)
@@ -505,7 +502,30 @@ class _ControlHTTPServer(ThreadingHTTPServer):
         accepted = time.perf_counter()
         with self.load_lock:
             self.queued += 1
-        self.workers.submit(self._serve_connection, request, address, accepted)
+        worker = None
+        try:
+            worker = threading.Thread(
+                target=self._serve_connection,
+                args=(request, address, accepted),
+                daemon=True,
+                name="control-http",
+            )
+            with self.load_lock:
+                self.worker_threads.add(worker)
+            worker.start()
+        except (RuntimeError, MemoryError) as exc:
+            with self.load_lock:
+                self.queued -= 1
+                if worker is not None:
+                    self.worker_threads.discard(worker)
+            self.slots.release()
+            self.shutdown_request(request)
+            self.telemetry.event(
+                "worker_start_error",
+                peer=address[0],
+                error_type=type(exc).__name__,
+                detail=str(exc),
+            )
 
     def _serve_connection(self, request, address, accepted):
         stage = "handshake"
@@ -541,6 +561,7 @@ class _ControlHTTPServer(ThreadingHTTPServer):
             self.shutdown_request(request)
             with self.load_lock:
                 self.active -= 1
+                self.worker_threads.discard(threading.current_thread())
             self.slots.release()
 
     def load(self):
@@ -553,7 +574,13 @@ class _ControlHTTPServer(ThreadingHTTPServer):
 
     def server_close(self):
         super().server_close()
-        self.workers.shutdown(wait=True)
+        while True:
+            with self.load_lock:
+                workers = list(self.worker_threads)
+            if not workers:
+                break
+            for worker in workers:
+                worker.join()
 
 
 class ControlServer:

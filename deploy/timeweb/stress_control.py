@@ -1,4 +1,4 @@
-"""Real loopback HTTPS credit-service load, with optional one-CPU/2-GiB limits.
+"""Real loopback HTTPS credit-service load, with optional one-CPU limits and externally applied cgroup memory limits.
 
 This is a control-plane benchmark. Logical settled bytes are test inputs;
 there is no FL training and no claim of interhost measurements.
@@ -113,7 +113,18 @@ def main():
         state = ledger.audit()
         failures = [r for r in rows if "error_type" in r]
         latencies = [r["elapsed_s"] for r in rows]
+        cgroup = {}
+        if Path("/proc/self/cgroup").exists():
+            for line in Path("/proc/self/cgroup").read_text().splitlines():
+                if line.startswith("0::"):
+                    base = Path("/sys/fs/cgroup") / line[3:].lstrip("/")
+                    cgroup = {
+                        name: (base / name).read_text().strip()
+                        for name in ("memory.max", "cpu.max", "memory.peak")
+                        if (base / name).exists()
+                    }
         result = dict(
+            cgroup=cgroup,
             kind="synthetic_credit_service_load_over_real_loopback_https",
             frames=a.frames,
             owners=a.owners,
