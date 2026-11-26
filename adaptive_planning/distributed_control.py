@@ -4,6 +4,7 @@ Each frame is charged before sending. Missing settlements retain the complete
 reservation across service restarts. Control traffic is outside the application
 byte budget and is measured separately by the experiment wall timer.
 """
+
 import hmac
 import json
 import sqlite3
@@ -57,50 +58,82 @@ class Ledger:
         with self.connect() as db:
             db.execute("BEGIN IMMEDIATE")
             if operation == "reserve":
-                ident, size = body['id'], body['size']
-                if not isinstance(ident, str) or not 0 < len(ident) < 100 or type(size) is not int or not 0 <= size < 2**63:
+                ident, size = body["id"], body["size"]
+                if (
+                    not isinstance(ident, str)
+                    or not 0 < len(ident) < 100
+                    or type(size) is not int
+                    or not 0 <= size < 2**63
+                ):
                     raise ValueError("Invalid reservation")
                 old = db.execute("SELECT owner,size FROM frames WHERE id=?", (ident,)).fetchone()
                 if old:
                     if old != (owner, size):
                         raise ValueError("Conflicting reservation")
                 else:
-                    charged = db.execute("SELECT COALESCE(SUM(COALESCE(sent,size)),0) FROM frames").fetchone()[0]
+                    charged = db.execute(
+                        "SELECT COALESCE(SUM(COALESCE(sent,size)),0) FROM frames"
+                    ).fetchone()[0]
                     if size > self.limit - charged:
-                        db.execute('INSERT INTO denials VALUES (?,?)',(owner,time.time()))
+                        db.execute("INSERT INTO denials VALUES (?,?)", (owner, time.time()))
                         db.commit()
                         raise ByteBudgetExceeded("Application byte quota exhausted")
-                    db.execute("INSERT INTO frames VALUES (?,?,?,NULL,?)", (ident, owner, size, time.time()))
+                    db.execute(
+                        "INSERT INTO frames VALUES (?,?,?,NULL,?)",
+                        (ident, owner, size, time.time()),
+                    )
             elif operation == "settle":
-                old = db.execute("SELECT owner,size,sent FROM frames WHERE id=?", (body['id'],)).fetchone()
-                sent = body['sent']
+                old = db.execute(
+                    "SELECT owner,size,sent FROM frames WHERE id=?", (body["id"],)
+                ).fetchone()
+                sent = body["sent"]
                 if not old or old[0] != owner or type(sent) is not int or not 0 <= sent <= old[1]:
                     raise ValueError("Invalid frame settlement")
                 if old[2] is not None and old[2] != sent:
                     raise ValueError("Conflicting settlement")
-                db.execute("UPDATE frames SET sent=? WHERE id=?", (sent, body['id']))
+                db.execute("UPDATE frames SET sent=? WHERE id=?", (sent, body["id"]))
             elif operation != "state":
                 raise ValueError("Unknown ledger operation")
-            spent, reserved, count = db.execute("SELECT COALESCE(SUM(sent),0), COALESCE(SUM(CASE WHEN sent IS NULL THEN size ELSE 0 END),0), COUNT(*) FROM frames").fetchone()
-            return dict(limit=self.limit, spent=spent, reserved=reserved, frames=count, denied_frames=db.execute('SELECT COUNT(*) FROM denials').fetchone()[0])
+            spent, reserved, count = db.execute(
+                "SELECT COALESCE(SUM(sent),0), COALESCE(SUM(CASE WHEN sent IS NULL THEN size ELSE 0 END),0), COUNT(*) FROM frames"
+            ).fetchone()
+            return dict(
+                limit=self.limit,
+                spent=spent,
+                reserved=reserved,
+                frames=count,
+                denied_frames=db.execute("SELECT COUNT(*) FROM denials").fetchone()[0],
+            )
 
 
 class ControlClient:
     def __init__(self, url, owner, key, ca=None, timeout=5):
-        if not (url.startswith('https://') or url.startswith('http://127.0.0.1:')):
+        if not (url.startswith("https://") or url.startswith("http://127.0.0.1:")):
             raise ValueError("Control plane requires HTTPS or loopback")
-        self.url, self.owner, self.key = url.rstrip('/'), owner, bytes.fromhex(key)
+        self.url, self.owner, self.key = url.rstrip("/"), owner, bytes.fromhex(key)
         self.context = ssl.create_default_context(cafile=ca) if ca else ssl.create_default_context()
         self.timeout = timeout
 
     def call(self, operation, body, timeout=None):
-        message = canonical(dict(owner=self.owner, operation=operation, body=body, nonce=uuid.uuid4().hex))
-        req = Request(self.url, data=message, headers={'Content-Type': 'application/json',
-                      'X-OCP-MAC': hmac.digest(self.key, message, 'sha256').hex()})
-        with urlopen(req, context=self.context, timeout=self.timeout if timeout is None else min(self.timeout,timeout)) as reply:
+        message = canonical(
+            dict(owner=self.owner, operation=operation, body=body, nonce=uuid.uuid4().hex)
+        )
+        req = Request(
+            self.url,
+            data=message,
+            headers={
+                "Content-Type": "application/json",
+                "X-OCP-MAC": hmac.digest(self.key, message, "sha256").hex(),
+            },
+        )
+        with urlopen(
+            req,
+            context=self.context,
+            timeout=self.timeout if timeout is None else min(self.timeout, timeout),
+        ) as reply:
             result = json.load(reply)
-        if 'error' in result:
-            raise ByteBudgetExceeded(result['error'])
+        if "error" in result:
+            raise ByteBudgetExceeded(result["error"])
         return result
 
 
@@ -112,10 +145,11 @@ class RemoteBudget:
     def reserve(self, size):
         ident = uuid.uuid4().hex
         # A retry uses this same id. A lost acknowledgement never permits sending.
-        deadline = getattr(self.local, 'deadline', time.time()+self.client.timeout)
-        remaining = deadline-time.time()
-        if remaining <= 0:raise TimeoutError('Budget admission deadline expired')
-        self.client.call('reserve', dict(id=ident, size=size), timeout=remaining)
+        deadline = getattr(self.local, "deadline", time.time() + self.client.timeout)
+        remaining = deadline - time.time()
+        if remaining <= 0:
+            raise TimeoutError("Budget admission deadline expired")
+        self.client.call("reserve", dict(id=ident, size=size), timeout=remaining)
         self.local.frame = [ident, size, 0]
 
     def sent(self, size):
@@ -125,42 +159,50 @@ class RemoteBudget:
         ident, size, sent = self.local.frame
         if sent + unsent != size:
             raise ValueError("Invalid local settlement")
-        self.client.call('settle', dict(id=ident, sent=sent))
+        self.client.call("settle", dict(id=ident, sent=sent))
         del self.local.frame
 
     def state(self):
-        return self.client.call('state', {})
+        return self.client.call("state", {})
 
 
 class ControlServer:
     def __init__(self, address, ledger, keys, evidence, cert=None, key=None):
         self.ledger, self.keys, self.evidence = ledger, keys, evidence
-        if address[0] != '127.0.0.1' and not (cert and key):
+        if address[0] != "127.0.0.1" and not (cert and key):
             raise ValueError("Non-loopback control service needs TLS")
         outer = self
+
         class Handler(BaseHTTPRequestHandler):
             def log_message(self, *_):
                 pass
 
             def do_POST(self):
                 try:
-                    size = int(self.headers.get('Content-Length', '0'))
+                    size = int(self.headers.get("Content-Length", "0"))
                     if not 0 < size <= 32768:
-                        raise ValueError('Request size')
+                        raise ValueError("Request size")
                     raw = self.rfile.read(size)
                     msg = json.loads(raw)
-                    secret = outer.keys[msg['owner']]
-                    if not hmac.compare_digest(hmac.digest(secret, raw, 'sha256').hex(), self.headers.get('X-OCP-MAC', '')):
-                        raise ValueError('Authentication failed')
-                    op = msg['operation']
-                    result = outer.evidence(msg['body']) if op == 'evidence' else outer.ledger.apply(msg['owner'], op, msg['body'])
+                    secret = outer.keys[msg["owner"]]
+                    if not hmac.compare_digest(
+                        hmac.digest(secret, raw, "sha256").hex(), self.headers.get("X-OCP-MAC", "")
+                    ):
+                        raise ValueError("Authentication failed")
+                    op = msg["operation"]
+                    result = (
+                        outer.evidence(msg["body"])
+                        if op == "evidence"
+                        else outer.ledger.apply(msg["owner"], op, msg["body"])
+                    )
                 except Exception as exc:
-                    result = {'error': f'{type(exc).__name__}: {exc}'}
+                    result = {"error": f"{type(exc).__name__}: {exc}"}
                 payload = canonical(result)
                 self.send_response(200)
-                self.send_header('Content-Length', str(len(payload)))
+                self.send_header("Content-Length", str(len(payload)))
                 self.end_headers()
                 self.wfile.write(payload)
+
         self.http = ThreadingHTTPServer(address, Handler)
         self.http.daemon_threads = True
         if cert:

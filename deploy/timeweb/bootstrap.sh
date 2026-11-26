@@ -9,7 +9,7 @@ if [[ ${1:-} != --no-system ]]; then
   [[ $ID == ubuntu && $VERSION_ID == 24.04 && $(uname -m) == x86_64 ]] || { echo 'Requires Ubuntu 24.04 x86_64'; exit 1; }
   export DEBIAN_FRONTEND=noninteractive
   apt-get update
-  apt-get install -y python3-venv ca-certificates curl git openssl chrony rsync jq tmux
+  apt-get install -y python3-venv ca-certificates curl git openssl chrony rsync jq tmux ufw
   systemctl enable --now chrony
 fi
 [[ -f requirements-linux-x86_64.lock ]] || { echo 'Missing verified Linux lock file'; exit 1; }

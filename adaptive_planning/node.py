@@ -56,6 +56,8 @@ def build(spec):
         if spec.get('chain_rpc'):
             from web3 import Web3
             w3 = Web3(Web3.HTTPProvider(spec['chain_rpc'], request_kwargs={'timeout': 5}))
+            from web3.middleware import ExtraDataToPOAMiddleware
+            w3.middleware_onion.inject(ExtraDataToPOAMiddleware,layer=0)
             reader = lambda request: read_evidence(w3, pin, request)
         else:
             reader = lambda request: client.call('evidence', request)

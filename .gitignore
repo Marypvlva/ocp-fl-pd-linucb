@@ -32,3 +32,5 @@ reproduced.json
 .venv-linux/
 deploy/timeweb/state/
 *.results.zip
+
+.venv-before-timeweb-*/
