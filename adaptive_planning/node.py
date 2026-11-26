@@ -14,6 +14,11 @@ import os
 import socket
 import sys
 import threading
+from hashlib import sha256
+from pathlib import Path
+import platform
+import subprocess
+import re
 from time import sleep, perf_counter
 
 import numpy as np
@@ -23,6 +28,11 @@ from .tcp_transport import Peer
 
 
 def build(spec):
+    root=Path(__file__).resolve().parents[1]
+    for rel,digest in spec.get('source_hashes',{}).items():
+        path=(root/rel).resolve()
+        if not path.is_relative_to(root) or sha256(path.read_bytes()).hexdigest()!=digest:
+            raise ValueError('Remote source manifest differs from coordinator')
     keys = {name: bytes.fromhex(value) for name, value in spec["keys"].items()}
     identity, rpc_timeout = spec["identity"], float(spec["rpc_timeout"])
     if spec["role"] == "worker":
@@ -125,7 +135,7 @@ def serve(spec, out=sys.stdout, stdin=sys.stdin):
             out.write(json.dumps(message) + "\n")
             out.flush()
 
-    emit(dict(port=gate.port, key=key, pid=os.getpid(), host=spec.get("advertise_host", "127.0.0.1")))
+    emit(dict(port=gate.port, key=key, pid=os.getpid(), host=spec.get("advertise_host", "127.0.0.1"),platform=platform.platform(),python=platform.python_version()))
 
     def control():
         # One JSON command per line; EOF means the launcher is gone.
@@ -134,7 +144,15 @@ def serve(spec, out=sys.stdout, stdin=sys.stdin):
                 command = json.loads(line)
                 if 'grant' in command:
                     try:
+                        clock_info=None
+                        if spec.get('require_chrony'):
+                            tracking=subprocess.check_output(['chronyc','tracking'],text=True,timeout=5)
+                            offset=re.search(r'System time\s*:\s*([0-9.]+)',tracking)
+                            if not offset or float(offset.group(1))>.005 or not re.search(r'Leap status\s*:\s*Normal',tracking):
+                                raise ValueError('Clock not synchronized within 5ms')
+                            clock_info=tracking
                         ack = server.shaper.guard.install(command['grant'])
+                        ack['chrony']=clock_info
                         emit(dict(seq=command['seq'], grant=ack))
                     except Exception as exc:
                         emit(dict(seq=command['seq'], error=repr(exc)))

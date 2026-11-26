@@ -2,6 +2,7 @@
 import argparse
 import base64
 import hmac
+from hashlib import sha256
 import json
 from pathlib import Path
 import secrets
@@ -13,10 +14,13 @@ from zipfile import ZipFile, ZIP_DEFLATED
 def build(source,target):
     # Only public research outputs. Never include TLS/SSH keys, ledger credentials or cloud state.
     allowed={'.json','.jsonl','.txt','.sha256','.csv','.log'}
+    hashes=[]
     with ZipFile(target,'x',ZIP_DEFLATED) as z:
         for p in sorted(source.rglob('*')):
             if p.is_file() and not p.is_symlink() and p.suffix in allowed and p.name!='RUNNING':
-                z.write(p,p.relative_to(source))
+                data=p.read_bytes();relative=p.relative_to(source).as_posix()
+                z.writestr(relative,data);hashes.append(f'{sha256(data).hexdigest()}  {relative}\n')
+        z.writestr('SHA256SUMS',''.join(hashes))
 
 
 def main():

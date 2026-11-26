@@ -30,8 +30,11 @@ def sources(root):
     return {str(p.relative_to(root)): sha256(p.read_bytes()).hexdigest() for p in sorted(paths) if p.is_file()}
 
 
-def plan(root, placement, output, profile, rounds=None, seeds=None, modes=None, network_mode="natural", chain_mode="local_evm"):
+def plan(root, placement, output, profile, rounds=None, seeds=None, modes=None, network_mode="natural", chain_mode="local_evm", windows=None, external_digest=None):
     from adaptive_planning.distributed import load_placement
+    windows=windows or [80,130,200]
+    if len(windows)!=3 or windows!=sorted(set(windows)) or not all(type(x) is int and 0<x<=60000 for x in windows):
+        raise ValueError("Choose three increasing positive millisecond windows")
     n = 16 if profile == 'confirmatory' else 4
     mapping = load_placement(placement, n)
     count = 12 if profile == 'confirmatory' else 2
@@ -47,7 +50,7 @@ def plan(root, placement, output, profile, rounds=None, seeds=None, modes=None, 
         commit=subprocess.check_output(['git','-C',str(root),'rev-parse','HEAD'],text=True).strip(),
         calibration=json.loads((root/'experiments/collector_v3/data/gateway_calibration.json').read_text()),
         bytes_per_episode=250_000*horizon, deadline_s=3., end_to_end_deadline_s=600.,
-        reward_delay=2, network_mode=network_mode, chain_mode=chain_mode, created=time.time(),
+        reward_delay=2, windows_ms=windows, external_config_digest=external_digest, network_mode=network_mode, chain_mode=chain_mode, created=time.time(),
         paired_scope='Same roster seeds, initial model, empty history, quotas and settings; randomized sequential crossover. Natural network outcomes differ by time.',
         uncertainty='Bootstrap whole seed/time blocks. Confirmatory sample size must be reassessed from pilot variance in a new plan before collecting confirmatory outcomes.')
     output.mkdir(parents=True,exist_ok=False)
@@ -114,6 +117,7 @@ def episode(root, output, config, seed, mode, runtime):
     from adaptive_planning.lease_guard import DistributedShaper, LeaseGuard, read_evidence
     from adaptive_planning.training import make_workers, Q_SCALE
     from eth_hash.auto import keccak
+    SLA[:]=config['windows_ms']
     n,h,k=config['population'],config['horizon'],config['k']
     directory=output/f'{seed}_{mode}'
     if (directory/'complete.json').exists():return
@@ -122,6 +126,7 @@ def episode(root, output, config, seed, mode, runtime):
     directory.mkdir()
     external=runtime.get('chain')
     chain=external_chain(root,external,mode) if external else OcpChain.local(n,k,genesis_timestamp=2145916800)
+    if len(chain.clients)!=n or chain.size!=k:raise ValueError('Chain population differs from frozen plan')
     groups,val,_=make_workers(n)
     settings=Settings(**config['calibration']['records'][mode]['chosen']['settings'])
     limit=caps(config['seeds'].index(seed),h)[None,:]
@@ -129,7 +134,8 @@ def episode(root, output, config, seed, mode, runtime):
     policy=Policy(settings,1,n,k,h,h//4,53,limit,prices)
     model=make_model(17,64,.5)
     initial=keccak(flatten_model(model)).hex()
-    book,cfg=deploy(chain,settings.__dict__,h//4,limit[0])
+    binding=dict(settings=settings.__dict__,plan_sha256=sha256((output/'plan.json').read_bytes()).hexdigest(),seed=seed,mode=mode,windows=config['windows_ms'],bytes=config['bytes_per_episode'])
+    book,cfg=deploy(chain,binding,h//4,limit[0])
     lease_pin=dict(chain_id=chain.chain_id,source=chain.contract.address,lease=book.address,
         source_code=chain.code_hash.hex(),lease_code=keccak(bytes(chain.w3.eth.get_code(book.address))).hex(),cfg=cfg.hex(),confirmations=chain.finality,require_finalized=bool(external),windows=[int(d) for d in SLA])
     names=['coordinator']+[f'w{i}' for i in range(n)]+[f'e{i}' for i in range(4)]
@@ -147,9 +153,10 @@ def episode(root, output, config, seed, mode, runtime):
     rows=[]
     try:
         with RemoteCluster(groups,placement=mapping,hidden=64,rpc_timeout=1.5,selection_authority=chain,
-                control=clients,lease_pin=lease_pin,chain_rpc=external['rpc'] if external else None,
+                control=clients,lease_pin=lease_pin,source_hashes=config['source_hashes'],chain_rpc=external['rpc'] if external else None,
                 **placement.get('ssh',{})) as cluster:
             cluster.shaper=coordinator_shaper
+            dump(directory/'role-environment.json',cluster.role_environment)
             dump(directory/'worker-keys.json',{str(i):key.public_bytes_raw().hex() for i,key in cluster.public_keys.items()})
             for t,c in enumerate(classes):
                 rd=t+1; started=time.perf_counter(); wall_started=time.time()
@@ -174,6 +181,8 @@ def episode(root, output, config, seed, mode, runtime):
                 digest=chain.record_model(rd,flatten_model(model))
                 if external:wait_blocks(chain.w3,chain.model_blocks[rd],chain.finality)
                 after_commit=time.perf_counter()
+                drift=(time.time()-wall_started)-(after_commit-started)
+                if abs(drift)>.005:raise ValueError('Coordinator wall clock stepped during round')
                 ontime=after_commit-started<=config['end_to_end_deadline_s']
                 if not ontime:raise TimeoutError('End-to-end deadline exceeded at model finality')
                 if result.accepted:
@@ -219,6 +228,8 @@ def run(root, output, runtime):
     if config['source_hashes']!=sources(root):raise ValueError('Source differs from frozen plan')
     if config['network_mode']!=runtime['network_mode'] or config['chain_mode']!=('external_rpc' if runtime.get('chain') else 'local_evm'):
         raise ValueError('Network or chain mode differs from frozen plan')
+    if runtime.get('chain') and sha256(json.dumps(runtime['chain'],sort_keys=True).encode()).hexdigest()!=config['external_config_digest']:
+        raise ValueError('External chain configuration differs from frozen plan')
     if runtime.get('chain') and (len(config['seeds'])!=1 or len(config['modes'])!=1):
         raise ValueError('External consensus experiment uses one fresh source contract and policy; natural drand rosters cannot be assumed paired across independent ceremonies')
     lock=output/'RUNNING'

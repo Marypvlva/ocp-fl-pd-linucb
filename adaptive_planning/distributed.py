@@ -123,7 +123,7 @@ class RemoteCluster(Cluster):
     def __init__(self, groups, *, placement, ssh_user=None, ssh_options=(),
                  remote_dir="~/adaptive_planning", remote_python=".venv/bin/python",
                  bind_host="0.0.0.0", proxies=None, physical_faults=True,
-                 edge_outage="refuse", control_timeout=10.0, control=None, lease_pin=None, chain_rpc=None, **kwargs):
+                 edge_outage="refuse", control_timeout=10.0, control=None, lease_pin=None, chain_rpc=None, source_hashes=None, **kwargs):
         require(clock.MODE == "wall", "Distributed runs require ADAPTIVE_CLOCK=wall")
         require(kwargs.get("app_byte_budget") is None, "Hard byte budgets need one host")
         require(kwargs.get("network") in (None, PROFILES["unlimited"]),
@@ -144,6 +144,8 @@ class RemoteCluster(Cluster):
         self.sequence = 0
         self.gate_log = []
         self.control, self.lease_pin, self.chain_rpc = control, lease_pin, chain_rpc
+        self.source_hashes=source_hashes or {}
+        self.role_environment={}
 
     def _command(self, host):
         if host == "local":
@@ -162,7 +164,7 @@ class RemoteCluster(Cluster):
                     advertise_host="127.0.0.1" if host == "local" else host,
                     port=23000+(int(name[1:]) if name.startswith("w") else 16+int(name[1:])) if self.control else 0)
         if self.control:
-            spec.update(control=dict(self.control[name]), lease_pin=self.lease_pin, chain_rpc=self.chain_rpc)
+            spec.update(control=dict(self.control[name]), lease_pin=self.lease_pin, chain_rpc=self.chain_rpc,source_hashes=self.source_hashes,require_chrony=host!='local')
         if name.startswith("w"):
             (X, y), total, hidden = args
             spec.update(role="worker", worker=dict(X=X.tolist(), y=[int(v) for v in y],
@@ -200,6 +202,7 @@ class RemoteCluster(Cluster):
             except Exception:
                 raise TimeoutError(f"Startup timeout: {name}") from None
             require(info is not None and "port" in info, f"Role {name} failed to start")
+            self.role_environment[name]={k:v for k,v in info.items() if k!="key"}
             host, port = info["host"], int(info["port"])
             settings = self.proxy_settings.get(name)
             if settings is not None:

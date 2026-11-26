@@ -1,5 +1,6 @@
 """Run on the coordinator through the Timeweb browser console."""
 import argparse
+from hashlib import sha256
 import ipaddress
 import json
 import os
@@ -89,7 +90,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__);sub=p.add_subparsers(dest='action',required=True)
     init=sub.add_parser('init');init.add_argument('--coordinator',required=True);init.add_argument('--workers',nargs='+',required=True);init.add_argument('--gateways',nargs=4,required=True)
     sub.add_parser('deploy');sub.add_parser('diagnose')
-    plan=sub.add_parser('plan');plan.add_argument('--out',type=Path,required=True);plan.add_argument('--profile',choices=['pilot','confirmatory'],default='pilot');plan.add_argument('--network-mode',choices=['natural','controlled'],default='natural');plan.add_argument('--chain-mode',choices=['local_evm','external_rpc'],default='local_evm');plan.add_argument('--rounds',type=int);plan.add_argument('--seeds',type=int,nargs='+');plan.add_argument('--modes',nargs='+',choices=['joint','no_ids','scalar','recent','round_lin','lp_mean','greedy'])
+    plan=sub.add_parser('plan');plan.add_argument('--out',type=Path,required=True);plan.add_argument('--profile',choices=['pilot','confirmatory'],default='pilot');plan.add_argument('--network-mode',choices=['natural','controlled'],default='natural');plan.add_argument('--chain-mode',choices=['local_evm','external_rpc'],default='local_evm');plan.add_argument('--rounds',type=int);plan.add_argument('--seeds',type=int,nargs='+');plan.add_argument('--windows-ms',nargs=3,type=int);plan.add_argument('--chain-config',type=Path);plan.add_argument('--modes',nargs='+',choices=['joint','no_ids','scalar','recent','round_lin','lp_mean','greedy'])
     run=sub.add_parser('run');run.add_argument('--out',type=Path,required=True);run.add_argument('--chain-config',type=Path)
     a=p.parse_args()
     if a.action=='init':initialize(a)
@@ -99,7 +100,11 @@ def main():
         sys.path.insert(0,str(ROOT));sys.path.insert(0,str(ROOT/'experiments/collector_v3/kit'))
         if a.action=='plan':
             from distributed_live import plan
-            plan(ROOT,STATE/'placement.json',a.out,a.profile,a.rounds,a.seeds,a.modes,a.network_mode,a.chain_mode)
+            external_digest=None
+            if a.chain_mode=='external_rpc':
+                if not a.chain_config:raise ValueError('External plan requires --chain-config')
+                external_digest=sha256(json.dumps(json.loads(a.chain_config.read_text()),sort_keys=True).encode()).hexdigest()
+            plan(ROOT,STATE/'placement.json',a.out,a.profile,a.rounds,a.seeds,a.modes,a.network_mode,a.chain_mode,a.windows_ms,external_digest)
         else:
             diag=json.loads((STATE/'diagnostics.json').read_text())
             if time.time()-diag['at']>3600:raise ValueError('Run diagnose again within one hour of the study')

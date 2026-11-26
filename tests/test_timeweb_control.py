@@ -74,6 +74,10 @@ class LedgerTests(unittest.TestCase):
             with self.assertRaises((OSError,TimeoutError)):
                 with reserve_frame(RemoteBudget(client),10):self.fail('Sending without admission')
 
+    def test_node_source_mismatch_rejected_before_start(self):
+        from adaptive_planning.node import build
+        with self.assertRaises(ValueError):build({'source_hashes':{'adaptive_planning/node.py':'00'*32}})
+
     def test_non_tls_remote_service_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:
             with self.assertRaises(ValueError):ControlServer(('0.0.0.0',0),Ledger(Path(tmp)/'credit',100),{},lambda _: {})
