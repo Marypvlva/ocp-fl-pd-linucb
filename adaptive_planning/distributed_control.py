@@ -331,12 +331,30 @@ class ControlClient:
                         or not 0 < int(declared) <= 262144
                     ):
                         raise ControlServiceError("Invalid control response length")
-                    raw = response.read(int(declared))
-                    if len(raw) != int(declared):
-                        raise http.client.IncompleteRead(raw, int(declared) - len(raw))
+                    chunks = []
+                    received = 0
+                    read_socket = connection.sock or getattr(
+                        getattr(response.fp, "raw", None), "_sock", None
+                    )
+                    while received < int(declared):
+                        remaining = deadline - time.perf_counter()
+                        if remaining <= 0:
+                            raise TimeoutError("Control response body deadline")
+                        if read_socket:
+                            read_socket.settimeout(remaining)
+                        part = response.read1(min(65536, int(declared) - received))
+                        if not part:
+                            raise http.client.IncompleteRead(
+                                b"".join(chunks), int(declared) - received
+                            )
+                        chunks.append(part)
+                        received += len(part)
+                    raw = b"".join(chunks)
                     if len(raw) > 262144:
                         raise ControlServiceError("Oversized control response")
                     result = json.loads(raw)
+                    if time.perf_counter() > deadline:
+                        raise TimeoutError("Control response deadline")
                     if response.status in (429, 503):
                         raise OSError("Control service temporarily unavailable")
                     if "error" in result:
@@ -362,6 +380,7 @@ class ControlClient:
                         pool_wait_s=pool_wait,
                         elapsed_s=time.perf_counter() - started,
                         error_type=type(exc).__name__,
+                        detail=str(exc)[:200],
                     )
                     connection.close()
                     connection = None
@@ -385,6 +404,7 @@ class ControlClient:
                         attempt=attempt,
                         elapsed_s=time.perf_counter() - started,
                         error_type=type(exc).__name__,
+                        detail=str(exc)[:200],
                     )
                     connection.close()
                     connection = None
@@ -396,6 +416,7 @@ class ControlClient:
                     **fields,
                     elapsed_s=time.perf_counter() - started,
                     error_type=type(exc).__name__,
+                        detail=str(exc)[:200],
                 )
             if connection:
                 connection.close()
@@ -524,6 +545,7 @@ class _ControlHTTPServer(ThreadingHTTPServer):
                 "worker_start_error",
                 peer=address[0],
                 error_type=type(exc).__name__,
+                        detail=str(exc)[:200],
                 detail=str(exc),
             )
 
@@ -613,6 +635,7 @@ class ControlServer:
                         "request_read_error",
                         peer=self.client_address[0],
                         error_type=type(exc).__name__,
+                        detail=str(exc)[:200],
                     )
 
             def do_POST(self):
@@ -700,6 +723,7 @@ class ControlServer:
                         status=status,
                         operation_applied=applied,
                         error_type=type(exc).__name__,
+                        detail=str(exc)[:200],
                         elapsed_s=time.perf_counter() - started,
                         **outer.http.load(),
                         **process_load(),

@@ -202,6 +202,25 @@ class ServiceRegressionTests(unittest.TestCase):
             self.assertLess(counts["connection_open"], 20)
             self.assertLessEqual(server.http.load()["peak_connections"], 4)
 
+    def test_trickled_body_cannot_extend_the_absolute_deadline(self):
+        original = socketserver._SocketWriter.write
+
+        def trickle(writer, data):
+            if data.startswith(b"{"):
+                for part in data[:12]:
+                    original(writer, bytes([part]))
+                    time.sleep(0.015)
+                return original(writer, data[12:])
+            return original(writer, data)
+
+        with service_fixture() as (_server, client, _ledger, _root):
+            client.call("state", {})
+            with patch.object(socketserver._SocketWriter, "write", trickle):
+                start = time.perf_counter()
+                with self.assertRaises(OSError):
+                    client.call("state", {}, timeout=0.05)
+                self.assertLess(time.perf_counter() - start, 0.15)
+
     def test_legacy_migration_and_no_full_journal_scans_per_operation(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "old.sqlite"
