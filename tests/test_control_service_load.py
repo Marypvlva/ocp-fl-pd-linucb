@@ -2,6 +2,7 @@
 
 from concurrent.futures import ThreadPoolExecutor
 import socketserver
+import threading
 from contextlib import contextmanager
 import json
 from pathlib import Path
@@ -13,7 +14,13 @@ import time
 import unittest
 from unittest.mock import patch
 
-from adaptive_planning.distributed_control import Ledger, ControlServer, ControlClient, RemoteBudget
+from adaptive_planning.distributed_control import (
+    Ledger,
+    ControlServer,
+    ControlClient,
+    RemoteBudget,
+    _ConnectionPool,
+)
 
 
 @contextmanager
@@ -147,6 +154,27 @@ class ServiceRegressionTests(unittest.TestCase):
             self.assertEqual(client.telemetry.snapshot()["counts"]["client_transport_error"], 1)
 
     def test_reuse_and_multithreaded_fair_credit(self):
+        pool = _ConnectionPool(1)
+        pool.get(0.1)
+        accepted = threading.Event()
+
+        def waiter():
+            connection = pool.get(2)
+            accepted.set()
+            pool.put(connection)
+
+        with ThreadPoolExecutor(max_workers=1) as executor:
+            future = executor.submit(waiter)
+            for _ in range(200):
+                with pool.condition:
+                    if pool.waiters:
+                        break
+                time.sleep(0.001)
+            pool.put(None)
+            connection = pool.get(2)
+            self.assertTrue(accepted.is_set())
+            pool.put(connection)
+            future.result()
         with service_fixture(max_workers=4) as (server, client, ledger, _):
 
             def send(i):

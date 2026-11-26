@@ -10,6 +10,7 @@ import http.client
 import queue
 from urllib.parse import urlsplit
 from concurrent.futures import ThreadPoolExecutor
+from collections import deque
 import json
 import sqlite3
 import socket
@@ -192,6 +193,48 @@ class ControlServiceError(ValueError):
     """A non-quota rejection, distinct from a lost response or denied budget."""
 
 
+class _ConnectionPool:
+    """Reuse idle connections while serving callers in FIFO order.
+
+    A condition around a LIFO idle stack alone allows an active caller to
+    reacquire its connection before a notified waiter can run.
+    """
+
+    def __init__(self, size):
+        self.condition = threading.Condition()
+        self.idle = [None] * size
+        self.waiters = deque()
+
+    def get(self, timeout):
+        ticket = object()
+        deadline = time.perf_counter() + timeout
+        with self.condition:
+            self.waiters.append(ticket)
+            try:
+                while self.waiters[0] is not ticket or not self.idle:
+                    remaining = deadline - time.perf_counter()
+                    if remaining <= 0:
+                        raise queue.Empty()
+                    self.condition.wait(remaining)
+                self.waiters.popleft()
+                return self.idle.pop()
+            finally:
+                if ticket in self.waiters:
+                    self.waiters.remove(ticket)
+                self.condition.notify_all()
+
+    def put(self, connection):
+        with self.condition:
+            self.idle.append(connection)
+            self.condition.notify_all()
+
+    def get_nowait(self):
+        with self.condition:
+            if not self.idle:
+                raise queue.Empty()
+            return self.idle.pop()
+
+
 class ControlClient:
     def __init__(self, url, owner, key, ca=None, timeout=5, pool_size=2, attempts=3, log_path=None):
         parsed = urlsplit(url)
@@ -215,9 +258,7 @@ class ControlClient:
         self.timeout, self.attempts = timeout, attempts
         self.telemetry = ControlTelemetry(log_path)
         self.closed = False
-        self.pool = queue.LifoQueue(pool_size)
-        for _ in range(pool_size):
-            self.pool.put(None)
+        self.pool = _ConnectionPool(pool_size)
 
     def _connection(self, timeout):
         if self.parsed.scheme == "https":
