@@ -29,7 +29,7 @@ def canonical(value):
 
 
 class Ledger:
-    """One durable transaction per change, constant-time accounting per request.
+    """Durable indexed frame operations with constant-time accounting totals.
 
     Totals are initialized once when opening a legacy database. The frame journal
     and totals always change within the same SQLite transaction. The Python lock
@@ -468,7 +468,7 @@ class RemoteBudget:
                 timeout=remaining,
             )
             if not reply["admitted"]:
-                raise ByteBudgetExceeded("Reservation already settled or canceled")
+                raise ControlServiceError("Reservation already settled or canceled")
         except (OSError, ValueError):
             # No application byte has been sent. Fencing is safe in either request order.
             try:
