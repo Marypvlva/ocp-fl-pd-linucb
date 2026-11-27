@@ -26,6 +26,12 @@ class Settings:
     price_rule: str = 'local' 
     allowed_arms: tuple | None = None
     lp_window: int = 96
+    # Opt-in research variants. Historical policies retain exactly their old semantics.
+    memory: str = 'none'
+    discount: float = .95
+    window: int = 32
+    memory_bonus: str = 'weighted'
+    feedback_rule: str = 'legacy'
 
 
 class Policy:

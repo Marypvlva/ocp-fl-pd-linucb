@@ -1,0 +1,15 @@
+[
+  {
+    "name": "E1-v070.zip",
+    "archive_sha256": "34a13b7d74bed8e3686eec04c7266efea8822f9664a21ca296e6038f0b21ab08",
+    "files": 5009
+  },
+  {
+    "name": "E5-booking-pilot-v070.zip",
+    "archive_sha256": "9c1bbc5704ea2547cff8c1f06f29f9723d4afbc12f72ea314dcb76d1116d8c93"
+  },
+  {
+    "name": "E3-pilot-v070.zip",
+    "archive_sha256": "2a0a9edb2d7e37f0b0367273f8b62191fb3082bdef61907dce5747d32baefd76"
+  }
+]

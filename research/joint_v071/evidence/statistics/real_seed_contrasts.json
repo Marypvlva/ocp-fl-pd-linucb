@@ -1,0 +1,686 @@
+[
+  {
+    "experiment": "E1",
+    "series": "B15000000",
+    "contrast": "no_dual minus joint",
+    "seeds": [
+      902101,
+      902102
+    ],
+    "delta_pp": [
+      0.0,
+      0.0
+    ],
+    "blocks": 2,
+    "mean": 0.0,
+    "positive": 0,
+    "negative": 0,
+    "ties": 2,
+    "sd": 0.0,
+    "ci_t": [
+      0.0,
+      0.0
+    ],
+    "ci_bootstrap": [
+      0.0,
+      0.0
+    ],
+    "ci_familywise_t": [
+      0.0,
+      0.0
+    ],
+    "p_exchangeable": 1.0,
+    "degenerate": true,
+    "assumption": "Independent seed/time blocks; t intervals assume approximately normal block means; sign flips require exchangeability/symmetry under the null. Intervals conditional on these VMs.",
+    "warning": "Zero pilot variance does not establish equivalence or zero population variance",
+    "inference": "Exploratory pilot only. n=2; no confirmatory claims. Constant paired deltas do not imply zero population uncertainty."
+  },
+  {
+    "experiment": "E1",
+    "series": "B15000000",
+    "contrast": "legacy_lp_mean minus joint",
+    "seeds": [
+      902101,
+      902102
+    ],
+    "delta_pp": [
+      0.8333333333333415,
+      0.8333333333333415
+    ],
+    "blocks": 2,
+    "mean": 0.8333333333333415,
+    "positive": 2,
+    "negative": 0,
+    "ties": 0,
+    "sd": 0.0,
+    "ci_t": [
+      0.8333333333333415,
+      0.8333333333333415
+    ],
+    "ci_bootstrap": [
+      0.8333333333333415,
+      0.8333333333333415
+    ],
+    "ci_familywise_t": [
+      0.8333333333333415,
+      0.8333333333333415
+    ],
+    "p_exchangeable": 0.5,
+    "degenerate": true,
+    "assumption": "Independent seed/time blocks; t intervals assume approximately normal block means; sign flips require exchangeability/symmetry under the null. Intervals conditional on these VMs.",
+    "warning": "Zero pilot variance does not establish equivalence or zero population variance",
+    "inference": "Exploratory pilot only. n=2; no confirmatory claims. Constant paired deltas do not imply zero population uncertainty."
+  },
+  {
+    "experiment": "E1",
+    "series": "B18000000",
+    "contrast": "no_dual minus joint",
+    "seeds": [
+      902101,
+      902102
+    ],
+    "delta_pp": [
+      0.0,
+      0.0
+    ],
+    "blocks": 2,
+    "mean": 0.0,
+    "positive": 0,
+    "negative": 0,
+    "ties": 2,
+    "sd": 0.0,
+    "ci_t": [
+      0.0,
+      0.0
+    ],
+    "ci_bootstrap": [
+      0.0,
+      0.0
+    ],
+    "ci_familywise_t": [
+      0.0,
+      0.0
+    ],
+    "p_exchangeable": 1.0,
+    "degenerate": true,
+    "assumption": "Independent seed/time blocks; t intervals assume approximately normal block means; sign flips require exchangeability/symmetry under the null. Intervals conditional on these VMs.",
+    "warning": "Zero pilot variance does not establish equivalence or zero population variance",
+    "inference": "Exploratory pilot only. n=2; no confirmatory claims. Constant paired deltas do not imply zero population uncertainty."
+  },
+  {
+    "experiment": "E1",
+    "series": "B18000000",
+    "contrast": "legacy_lp_mean minus joint",
+    "seeds": [
+      902101,
+      902102
+    ],
+    "delta_pp": [
+      0.0,
+      0.0
+    ],
+    "blocks": 2,
+    "mean": 0.0,
+    "positive": 0,
+    "negative": 0,
+    "ties": 2,
+    "sd": 0.0,
+    "ci_t": [
+      0.0,
+      0.0
+    ],
+    "ci_bootstrap": [
+      0.0,
+      0.0
+    ],
+    "ci_familywise_t": [
+      0.0,
+      0.0
+    ],
+    "p_exchangeable": 1.0,
+    "degenerate": true,
+    "assumption": "Independent seed/time blocks; t intervals assume approximately normal block means; sign flips require exchangeability/symmetry under the null. Intervals conditional on these VMs.",
+    "warning": "Zero pilot variance does not establish equivalence or zero population variance",
+    "inference": "Exploratory pilot only. n=2; no confirmatory claims. Constant paired deltas do not imply zero population uncertainty."
+  },
+  {
+    "experiment": "E1",
+    "series": "B21000000",
+    "contrast": "no_dual minus joint",
+    "seeds": [
+      902101,
+      902102
+    ],
+    "delta_pp": [
+      3.3333333333333326,
+      -0.8333333333333304
+    ],
+    "blocks": 2,
+    "mean": 1.250000000000001,
+    "positive": 1,
+    "negative": 1,
+    "ties": 0,
+    "sd": 2.946278254943945,
+    "ci_t": [
+      -25.221259867030586,
+      27.721259867030586
+    ],
+    "ci_bootstrap": [
+      -0.8333333333333304,
+      3.3333333333333326
+    ],
+    "ci_familywise_t": [
+      -25.221259867030586,
+      27.721259867030586
+    ],
+    "p_exchangeable": 1.0,
+    "degenerate": false,
+    "assumption": "Independent seed/time blocks; t intervals assume approximately normal block means; sign flips require exchangeability/symmetry under the null. Intervals conditional on these VMs.",
+    "warning": null,
+    "inference": "Exploratory pilot only. n=2; no confirmatory claims. Constant paired deltas do not imply zero population uncertainty."
+  },
+  {
+    "experiment": "E1",
+    "series": "B21000000",
+    "contrast": "legacy_lp_mean minus joint",
+    "seeds": [
+      902101,
+      902102
+    ],
+    "delta_pp": [
+      2.500000000000002,
+      0.0
+    ],
+    "blocks": 2,
+    "mean": 1.250000000000001,
+    "positive": 1,
+    "negative": 0,
+    "ties": 1,
+    "sd": 1.7677669529663704,
+    "ci_t": [
+      -14.63275592021838,
+      17.132755920218383
+    ],
+    "ci_bootstrap": [
+      0.0,
+      2.500000000000002
+    ],
+    "ci_familywise_t": [
+      -14.63275592021838,
+      17.132755920218383
+    ],
+    "p_exchangeable": 1.0,
+    "degenerate": false,
+    "assumption": "Independent seed/time blocks; t intervals assume approximately normal block means; sign flips require exchangeability/symmetry under the null. Intervals conditional on these VMs.",
+    "warning": null,
+    "inference": "Exploratory pilot only. n=2; no confirmatory claims. Constant paired deltas do not imply zero population uncertainty."
+  },
+  {
+    "experiment": "E1",
+    "series": "B24000000",
+    "contrast": "no_dual minus joint",
+    "seeds": [
+      902101,
+      902102
+    ],
+    "delta_pp": [
+      0.0,
+      0.0
+    ],
+    "blocks": 2,
+    "mean": 0.0,
+    "positive": 0,
+    "negative": 0,
+    "ties": 2,
+    "sd": 0.0,
+    "ci_t": [
+      0.0,
+      0.0
+    ],
+    "ci_bootstrap": [
+      0.0,
+      0.0
+    ],
+    "ci_familywise_t": [
+      0.0,
+      0.0
+    ],
+    "p_exchangeable": 1.0,
+    "degenerate": true,
+    "assumption": "Independent seed/time blocks; t intervals assume approximately normal block means; sign flips require exchangeability/symmetry under the null. Intervals conditional on these VMs.",
+    "warning": "Zero pilot variance does not establish equivalence or zero population variance",
+    "inference": "Exploratory pilot only. n=2; no confirmatory claims. Constant paired deltas do not imply zero population uncertainty."
+  },
+  {
+    "experiment": "E1",
+    "series": "B24000000",
+    "contrast": "legacy_lp_mean minus joint",
+    "seeds": [
+      902101,
+      902102
+    ],
+    "delta_pp": [
+      -0.8333333333333304,
+      0.0
+    ],
+    "blocks": 2,
+    "mean": -0.4166666666666652,
+    "positive": 0,
+    "negative": 1,
+    "ties": 1,
+    "sd": 0.5892556509887875,
+    "ci_t": [
+      -5.7109186400727685,
+      4.877585306739438
+    ],
+    "ci_bootstrap": [
+      -0.8333333333333304,
+      0.0
+    ],
+    "ci_familywise_t": [
+      -5.7109186400727685,
+      4.877585306739438
+    ],
+    "p_exchangeable": 1.0,
+    "degenerate": false,
+    "assumption": "Independent seed/time blocks; t intervals assume approximately normal block means; sign flips require exchangeability/symmetry under the null. Intervals conditional on these VMs.",
+    "warning": null,
+    "inference": "Exploratory pilot only. n=2; no confirmatory claims. Constant paired deltas do not imply zero population uncertainty."
+  },
+  {
+    "experiment": "E1",
+    "series": "B27000000",
+    "contrast": "no_dual minus joint",
+    "seeds": [
+      902101,
+      902102
+    ],
+    "delta_pp": [
+      0.0,
+      0.0
+    ],
+    "blocks": 2,
+    "mean": 0.0,
+    "positive": 0,
+    "negative": 0,
+    "ties": 2,
+    "sd": 0.0,
+    "ci_t": [
+      0.0,
+      0.0
+    ],
+    "ci_bootstrap": [
+      0.0,
+      0.0
+    ],
+    "ci_familywise_t": [
+      0.0,
+      0.0
+    ],
+    "p_exchangeable": 1.0,
+    "degenerate": true,
+    "assumption": "Independent seed/time blocks; t intervals assume approximately normal block means; sign flips require exchangeability/symmetry under the null. Intervals conditional on these VMs.",
+    "warning": "Zero pilot variance does not establish equivalence or zero population variance",
+    "inference": "Exploratory pilot only. n=2; no confirmatory claims. Constant paired deltas do not imply zero population uncertainty."
+  },
+  {
+    "experiment": "E1",
+    "series": "B27000000",
+    "contrast": "legacy_lp_mean minus joint",
+    "seeds": [
+      902101,
+      902102
+    ],
+    "delta_pp": [
+      0.0,
+      0.8333333333333304
+    ],
+    "blocks": 2,
+    "mean": 0.4166666666666652,
+    "positive": 1,
+    "negative": 0,
+    "ties": 1,
+    "sd": 0.5892556509887875,
+    "ci_t": [
+      -4.877585306739438,
+      5.7109186400727685
+    ],
+    "ci_bootstrap": [
+      0.0,
+      0.8333333333333304
+    ],
+    "ci_familywise_t": [
+      -4.877585306739438,
+      5.7109186400727685
+    ],
+    "p_exchangeable": 1.0,
+    "degenerate": false,
+    "assumption": "Independent seed/time blocks; t intervals assume approximately normal block means; sign flips require exchangeability/symmetry under the null. Intervals conditional on these VMs.",
+    "warning": null,
+    "inference": "Exploratory pilot only. n=2; no confirmatory claims. Constant paired deltas do not imply zero population uncertainty."
+  },
+  {
+    "experiment": "E1",
+    "series": "B30000000",
+    "contrast": "no_dual minus joint",
+    "seeds": [
+      902101,
+      902102
+    ],
+    "delta_pp": [
+      0.0,
+      0.0
+    ],
+    "blocks": 2,
+    "mean": 0.0,
+    "positive": 0,
+    "negative": 0,
+    "ties": 2,
+    "sd": 0.0,
+    "ci_t": [
+      0.0,
+      0.0
+    ],
+    "ci_bootstrap": [
+      0.0,
+      0.0
+    ],
+    "ci_familywise_t": [
+      0.0,
+      0.0
+    ],
+    "p_exchangeable": 1.0,
+    "degenerate": true,
+    "assumption": "Independent seed/time blocks; t intervals assume approximately normal block means; sign flips require exchangeability/symmetry under the null. Intervals conditional on these VMs.",
+    "warning": "Zero pilot variance does not establish equivalence or zero population variance",
+    "inference": "Exploratory pilot only. n=2; no confirmatory claims. Constant paired deltas do not imply zero population uncertainty."
+  },
+  {
+    "experiment": "E1",
+    "series": "B30000000",
+    "contrast": "legacy_lp_mean minus joint",
+    "seeds": [
+      902101,
+      902102
+    ],
+    "delta_pp": [
+      0.0,
+      0.0
+    ],
+    "blocks": 2,
+    "mean": 0.0,
+    "positive": 0,
+    "negative": 0,
+    "ties": 2,
+    "sd": 0.0,
+    "ci_t": [
+      0.0,
+      0.0
+    ],
+    "ci_bootstrap": [
+      0.0,
+      0.0
+    ],
+    "ci_familywise_t": [
+      0.0,
+      0.0
+    ],
+    "p_exchangeable": 1.0,
+    "degenerate": true,
+    "assumption": "Independent seed/time blocks; t intervals assume approximately normal block means; sign flips require exchangeability/symmetry under the null. Intervals conditional on these VMs.",
+    "warning": "Zero pilot variance does not establish equivalence or zero population variance",
+    "inference": "Exploratory pilot only. n=2; no confirmatory claims. Constant paired deltas do not imply zero population uncertainty."
+  },
+  {
+    "experiment": "E5",
+    "series": "booking_windows_cpu",
+    "contrast": "no_dual minus joint",
+    "seeds": [
+      902501,
+      902502
+    ],
+    "delta_pp": [
+      -26.66666666666667,
+      -5.000000000000004
+    ],
+    "blocks": 2,
+    "mean": -15.833333333333337,
+    "positive": 0,
+    "negative": 2,
+    "ties": 0,
+    "sd": 15.32064692570853,
+    "ci_t": [
+      -153.48388464189253,
+      121.81721797522584
+    ],
+    "ci_bootstrap": [
+      -26.66666666666667,
+      -5.000000000000004
+    ],
+    "ci_familywise_t": [
+      -153.48388464189253,
+      121.81721797522584
+    ],
+    "p_exchangeable": 0.5,
+    "degenerate": false,
+    "assumption": "Independent seed/time blocks; t intervals assume approximately normal block means; sign flips require exchangeability/symmetry under the null. Intervals conditional on these VMs.",
+    "warning": null,
+    "inference": "Exploratory pilot only. n=2; no confirmatory claims. Constant paired deltas do not imply zero population uncertainty."
+  },
+  {
+    "experiment": "E5",
+    "series": "booking_windows_cpu",
+    "contrast": "no_exploration minus joint",
+    "seeds": [
+      902501,
+      902502
+    ],
+    "delta_pp": [
+      -31.66666666666667,
+      -5.000000000000004
+    ],
+    "blocks": 2,
+    "mean": -18.33333333333334,
+    "positive": 0,
+    "negative": 2,
+    "ties": 0,
+    "sd": 18.856180831641268,
+    "ci_t": [
+      -187.74939648232927,
+      151.0827298156626
+    ],
+    "ci_bootstrap": [
+      -31.66666666666667,
+      -5.000000000000004
+    ],
+    "ci_familywise_t": [
+      -187.74939648232927,
+      151.0827298156626
+    ],
+    "p_exchangeable": 0.5,
+    "degenerate": false,
+    "assumption": "Independent seed/time blocks; t intervals assume approximately normal block means; sign flips require exchangeability/symmetry under the null. Intervals conditional on these VMs.",
+    "warning": null,
+    "inference": "Exploratory pilot only. n=2; no confirmatory claims. Constant paired deltas do not imply zero population uncertainty."
+  },
+  {
+    "experiment": "E5",
+    "series": "booking_windows_cpu",
+    "contrast": "matched_recent minus joint",
+    "seeds": [
+      902501,
+      902502
+    ],
+    "delta_pp": [
+      29.166666666666664,
+      10.833333333333329
+    ],
+    "blocks": 2,
+    "mean": 19.999999999999996,
+    "positive": 2,
+    "negative": 0,
+    "ties": 0,
+    "sd": 12.963624321753374,
+    "ci_t": [
+      -96.47354341493471,
+      136.4735434149347
+    ],
+    "ci_bootstrap": [
+      10.833333333333329,
+      29.166666666666664
+    ],
+    "ci_familywise_t": [
+      -96.47354341493471,
+      136.4735434149347
+    ],
+    "p_exchangeable": 0.5,
+    "degenerate": false,
+    "assumption": "Independent seed/time blocks; t intervals assume approximately normal block means; sign flips require exchangeability/symmetry under the null. Intervals conditional on these VMs.",
+    "warning": null,
+    "inference": "Exploratory pilot only. n=2; no confirmatory claims. Constant paired deltas do not imply zero population uncertainty."
+  },
+  {
+    "experiment": "E5",
+    "series": "booking_windows_cpu",
+    "contrast": "legacy_lp_mean minus joint",
+    "seeds": [
+      902501,
+      902502
+    ],
+    "delta_pp": [
+      -4.166666666666674,
+      2.499999999999991
+    ],
+    "blocks": 2,
+    "mean": -0.8333333333333415,
+    "positive": 1,
+    "negative": 1,
+    "ties": 0,
+    "sd": 4.714045207910315,
+    "ci_t": [
+      -43.187349120582304,
+      41.52068245391562
+    ],
+    "ci_bootstrap": [
+      -4.166666666666674,
+      2.499999999999991
+    ],
+    "ci_familywise_t": [
+      -43.187349120582304,
+      41.52068245391562
+    ],
+    "p_exchangeable": 1.0,
+    "degenerate": false,
+    "assumption": "Independent seed/time blocks; t intervals assume approximately normal block means; sign flips require exchangeability/symmetry under the null. Intervals conditional on these VMs.",
+    "warning": null,
+    "inference": "Exploratory pilot only. n=2; no confirmatory claims. Constant paired deltas do not imply zero population uncertainty."
+  },
+  {
+    "experiment": "E5",
+    "series": "booking_windows_cpu",
+    "contrast": "article_pd minus joint",
+    "seeds": [
+      902501,
+      902502
+    ],
+    "delta_pp": [
+      10.833333333333329,
+      10.833333333333329
+    ],
+    "blocks": 2,
+    "mean": 10.833333333333329,
+    "positive": 2,
+    "negative": 0,
+    "ties": 0,
+    "sd": 0.0,
+    "ci_t": [
+      10.833333333333329,
+      10.833333333333329
+    ],
+    "ci_bootstrap": [
+      10.833333333333329,
+      10.833333333333329
+    ],
+    "ci_familywise_t": [
+      10.833333333333329,
+      10.833333333333329
+    ],
+    "p_exchangeable": 0.5,
+    "degenerate": true,
+    "assumption": "Independent seed/time blocks; t intervals assume approximately normal block means; sign flips require exchangeability/symmetry under the null. Intervals conditional on these VMs.",
+    "warning": "Zero pilot variance does not establish equivalence or zero population variance",
+    "inference": "Exploratory pilot only. n=2; no confirmatory claims. Constant paired deltas do not imply zero population uncertainty."
+  },
+  {
+    "experiment": "E3",
+    "series": "proof_switch",
+    "contrast": "matched_recent minus joint",
+    "seeds": [
+      902011,
+      902012
+    ],
+    "delta_pp": [
+      0.0,
+      0.0
+    ],
+    "blocks": 2,
+    "mean": 0.0,
+    "positive": 0,
+    "negative": 0,
+    "ties": 2,
+    "sd": 0.0,
+    "ci_t": [
+      0.0,
+      0.0
+    ],
+    "ci_bootstrap": [
+      0.0,
+      0.0
+    ],
+    "ci_familywise_t": [
+      0.0,
+      0.0
+    ],
+    "p_exchangeable": 1.0,
+    "degenerate": true,
+    "assumption": "Independent seed/time blocks; t intervals assume approximately normal block means; sign flips require exchangeability/symmetry under the null. Intervals conditional on these VMs.",
+    "warning": "Zero pilot variance does not establish equivalence or zero population variance",
+    "inference": "Exploratory pilot only. n=2; no confirmatory claims. Constant paired deltas do not imply zero population uncertainty."
+  },
+  {
+    "experiment": "E3",
+    "series": "proof_switch",
+    "contrast": "legacy_lp_mean minus joint",
+    "seeds": [
+      902011,
+      902012
+    ],
+    "delta_pp": [
+      0.0,
+      0.0
+    ],
+    "blocks": 2,
+    "mean": 0.0,
+    "positive": 0,
+    "negative": 0,
+    "ties": 2,
+    "sd": 0.0,
+    "ci_t": [
+      0.0,
+      0.0
+    ],
+    "ci_bootstrap": [
+      0.0,
+      0.0
+    ],
+    "ci_familywise_t": [
+      0.0,
+      0.0
+    ],
+    "p_exchangeable": 1.0,
+    "degenerate": true,
+    "assumption": "Independent seed/time blocks; t intervals assume approximately normal block means; sign flips require exchangeability/symmetry under the null. Intervals conditional on these VMs.",
+    "warning": "Zero pilot variance does not establish equivalence or zero population variance",
+    "inference": "Exploratory pilot only. n=2; no confirmatory claims. Constant paired deltas do not imply zero population uncertainty."
+  }
+]

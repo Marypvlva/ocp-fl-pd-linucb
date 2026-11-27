@@ -1,0 +1,5 @@
+{
+  "primary_family": 4,
+  "secondary_family": 32,
+  "caveat": "Sign flips require symmetric/exchangeable paired seed differences; t intervals assume approximately normal seed means. New cloud confirmation needs new seeds and time blocks; all old v0.7.0 data are development data."
+}

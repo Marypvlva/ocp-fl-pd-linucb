@@ -1,0 +1,61 @@
+[
+  {
+    "series": "proof_switch",
+    "plan_sha256": "2685f4ba5e5119fa2cd87fcd10bdf74f51dd932635158210b3cef5ba94cff753",
+    "complete": true,
+    "control_log_fetch_errors": [],
+    "blocks": 2,
+    "results": {
+      "joint": {
+        "accepted": [
+          120,
+          120
+        ],
+        "mean": 120.0,
+        "joint_minus": 0.0,
+        "conditional_seed_ci": [
+          0.0,
+          0.0
+        ],
+        "p50_p95_total_s": [
+          1.9710743039977388,
+          2.3011435014457673
+        ]
+      },
+      "matched_recent": {
+        "accepted": [
+          120,
+          120
+        ],
+        "mean": 120.0,
+        "joint_minus": 0.0,
+        "conditional_seed_ci": [
+          0.0,
+          0.0
+        ],
+        "p50_p95_total_s": [
+          1.9600285175038152,
+          2.2660835796952594
+        ]
+      },
+      "legacy_lp_mean": {
+        "accepted": [
+          120,
+          120
+        ],
+        "mean": 120.0,
+        "joint_minus": 0.0,
+        "conditional_seed_ci": [
+          0.0,
+          0.0
+        ],
+        "p50_p95_total_s": [
+          1.7132620140037034,
+          1.9205335756094424
+        ]
+      }
+    },
+    "scope": "Same roster seeds, initial model, empty history, quotas and settings; randomized sequential crossover. Natural network outcomes differ by time.",
+    "caution": "Seed/time-block uncertainty is conditional on these hosts and sequential observation periods. Pilot size does not establish confirmatory power."
+  }
+]

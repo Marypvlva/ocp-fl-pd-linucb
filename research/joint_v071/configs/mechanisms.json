@@ -1,0 +1,9 @@
+{
+  "joint":{"alpha":0.15},
+  "joint_discounted":{"alpha":0.15,"discount":0.95},
+  "joint_discounted_legacy_bonus":{"alpha":0.15,"discount":0.95},
+  "joint_window":{"alpha":0.15,"window":16},
+  "joint_eligible":{"alpha":0.15},
+  "joint_discounted_eligible":{"alpha":0.15,"discount":0.95},
+  "joint_window_eligible":{"alpha":0.15,"window":16}
+}

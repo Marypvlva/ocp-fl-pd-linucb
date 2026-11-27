@@ -13,7 +13,7 @@ import sys
 import time
 
 import numpy as np
-from model import ARMS, Policy, Settings, SLA
+from model import ARMS, Settings, SLA
 from gateway_study import caps
 from lease import deploy, reserve
 from meter import settled_metrics
@@ -224,9 +224,8 @@ def episode(root, output, config, seed, mode, runtime):
     limit = caps(config["seeds"].index(seed), h,config.get('site_fraction',.2))[None, :]
     prices = np.array([config["calibration"]["prices"][str(config["seeds"].index(seed) % 4)]])
     mirror_limit=config.get('mirror_limit',h//4)
-    from article_policy import ArticlePolicy
-    policy_class=ArticlePolicy if settings.mode=='article_pd' else Policy
-    policy = policy_class(settings, 1, n, k, h, mirror_limit, config.get('policy_tie_seed',53), limit, prices)
+    from policy_factory import make_policy
+    policy = make_policy(settings, 1, n, k, h, mirror_limit, config.get('policy_tie_seed',53), limit, prices)
     model = make_model(17, 64, 0.5)
     initial = keccak(flatten_model(model)).hex()
     binding = dict(
@@ -426,7 +425,13 @@ def episode(root, output, config, seed, mode, runtime):
                 if state['denied_frames']>before_state['denied_frames']:
                     attempted &= samples>0
                 update_started=time.perf_counter()
-                if config.get('feedback_schema',1)>=2:
+                if settings.feedback_rule=='eligible':
+                    learning_mask=attempted.copy()
+                    if state['denied_frames']>before_state['denied_frames']:
+                        learning_mask[:]=False
+                    policy.observe(samples,np.array([result.accepted]),learning_mask,
+                        observation_horizon_ms=result.metrics.get('collector_phase_budget_ms',0.))
+                elif config.get('feedback_schema',1)>=2:
                     policy.observe(samples,np.array([result.accepted]),attempted)
                 else:
                     policy.observe(samples,np.array([result.accepted]))
@@ -472,6 +477,7 @@ def episode(root, output, config, seed, mode, runtime):
                         attempt_id=attempt_id,
                         policy_decision=policy.last_decision,
                         path_readings=samples.tolist(),path_observed=attempted.tolist(),
+                        learning_path_observed=learning_mask.tolist() if settings.feedback_rule=='eligible' else attempted.tolist(),
                         controlled_effect=effect,feedback_schema=config.get('feedback_schema',1),
                         planning_s=planning_s,policy_update_s=policy_update_s,
                         validation_s=validation_s,scientific_audit_s=scientific_audit_s,

@@ -1,0 +1,1 @@
+{"id":"J071_development_like_switch","horizon":120,"budget_bytes":30000000,"windows_ms":[27,35,46],"mirror_fraction":0.1,"site_fraction":0.1,"network_mode":"controlled","events":[{"start":1,"end":40,"cpu_iterations":[1000,0,1000,0]},{"start":41,"end":80,"cpu_iterations":[0,1000,0,1000]}]}

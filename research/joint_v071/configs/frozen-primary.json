@@ -1,0 +1,7 @@
+{
+  "joint":{"alpha":0.3},
+  "joint_discounted":{"alpha":0.15,"discount":0.95},
+  "joint_window":{"alpha":0.15,"window":16},
+  "matched_recent":{"eta":0.05},
+  "article_pd":{"alpha":2.0}
+}

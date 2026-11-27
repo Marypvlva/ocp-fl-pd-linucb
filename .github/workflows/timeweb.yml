@@ -1,7 +1,7 @@
 name: Timeweb Ubuntu 24.04 distributed mechanisms
 on:
   push:
-    branches: [main, timeweb-collector-v3, fix/control-service-061, research/experimental-program-070]
+    branches: [main, timeweb-collector-v3, fix/control-service-061, research/experimental-program-070, research/joint-forgetting-071]
   pull_request:
   workflow_dispatch:
 permissions:

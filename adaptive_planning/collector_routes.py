@@ -60,11 +60,13 @@ def forward(edge, header, payload, server):
 
 
 def collect(cluster, roster, gateways, command, challenge, phase_end, emulated_ms, metrics,
-            *,cpu_iterations=(0,0,0,0),service_ms=(0.,0.,0.,0.),unavailable=()):
+            *,cpu_iterations=(0,0,0,0),service_ms=(0.,0.,0.,0.),unavailable=(),
+            phase_started=None, observation_horizon_ms=None):
     require(len(cpu_iterations)==len(service_ms)==4,'Four collector workloads required')
     calls=[(g,i) for g in gateways for i in roster]
-    started=now()
-    metrics['collector_phase_budget_ms']=max(0.,1000*(phase_end-started))
+    started=now() if phase_started is None else phase_started
+    metrics['collector_phase_budget_ms']=(max(0.,1000*(phase_end-started))
+        if observation_horizon_ms is None else observation_horizon_ms)
     metrics['collector_attempts']=[list(pair) for pair in calls]
     metrics['collector_workload_observed']=[]
     def one(g,i):

@@ -1,0 +1,6 @@
+{
+  "rounds": 1440,
+  "plans": 1,
+  "status": "exact_action_and_stored_state_reconstruction",
+  "caution": "Observed policy histories only; no counterfactual reward estimates or iid-round inference. Pilot seeds, host/time confounding and outcome-dependent censoring remain."
+}

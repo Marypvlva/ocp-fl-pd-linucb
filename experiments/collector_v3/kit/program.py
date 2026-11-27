@@ -45,6 +45,14 @@ def policies(calibration):
         mode="article_pd", alpha=1.0, ridge=1.0, eta=0.05, initial_price=0.0, delay=base.delay
     )
     result["article_no_dual"] = replace(result["article_pd"], eta=0.0)
+    # Memory-only variants deliberately retain v0.7.0 censoring for causal ablation.
+    result["joint_discounted"] = replace(base, memory="discount")
+    result["joint_window"] = replace(base, memory="window")
+    result["joint_discounted_legacy_bonus"] = replace(
+        result["joint_discounted"], memory_bonus="legacy")
+    # Separate feedback correction; never attribute its effect to forgetting.
+    for name in ("joint", "joint_discounted", "joint_window", "matched_recent"):
+        result[name + "_eligible"] = replace(result[name], feedback_rule="eligible")
     return {name: settings.__dict__ for name, settings in result.items()}
 
 
@@ -236,6 +244,8 @@ def freeze(
             "ridge",
             "initial_price",
             "lp_window",
+            "discount",
+            "window",
         }:
             raise ValueError("Unknown policy/hyperparameter override")
         for key, value in values.items():
@@ -245,6 +255,8 @@ def freeze(
                 or value < 0
                 or (key == "ridge" and value <= 0)
                 or (key == "lp_window" and (type(value) is not int or value < 2))
+                or (key == "window" and (type(value) is not int or value < 1))
+                or (key == "discount" and not 0 < value <= 1)
             ):
                 raise ValueError("Invalid policy hyperparameter")
         spec[name] = Settings(**dict(spec[name], **values)).__dict__

@@ -1,0 +1,109 @@
+[
+  {
+    "series": "booking_windows_cpu",
+    "plan_sha256": "2ca2e1b2070967d9bd00f57c4dffbf50a0c7990268688041670400892b404940",
+    "complete": true,
+    "control_log_fetch_errors": [],
+    "blocks": 2,
+    "results": {
+      "joint": {
+        "accepted": [
+          62,
+          70
+        ],
+        "mean": 66.0,
+        "joint_minus": 0.0,
+        "conditional_seed_ci": [
+          0.0,
+          0.0
+        ],
+        "p50_p95_total_s": [
+          1.7472876384999836,
+          1.9515103768986588
+        ]
+      },
+      "no_dual": {
+        "accepted": [
+          30,
+          64
+        ],
+        "mean": 47.0,
+        "joint_minus": 19.0,
+        "conditional_seed_ci": [
+          6.0,
+          32.0
+        ],
+        "p50_p95_total_s": [
+          2.026008164495579,
+          2.30650725214
+        ]
+      },
+      "no_exploration": {
+        "accepted": [
+          24,
+          64
+        ],
+        "mean": 44.0,
+        "joint_minus": 22.0,
+        "conditional_seed_ci": [
+          6.0,
+          38.0
+        ],
+        "p50_p95_total_s": [
+          1.8307782735064393,
+          2.21003409179757
+        ]
+      },
+      "matched_recent": {
+        "accepted": [
+          97,
+          83
+        ],
+        "mean": 90.0,
+        "joint_minus": -24.0,
+        "conditional_seed_ci": [
+          -35.0,
+          -13.0
+        ],
+        "p50_p95_total_s": [
+          1.9910859369992977,
+          2.3531522719444182
+        ]
+      },
+      "legacy_lp_mean": {
+        "accepted": [
+          57,
+          73
+        ],
+        "mean": 65.0,
+        "joint_minus": 1.0,
+        "conditional_seed_ci": [
+          -3.0,
+          5.0
+        ],
+        "p50_p95_total_s": [
+          1.7733415190014057,
+          2.000012748040899
+        ]
+      },
+      "article_pd": {
+        "accepted": [
+          75,
+          83
+        ],
+        "mean": 79.0,
+        "joint_minus": -13.0,
+        "conditional_seed_ci": [
+          -13.0,
+          -13.0
+        ],
+        "p50_p95_total_s": [
+          1.7622653915022966,
+          1.9981536946550476
+        ]
+      }
+    },
+    "scope": "Same roster seeds, initial model, empty history, quotas and settings; randomized sequential crossover. Natural network outcomes differ by time.",
+    "caution": "Seed/time-block uncertainty is conditional on these hosts and sequential observation periods. Pilot size does not establish confirmatory power."
+  }
+]

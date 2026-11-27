@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 import numpy as np
-from model import ARMS, SLA, Policy, Settings
+from model import ARMS, SLA, Settings
 from gateway_study import caps
 from program import read_plan
 
@@ -24,10 +24,8 @@ def reconstruct(directory, seed, mode):
             else config["calibration"]["records"][mode]["chosen"]["settings"]
         )
     )
-    from article_policy import ArticlePolicy
-
-    policy_class = ArticlePolicy if settings.mode == "article_pd" else Policy
-    policy = policy_class(
+    from policy_factory import make_policy
+    policy = make_policy(
         settings,
         1,
         n,
@@ -66,7 +64,12 @@ def reconstruct(directory, seed, mode):
             if config.get("feedback_schema", 1) >= 2
             else None
         )
-        policy.observe(samples, np.array([row["accepted"]]), mask)
+        if settings.feedback_rule == 'eligible':
+            policy.observe(samples, np.array([row['accepted']]),
+                np.array(row['learning_path_observed'],bool),
+                observation_horizon_ms=row['metrics'].get('collector_phase_budget_ms',0.))
+        else:
+            policy.observe(samples, np.array([row["accepted"]]), mask)
         rows.append(
             dict(
                 round=rd,

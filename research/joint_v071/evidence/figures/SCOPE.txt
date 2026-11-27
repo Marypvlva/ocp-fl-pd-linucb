@@ -1,0 +1,1 @@
+E1/E5 real observations; shadows use original Joint actions only. Local synthetic/RIPE figures are proxies, not TCP/cloud measurements. No confidence bands from two pilot seeds.

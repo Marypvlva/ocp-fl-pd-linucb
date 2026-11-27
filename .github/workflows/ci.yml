@@ -42,7 +42,7 @@ jobs:
         run: python project.py doctor
       - name: Check imports and static errors
         run: |
-          python -m ruff check adaptive_planning tests project.py experiments/collector_v3/kit/*_program.py experiments/collector_v3/kit/program.py experiments/collector_v3/kit/program_suite.py experiments/collector_v3/kit/audit_release.py experiments/collector_v3/kit/article_policy.py
+          python -m ruff check adaptive_planning tests project.py experiments/collector_v3/kit/*_program.py experiments/collector_v3/kit/program.py experiments/collector_v3/kit/program_suite.py experiments/collector_v3/kit/audit_release.py experiments/collector_v3/kit/article_policy.py experiments/collector_v3/kit/joint_*.py experiments/collector_v3/kit/memory_policy.py experiments/collector_v3/kit/policy_factory.py
       - name: Run tests
         run: python project.py test
       - name: Verify collector results and protocol boundaries

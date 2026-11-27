@@ -1,0 +1,6 @@
+{
+  "manifest_sha256": "b79d764a464fa6c9194df3c8af956454940110ad6ce8d9440f752d0a8327b10c",
+  "selection_sha256": "b1634d745bd1e54fb4691e1ef433ea9cabf3ef02425085de6a799a8167bb2710",
+  "elapsed_s": 36.96280154201668,
+  "caution": "Synthetic validation and historical ICMP proxy only; no real distributed measurements, no application-byte modeling. Seed is paired unit; Atlas panels within month are correlated. No claim of confirmation."
+}

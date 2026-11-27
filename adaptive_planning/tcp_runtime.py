@@ -994,12 +994,16 @@ class Cluster:
                             replies, errors = self.parallel(
                                 [(f"w{i}", "projection", command, b"") for i in selected], deadline)
                         else:
-                            phase_end=min(deadline,monotonic()+proof_budget_ms/1000)
+                            phase_started=monotonic()
+                            phase_end=min(deadline,phase_started+proof_budget_ms/1000)
                             replies,errors=collector_routes.collect(self,selected,proof_collectors,command,
                                 challenge,phase_end,emulated_link_ms,metrics,
                                 cpu_iterations=fault.collector_cpu_iterations,
                                 service_ms=fault.collector_service_ms,
-                                unavailable=fault.unavailable_collectors)
+                                unavailable=fault.unavailable_collectors,
+                                phase_started=phase_started,
+                                observation_horizon_ms=min(proof_budget_ms,
+                                    max(0.,1000*(deadline-phase_started))))
                         metrics["projection_rpc_wall_s"] += perf_counter() - t
                         result.errors.extend(errors)
                         signed = []

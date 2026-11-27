@@ -1,0 +1,5 @@
+{
+  "meaning": "Predictions of shadow learners on original Joint actions/history; no rewards for alternative actions.",
+  "tuning": "All v0.7.0 data are development data; these forecasts cannot select/confirm superiority on the same data.",
+  "censoring": "Legacy pooling deliberately retained to isolate memory. Unknown unattempted labels omitted from path scores. Coverage includes execution failures."
+}
