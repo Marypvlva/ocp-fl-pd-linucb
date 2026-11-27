@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import platform
 import secrets
+import socket
 import subprocess
 import sys
 import time
@@ -191,12 +192,24 @@ def episode(root, output, config, seed, mode, runtime):
     n, h, k = config["population"], config["horizon"], config["k"]
     directory = output / f"{seed}_{mode}"
     if (directory / "complete.json").exists():
+        if config.get('version',1)>=2:
+            from program import verify_complete
+            verify_complete(directory,config)
         return
+    if directory.exists() and config.get('version',1)>=2 and runtime.get('retry_incomplete'):
+        archive=output/'attempts'/directory.name/str(time.time_ns())
+        archive.parent.mkdir(parents=True,exist_ok=True)
+        directory.rename(archive)
+        with (output/'attempts.jsonl').open('a') as stream:
+            stream.write(json.dumps(dict(seed=seed,mode=mode,archived=str(archive.relative_to(output)),at=time.time()))+'\n')
     if directory.exists():
         raise ValueError(
             f"Interrupted episode {directory}. Preserve it and use a new run directory; credit is never reset automatically."
         )
     directory.mkdir()
+    attempt_id=secrets.token_hex(8) if config.get('version',1)>=2 else ''
+    if attempt_id:
+        dump(directory/'attempt.json',dict(id=attempt_id,seed=seed,mode=mode,created=time.time()))
     external = runtime.get("chain")
     chain = (
         external_chain(root, external, mode)
@@ -206,10 +219,14 @@ def episode(root, output, config, seed, mode, runtime):
     if len(chain.clients) != n or chain.size != k:
         raise ValueError("Chain population differs from frozen plan")
     groups, val, _ = make_workers(n)
-    settings = Settings(**config["calibration"]["records"][mode]["chosen"]["settings"])
-    limit = caps(config["seeds"].index(seed), h)[None, :]
+    settings = Settings(**(config['policy_specs'][mode] if 'policy_specs' in config else
+                          config["calibration"]["records"][mode]["chosen"]["settings"]))
+    limit = caps(config["seeds"].index(seed), h,config.get('site_fraction',.2))[None, :]
     prices = np.array([config["calibration"]["prices"][str(config["seeds"].index(seed) % 4)]])
-    policy = Policy(settings, 1, n, k, h, h // 4, 53, limit, prices)
+    mirror_limit=config.get('mirror_limit',h//4)
+    from article_policy import ArticlePolicy
+    policy_class=ArticlePolicy if settings.mode=='article_pd' else Policy
+    policy = policy_class(settings, 1, n, k, h, mirror_limit, config.get('policy_tie_seed',53), limit, prices)
     model = make_model(17, 64, 0.5)
     initial = keccak(flatten_model(model)).hex()
     binding = dict(
@@ -220,7 +237,7 @@ def episode(root, output, config, seed, mode, runtime):
         windows=config["windows_ms"],
         bytes=config["bytes_per_episode"],
     )
-    book, cfg = deploy(chain, binding, h // 4, limit[0])
+    book, cfg = deploy(chain, binding, mirror_limit, limit[0])
     lease_pin = dict(
         chain_id=chain.chain_id,
         source=chain.contract.address,
@@ -259,7 +276,7 @@ def episode(root, output, config, seed, mode, runtime):
             else str(
                 root
                 / "results/control"
-                / f"{directory.name}-{sha256(str(directory).encode()).hexdigest()[:12]}"
+                / f"{directory.name}-{sha256((str(directory)+attempt_id).encode()).hexdigest()[:12]}"
                 / f"{name}.jsonl"
             ),
         )
@@ -275,6 +292,8 @@ def episode(root, output, config, seed, mode, runtime):
     mapping = load_placement(placement, n)
     classes = np.resize(np.arange(3), h)
     np.random.default_rng(seed + 200).shuffle(classes)
+    if 'window_classes' in config:
+        classes=np.array(config['window_classes'][str(seed)],dtype=int)
     rows = []
     progress = {}
     result = None
@@ -306,7 +325,11 @@ def episode(root, output, config, seed, mode, runtime):
                 ticket = ceremony(chain, rd, seed, n, bool(external))
                 after_final = time.perf_counter()
                 members = list(chain.authorize(ticket, rd, n))
-                arm = int(policy.decide(c, np.array([members]))[0])
+                plan_started=time.perf_counter()
+                forced=config.get('forced_arms',{}).get(str(seed))
+                arm = int(policy.decide(c, np.array([members]),
+                    forced_arm=forced[t] if forced is not None else None)[0])
+                planning_s=time.perf_counter()-plan_started
                 gateways = ARMS[arm]
                 progress["stage"] = "booking"
                 lease = reserve(chain, book, cfg, ticket, gateways, int(SLA[c]))
@@ -327,7 +350,8 @@ def episode(root, output, config, seed, mode, runtime):
                 cguard.install(request)
                 acks = cluster.install_grant(request)
                 after_booking = time.perf_counter()
-                before = coordinator_shaper.byte_budget.state()["spent"]
+                before_state = coordinator_shaper.byte_budget.state()
+                before = before_state['spent']
                 old = flatten_model(model)
                 remaining = config["end_to_end_deadline_s"] - (time.perf_counter() - started)
                 if remaining <= 0:
@@ -337,6 +361,13 @@ def episode(root, output, config, seed, mode, runtime):
                     if runtime["network_mode"] == "controlled" and rd % 5 == 0
                     else None
                 )
+                effect=None
+                if 'effects' in config:
+                    effect=config['effects'][str(seed)][t]
+                    fault=Fault(failed_edges=tuple(effect['failed_edges']),
+                        collector_cpu_iterations=tuple(effect['cpu_iterations']),
+                        collector_service_ms=tuple(effect['service_ms']),
+                        unavailable_collectors=tuple(effect.get('unavailable_collectors',[])))
                 progress["stage"] = "protocol"
                 result = cluster.run_round(
                     model,
@@ -366,6 +397,7 @@ def episode(root, output, config, seed, mode, runtime):
                 ontime = after_commit - started <= config["end_to_end_deadline_s"]
                 if not ontime:
                     raise TimeoutError("End-to-end deadline exceeded at model finality")
+                audit_started=time.perf_counter()
                 if result.accepted:
                     total = sum(len(groups[i][1]) for i in members)
                     reference = np.stack(
@@ -381,12 +413,27 @@ def episode(root, output, config, seed, mode, runtime):
                     np.testing.assert_array_equal(result.vector, reference)
                 elif old != flatten_model(model):
                     raise AssertionError("Rejected update changed model")
+                scientific_audit_s=time.perf_counter()-audit_started
                 timings = result.metrics.get("collector_ms", {str(g): {} for g in gateways})
                 samples = np.full((1, k, 2), -1.0)
                 for j, g in enumerate(gateways):
                     for i, member in enumerate(members):
                         samples[0, i, j] = timings[str(g)].get(str(member), -1.0)
-                policy.observe(samples, np.array([result.accepted]))
+                attempted=np.zeros_like(samples,dtype=bool)
+                for g,member in result.metrics.get('collector_attempts',[]):
+                    if g in gateways and member in members:
+                        attempted[0,members.index(member),list(gateways).index(g)]=True
+                if state['denied_frames']>before_state['denied_frames']:
+                    attempted &= samples>0
+                update_started=time.perf_counter()
+                if config.get('feedback_schema',1)>=2:
+                    policy.observe(samples,np.array([result.accepted]),attempted)
+                else:
+                    policy.observe(samples,np.array([result.accepted]))
+                policy_update_s=time.perf_counter()-update_started
+                validation_started=time.perf_counter()
+                validation=list(map(float, model.score(*val)))
+                validation_s=time.perf_counter()-validation_started
                 row = dict(
                     round=rd,
                     seed=seed,
@@ -405,7 +452,7 @@ def episode(root, output, config, seed, mode, runtime):
                     initial_model_hash=initial,
                     previous_model_hash=keccak(old).hex(),
                     model_hash=digest,
-                    validation=list(map(float, model.score(*val))),
+                    validation=validation,
                     window_ms=int(SLA[c]),
                     byte_ledger=state,
                     telemetry=met,
@@ -420,8 +467,22 @@ def episode(root, output, config, seed, mode, runtime):
                     mirror=int(policy.spent[0]),
                     gateway_spent=policy.gateway_spent[0].tolist(),
                 )
+                if config.get('version',1)>=2:
+                    row.update(plan_sha256=binding['plan_sha256'],
+                        attempt_id=attempt_id,
+                        policy_decision=policy.last_decision,
+                        path_readings=samples.tolist(),path_observed=attempted.tolist(),
+                        controlled_effect=effect,feedback_schema=config.get('feedback_schema',1),
+                        planning_s=planning_s,policy_update_s=policy_update_s,
+                        validation_s=validation_s,scientific_audit_s=scientific_audit_s,
+                        cycle_until_log_s=time.perf_counter()-started)
                 rows.append(row)
+                logging_started=time.perf_counter()
                 dump(directory / f"round-{rd:04}.json", row)
+                if config.get('version',1)>=2:
+                    with (directory/'round-io.jsonl').open('a') as stream:
+                        stream.write(json.dumps(dict(round=rd,logging_s=time.perf_counter()-logging_started,
+                            full_cycle_s=time.perf_counter()-started))+'\n')
                 if rd % 10 == 0 or service_status["counters"]["counts"].get("response_lost", 0):
                     print(
                         json.dumps(
@@ -444,6 +505,10 @@ def episode(root, output, config, seed, mode, runtime):
                     accepted=sum(r["accepted"] for r in rows),
                     initial_model_hash=initial,
                     finished=time.time(),
+                    **(dict(plan_sha256=binding['plan_sha256'],
+                        round_hashes={p.name:sha256(p.read_bytes()).hexdigest()
+                            for p in sorted(directory.glob('round-*.json'))})
+                       if config.get('version',1)>=2 else {}),
                 ),
             )
     except BaseException as exc:
@@ -508,18 +573,23 @@ def run(root, output, runtime):
         )
     lock = output / "RUNNING"
     with lock.open("x") as f:
-        f.write(str(os.getpid()))
+        f.write(json.dumps(dict(pid=os.getpid(),host=socket.gethostname()))
+            if config.get('version',1)>=2 else str(os.getpid()))
     try:
-        dump(
-            output / "environment.json",
-            dict(
+        environment=dict(
                 python=sys.version,
                 platform=platform.platform(),
                 runtime={k: v for k, v in runtime.items() if k not in ("key", "chain")},
                 started=time.time(),
-            ),
-        )
-        for seed in config["seeds"]:
+            )
+        if config.get('version',1)>=2:
+            launches=output/'launches';launches.mkdir(exist_ok=True)
+            dump(launches/f'{time.time_ns()}.json',environment)
+        if not (output/'environment.json').exists():
+            dump(output/'environment.json',environment)
+        selected=runtime.get('seed_blocks') or config['seeds']
+        if not set(selected)<=set(config['seeds']):raise ValueError('Seed block outside frozen plan')
+        for seed in selected:
             for mode in config["order"][str(seed)]:
                 episode(root, output, config, seed, mode, runtime)
     finally:
@@ -537,6 +607,8 @@ def main(root):
     parser.add_argument("--tls-ca")
     parser.add_argument("--chain-config", type=Path)
     parser.add_argument("--network-mode", choices=("natural", "controlled"), default="natural")
+    parser.add_argument('--retry-incomplete',action='store_true')
+    parser.add_argument('--seed-block',type=int,nargs='+')
     a = parser.parse_args(sys.argv[1:])
     runtime = dict(
         url=a.control_url,
@@ -546,6 +618,8 @@ def main(root):
         key=a.tls_key,
         ca=a.tls_ca,
         network_mode=a.network_mode,
+        retry_incomplete=a.retry_incomplete,
+        seed_blocks=a.seed_block,
     )
     if a.chain_config:
         runtime["chain"] = json.loads(a.chain_config.read_text())

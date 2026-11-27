@@ -114,9 +114,14 @@ class PrimalDualLinUCB:
         self.pending = {}
         self.last_decision = {}
 
-    def select(self, context, *, forced_action=None):
+    def select(self, context, *, forced_action=None, allowed_actions=None):
         """Charge one action, optionally from a precommitted experimental control."""
         feasible = self.ledger.feasible_actions()
+        if allowed_actions is not None:
+            allowed = tuple(allowed_actions)
+            if len(allowed) != len(set(allowed)) or any(a not in self.index for a in allowed):
+                raise ValueError("Unknown or duplicate externally permitted action")
+            feasible = tuple(a for a in feasible if a in allowed)
         if not feasible:
             return None
         if forced_action is not None and forced_action not in feasible:

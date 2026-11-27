@@ -225,6 +225,8 @@ def main():
     run = sub.add_parser("run")
     run.add_argument("--out", type=Path, required=True)
     run.add_argument("--chain-config", type=Path)
+    run.add_argument('--retry-incomplete',action='store_true')
+    run.add_argument('--seed-block',type=int,nargs='+')
     a = p.parse_args()
     if a.action == "init":
         initialize(a)
@@ -283,6 +285,10 @@ def main():
             ]
             if a.chain_config:
                 args += ["--chain-config", a.chain_config]
+            if a.retry_incomplete:
+                args += ['--retry-incomplete']
+            if a.seed_block:
+                args += ['--seed-block',*map(str,a.seed_block)]
             execute(
                 args,
                 env=dict(

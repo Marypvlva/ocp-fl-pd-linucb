@@ -1,0 +1,9 @@
+{
+  "id":"C1_proof_service_outage_and_recovery",
+  "horizon":120,
+  "network_mode":"controlled",
+  "mirror_fraction":0.25,
+  "site_fraction":0.2,
+  "events":[{"start":41,"end":80,"unavailable_collectors":[0]}],
+  "primary_metric":"accepted"
+}

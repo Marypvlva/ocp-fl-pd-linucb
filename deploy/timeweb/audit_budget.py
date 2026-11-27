@@ -6,8 +6,16 @@ from pathlib import Path
 import sqlite3
 
 
-def audit(path):
-    db = sqlite3.connect(path.resolve().as_uri() + "?mode=ro", uri=True)
+def audit(path, *, immutable=False):
+    if immutable:
+        wal = path.with_name(path.name + "-wal")
+        if wal.exists() and wal.stat().st_size:
+            raise ValueError(
+                "Immutable audit requires a stopped checkpointed database; preserve the WAL"
+            )
+    db = sqlite3.connect(
+        path.resolve().as_uri() + "?mode=ro" + ("&immutable=1" if immutable else ""), uri=True
+    )
     try:
         db.execute("BEGIN")
         limit = db.execute("SELECT limit_bytes FROM config").fetchone()[0]

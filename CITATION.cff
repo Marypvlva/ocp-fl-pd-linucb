@@ -5,8 +5,8 @@ title: "OCP-FL + PD-LinUCB: Resource-Constrained Verifiable Edge Scheduling"
 authors:
   - family-names: Pavlova
     given-names: Mariia
-version: 0.6.1
-date-released: 2026-11-26
+version: 0.7.0
+date-released: 2026-11-27
 repository-code: "https://github.com/Marypvlva/ocp-fl-pd-linucb"
 url: "https://github.com/Marypvlva/ocp-fl-pd-linucb"
 keywords:

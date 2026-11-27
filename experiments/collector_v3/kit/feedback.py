@@ -38,7 +38,7 @@ class FeedbackPolicy(Policy):
             super().observe(readings,reward)
 
     def _mature(self,payload):
-        c,members,arm,readings,reward,features=payload
+        c,members,arm,readings,reward,features=payload[:6]
         if self.signal=='rtt':
             return super()._mature(payload)
         pair=EXTRA[arm]

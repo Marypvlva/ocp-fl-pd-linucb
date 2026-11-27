@@ -1,0 +1,9 @@
+{
+  "id":"booking_quota_pressure",
+  "horizon":120,
+  "network_mode":"controlled",
+  "mirror_fraction":0.1,
+  "site_fraction":0.1,
+  "random_outage_probability":0.2,
+  "primary_metric":"accepted"
+}

@@ -117,6 +117,10 @@ class Fault:
     missing_full_update: tuple = ()
     # Test harness controls endpoint admission responses independently of eventual data service.
     unavailable_at_probe: tuple | None = None
+    # Explicit controlled collector CPU/queue workloads, never natural WAN measurements.
+    collector_cpu_iterations: tuple = (0, 0, 0, 0)
+    collector_service_ms: tuple = (0.0, 0.0, 0.0, 0.0)
+    unavailable_collectors: tuple = ()
 
 
 @dataclass
@@ -992,7 +996,10 @@ class Cluster:
                         else:
                             phase_end=min(deadline,monotonic()+proof_budget_ms/1000)
                             replies,errors=collector_routes.collect(self,selected,proof_collectors,command,
-                                challenge,phase_end,emulated_link_ms,metrics)
+                                challenge,phase_end,emulated_link_ms,metrics,
+                                cpu_iterations=fault.collector_cpu_iterations,
+                                service_ms=fault.collector_service_ms,
+                                unavailable=fault.unavailable_collectors)
                         metrics["projection_rpc_wall_s"] += perf_counter() - t
                         result.errors.extend(errors)
                         signed = []

@@ -1,0 +1,12 @@
+{
+  "id":"C2_collector_CPU_load_switch",
+  "horizon":120,
+  "network_mode":"controlled",
+  "mirror_fraction":0.25,
+  "site_fraction":0.2,
+  "events":[
+    {"start":1,"end":40,"cpu_iterations":[1000,0,1000,0]},
+    {"start":41,"end":80,"cpu_iterations":[0,1000,0,1000]}
+  ],
+  "primary_metric":"accepted"
+}

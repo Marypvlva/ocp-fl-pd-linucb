@@ -1,0 +1,8 @@
+{
+  "id":"natural_reference",
+  "horizon":120,
+  "network_mode":"natural",
+  "mirror_fraction":0.25,
+  "site_fraction":0.2,
+  "primary_metric":"accepted"
+}

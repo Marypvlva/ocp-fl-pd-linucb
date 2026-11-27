@@ -1,0 +1,9 @@
+{
+  "id":"C0_balanced_actions",
+  "horizon":40,
+  "network_mode":"natural",
+  "mirror_fraction":1.0,
+  "site_fraction":1.0,
+  "balanced_probe":true,
+  "primary_metric":"action_path_measurements"
+}

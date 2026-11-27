@@ -1,0 +1,13 @@
+{
+  "id":"confirmation_template_requires_reviewed_comparator_and_power",
+  "horizon":250,
+  "network_mode":"controlled",
+  "mirror_fraction":0.10,
+  "site_fraction":0.10,
+  "windows_ms":[27,35,46],
+  "events":[
+    {"start":1,"end":83,"cpu_iterations":[1000,0,1000,0]},
+    {"start":84,"end":166,"cpu_iterations":[0,1000,0,1000]}
+  ],
+  "primary_metric":"accepted"
+}

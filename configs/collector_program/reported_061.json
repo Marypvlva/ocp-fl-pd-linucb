@@ -1,0 +1,17 @@
+{
+  "source": "User supplied on 2026-11-27; raw Timeweb exports not yet available locally",
+  "blocks": 8,
+  "horizon": 120,
+  "budget_bytes": 30000000,
+  "accepted": {
+    "Natural": {"joint":959,"no_ids":960,"scalar":958,"recent":960,"round_lin":957,"lp_mean":957,"greedy":958},
+    "Controlled": {"joint":847,"no_ids":846,"scalar":848,"recent":841,"round_lin":826,"lp_mean":849,"greedy":843}
+  },
+  "reported_joint_minus_round_lin_mean_ci_rounds": [1.125,4.0],
+  "ci_status": "Reported conditional interval; not recalculated, method and seed-level differences not available",
+  "raw_locations": {
+    "coordinator": "77.233.212.217",
+    "Natural": "/opt/research/ocp-fl-pd-linucb/results/timeweb-061-natural",
+    "Controlled": "/opt/research/ocp-fl-pd-linucb/results/timeweb-061-controlled"
+  }
+}
