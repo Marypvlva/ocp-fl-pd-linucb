@@ -53,6 +53,8 @@ def analyze(directory, output):
         for index, seed in enumerate(plan['seeds']):
             for mode in plan['modes']:
                 settings = Settings(**plan['policy_specs'][mode])
+                if settings.memory != 'none' or settings.feedback_rule != 'legacy':
+                    raise ValueError('This audit reconstructs v0.7.0 only; use replay_program for new memory policies')
                 if settings.mode == 'article_pd':
                     from article_policy import ArticlePolicy
                     cls = ArticlePolicy

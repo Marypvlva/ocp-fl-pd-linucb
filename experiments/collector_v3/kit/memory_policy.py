@@ -16,6 +16,8 @@ class MemoryPolicy(Policy):
         s = self.s
         if s.mode not in ('joint', 'recent') or s.memory not in ('none', 'discount', 'window'):
             raise ValueError('Unsupported memory policy')
+        if s.mode == 'recent' and s.memory != 'none':
+            raise ValueError('EWMA recent does not implement discounted/window Joint')
         if (type(s.discount) not in (int, float) or not math.isfinite(s.discount)
                 or not 0 < s.discount <= 1 or type(s.window) is not int or s.window < 1
                 or s.memory_bonus not in ('weighted', 'legacy')
@@ -122,6 +124,7 @@ class MemoryPolicy(Policy):
     def decide(self, c, roster, forced_arm=None):
         if self.live_event is not None:
             raise ValueError('Observe the preceding decision exactly once')
+        roster = np.array(roster, copy=True)  # Deferred geometry owns its context indices.
         self._advance()
         arm = super().decide(c, roster, forced_arm)
         entries = []

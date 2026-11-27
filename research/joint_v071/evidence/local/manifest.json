@@ -323,7 +323,7 @@
   "source_sha256": {
     "joint_local.py": "e82f9bb098ee383706cd52ccef7cca74b1e7988f1adf979f1661b0c7421ec513",
     "model.py": "239b16bea66f722e6c776ee7c421a099249191327e68bb617c6d41fb5d9b166d",
-    "memory_policy.py": "6ec2468c6dee4fb5abc9736c3514274fe8ce603743bc8836b1cb9ab3710e3ed3",
+    "memory_policy.py": "c857ae65aab57003e5fd53a4416bd2090b8bb8d913a9f43fea624508380b6b84",
     "article_policy.py": "d68ff341ae094f41fb62b421a1fe2dbb2da4ad1e92b3c15b25b40e6ffab01d55"
   },
   "scope": "Local latency/coverage proxy, not real TCP, application bytes, EVM or scientific confirmation."

@@ -125,6 +125,16 @@ class MemoryTests(unittest.TestCase):
         self.assertIs(type(make_policy(Settings(),1,4,2,12,3)),Policy)
         self.assertIs(type(make_policy(Settings(memory='discount'),1,4,2,12,3)),MemoryPolicy)
 
+    def test_caller_context_mutation_cannot_rewrite_delayed_geometry(self):
+        p=self.make(discount=.5,delay=0)
+        roster=np.array([[0,1]])
+        p.decide(0,roster,forced_arm=0)
+        roster[:]=[2,3]
+        p.observe(np.full((1,2,2),50.),np.array([True]))
+        p.decide(0,np.array([[0,1]]),forced_arm=0)
+        np.testing.assert_allclose(p.done[0,:,0,0],[.5,.5,0,0])
+        self.assertFalse(p.design[0,2:].any())
+
     def test_dual_update_uses_remaining_budget_before_charge(self):
         p=self.make(eta=.2,delay=0)
         p.caps=np.array([[12,12,3,3]])
